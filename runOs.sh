@@ -1,3 +1,4 @@
+rm -rf output
 mkdir -p output
 cd output
 # compile the boot code, kernel.c and link them from the linker
@@ -12,3 +13,4 @@ cp ../grub.cfg ./boot/grub/grub.cfg
 grub-mkrescue -o myos.iso .
 # run the image in qemu
 qemu-system-i386 -cdrom myos.iso -vga std
+

@@ -3,7 +3,7 @@
 
 
 #if defined(__linux__)
-  #error "use i686-elf-as command"
+  #error use i686-elf-as command
 #endif
 
 void init(void){

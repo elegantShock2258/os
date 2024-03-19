@@ -1,5 +1,6 @@
-#include "./io/print.c"
+#include "io/printf.c"
 
-void main(){
- print("hi."); 
+void main(void) {
+  terminal_color = vga_entry_color(WHITE, BLACK);
+  printf("hie %d",49);
 }
