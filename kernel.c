@@ -1,4 +1,4 @@
-#include "io/print.c"
+#include "io/printf.c"
 #include "main.c"
 
 
