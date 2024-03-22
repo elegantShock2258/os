@@ -1,4 +1,5 @@
 #include "../../utils/types.h"
+#include "../../utils/kernel_utils.c"
 #ifndef ___GDTC
 
 #define ___GDTC
@@ -77,14 +78,23 @@ void gdt_init() {
   gdtPtr.base = (u32)&gdt_entries;
 
   gdt_set_entry_info(0, 0, 0, 0, 0);                // Null segment
+  kernel_log("GDT: Create NULL Segment: (%o,%o,%o,%o,%o)\n",0,0,0,0,0);
   gdt_set_entry_info(1, 0, 0xFFFFFFFF, 0x9A, 0xCF); // Kernel Code segment
+  kernel_log("GDT: Create Kernel Code Segment: (%o,%o,%o,%o,%o)\n",1,0,0xFFFFFFFF,0x9A,0xCF);
   gdt_set_entry_info(2, 0, 0xFFFFFFFF, 0x92, 0xCF); // Kernel Data segment
+  kernel_log("GDT: Create Kernel Data Segment: (%o,%o,%o,%o,%o)\n",1,0,0xFFFFFFFF,0x92,0xCF);
   gdt_set_entry_info(3, 0, 0xFFFFFFFF, 0xFA, 0xCF); // User Code segment
+  kernel_log("GDT: Create User Code Segment: (%o,%o,%o,%o,%o)\n",1,0,0xFFFFFFFF,0xFA,0xCF);
   gdt_set_entry_info(4, 0, 0xFFFFFFFF, 0xF2, 0xCF); // User Data segment
+  kernel_log("GDT: Create User Data Segment: (%o,%o,%o,%o,%o)\n",1,0,0xFFFFFFFF,0xF2,0xCF);
   // TODO: figure out sizeof TSS and put as limit
   // gdt_set_entry_info(5, 0, 0xFFFFFFFF, 0x89, 0x0F); // Task State segment
   gdt_set_entry_info(5, 0, 0xFFFFFFFF, 0x89, 0xCF); //  Dummy Task State segment
+  kernel_log("GDT: Create (Dummy) Task State Segment: (%o,%o,%o,%o,%o)\n",1,0,0xFFFFFFFF,0x89,0xCF);
 
   gdt_flush((u32)&gdtPtr);
+
+  kernel_log("GDT: Set GDT.\n");
+
 }
 #endif
