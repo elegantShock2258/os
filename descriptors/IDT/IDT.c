@@ -3,8 +3,6 @@
 
 __attribute__((aligned(0x10))) static IDTEntry idt[256];
 void IDT_EnableGate(int interrupt) {
-  if (interrupt < 10)
-    printf("enabled %d\n", interrupt);
   FLAG_SET(idt[interrupt].Flags, IDT_FLAG_PRESENT);
 }
 

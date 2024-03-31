@@ -1,4 +1,3 @@
-#include "io/printf.c"
 #include "./descriptors/GDT/GDT.c"
 #include "./descriptors/IDT/IDT.c"
 #include "./descriptors/IDT/isr.c"
