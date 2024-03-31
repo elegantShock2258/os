@@ -96,7 +96,7 @@ void gdt_init() {
   kernel_log("GDT: Create (Dummy) Task State Segment: (%o,%o,%o,%o,%o)\n", 1, 0,
              0xFFFFFFFF, 0x89, 0xCF);
 
-  __asm__ volatile("lgdt %0" : : "m"(gdtPtr)); // load the new IDT
+  __asm__ volatile("lgdt %0" : : "m"(gdtPtr)); // load the new GDT
 
   kernel_log("GDT: Set GDT.\n");
 }

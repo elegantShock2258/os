@@ -3,1537 +3,1802 @@
 .globl ISR0
 .type ISR0, @function
 ISR0:
-    call ISR_Handler
- 
+    pushl $0      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR1
 .type ISR1, @function
 ISR1:
-    call ISR_Handler
+    pushl $1      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR2
 .type ISR2, @function
 ISR2:
-    call ISR_Handler
- 
+    pushl $2      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR3
 .type ISR3, @function
 ISR3:
-    call ISR_Handler
- 
+    pushl $3      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR4
 .type ISR4, @function
 ISR4:
-    call ISR_Handler
- 
+    pushl $4      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR5
 .type ISR5, @function
 ISR5:
-    call ISR_Handler
- 
+    pushl $5      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR6
 .type ISR6, @function
 ISR6:
-    call ISR_Handler
- 
+    pushl $6      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR7
 .type ISR7, @function
 ISR7:
-    call ISR_Handler
- 
+    pushl $7      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR8
 .type ISR8, @function
 ISR8:
-    call ISR_Handler
- 
+    pushl $0       # Push dummy error code
+    pushl $8      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR9
 .type ISR9, @function
 ISR9:
-    call ISR_Handler
- 
+    pushl $9      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR10
 .type ISR10, @function
 ISR10:
-    call ISR_Handler
- 
+    pushl $0       # Push dummy error code
+    pushl $10      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR11
 .type ISR11, @function
 ISR11:
-    call ISR_Handler
- 
+    pushl $0       # Push dummy error code
+    pushl $11      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR12
 .type ISR12, @function
 ISR12:
-    call ISR_Handler
- 
+    pushl $0       # Push dummy error code
+    pushl $12      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR13
 .type ISR13, @function
 ISR13:
-    call ISR_Handler
- 
+    pushl $0       # Push dummy error code
+    pushl $13      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR14
 .type ISR14, @function
 ISR14:
-    call ISR_Handler
- 
+    pushl $0       # Push dummy error code
+    pushl $14      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR15
 .type ISR15, @function
 ISR15:
-    call ISR_Handler
- 
+    pushl $15      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR16
 .type ISR16, @function
 ISR16:
-    call ISR_Handler
- 
+    pushl $16      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR17
 .type ISR17, @function
 ISR17:
-    call ISR_Handler
- 
+    pushl $0       # Push dummy error code
+    pushl $17      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR18
 .type ISR18, @function
 ISR18:
-    call ISR_Handler
- 
+    pushl $18      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR19
 .type ISR19, @function
 ISR19:
-    call ISR_Handler
- 
+    pushl $19      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR20
 .type ISR20, @function
 ISR20:
-    call ISR_Handler
- 
+    pushl $20      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR21
 .type ISR21, @function
 ISR21:
-    call ISR_Handler
- 
+    pushl $0       # Push dummy error code
+    pushl $21      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR22
 .type ISR22, @function
 ISR22:
-    call ISR_Handler
- 
+    pushl $22      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR23
 .type ISR23, @function
 ISR23:
-    call ISR_Handler
- 
+    pushl $23      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR24
 .type ISR24, @function
 ISR24:
-    call ISR_Handler
- 
+    pushl $24      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR25
 .type ISR25, @function
 ISR25:
-    call ISR_Handler
- 
+    pushl $25      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR26
 .type ISR26, @function
 ISR26:
-    call ISR_Handler
- 
+    pushl $26      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR27
 .type ISR27, @function
 ISR27:
-    call ISR_Handler
- 
+    pushl $27      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR28
 .type ISR28, @function
 ISR28:
-    call ISR_Handler
- 
+    pushl $28      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR29
 .type ISR29, @function
 ISR29:
-    call ISR_Handler
- 
+    pushl $29      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR30
 .type ISR30, @function
 ISR30:
-    call ISR_Handler
- 
+    pushl $30      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR31
 .type ISR31, @function
 ISR31:
-    call ISR_Handler
- 
+    pushl $31      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR32
 .type ISR32, @function
 ISR32:
-    call ISR_Handler
- 
+    pushl $32      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR33
 .type ISR33, @function
 ISR33:
-    call ISR_Handler
- 
+    pushl $33      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR34
 .type ISR34, @function
 ISR34:
-    call ISR_Handler
- 
+    pushl $34      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR35
 .type ISR35, @function
 ISR35:
-    call ISR_Handler
- 
+    pushl $35      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR36
 .type ISR36, @function
 ISR36:
-    call ISR_Handler
- 
+    pushl $36      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR37
 .type ISR37, @function
 ISR37:
-    call ISR_Handler
- 
+    pushl $37      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR38
 .type ISR38, @function
 ISR38:
-    call ISR_Handler
- 
+    pushl $38      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR39
 .type ISR39, @function
 ISR39:
-    call ISR_Handler
- 
+    pushl $39      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR40
 .type ISR40, @function
 ISR40:
-    call ISR_Handler
- 
+    pushl $40      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR41
 .type ISR41, @function
 ISR41:
-    call ISR_Handler
- 
+    pushl $41      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR42
 .type ISR42, @function
 ISR42:
-    call ISR_Handler
- 
+    pushl $42      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR43
 .type ISR43, @function
 ISR43:
-    call ISR_Handler
- 
+    pushl $43      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR44
 .type ISR44, @function
 ISR44:
-    call ISR_Handler
- 
+    pushl $44      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR45
 .type ISR45, @function
 ISR45:
-    call ISR_Handler
- 
+    pushl $45      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR46
 .type ISR46, @function
 ISR46:
-    call ISR_Handler
- 
+    pushl $46      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR47
 .type ISR47, @function
 ISR47:
-    call ISR_Handler
- 
+    pushl $47      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR48
 .type ISR48, @function
 ISR48:
-    call ISR_Handler
- 
+    pushl $48      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR49
 .type ISR49, @function
 ISR49:
-    call ISR_Handler
- 
+    pushl $49      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR50
 .type ISR50, @function
 ISR50:
-    call ISR_Handler
- 
+    pushl $50      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR51
 .type ISR51, @function
 ISR51:
-    call ISR_Handler
- 
+    pushl $51      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR52
 .type ISR52, @function
 ISR52:
-    call ISR_Handler
- 
+    pushl $52      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR53
 .type ISR53, @function
 ISR53:
-    call ISR_Handler
- 
+    pushl $53      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR54
 .type ISR54, @function
 ISR54:
-    call ISR_Handler
- 
+    pushl $54      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR55
 .type ISR55, @function
 ISR55:
-    call ISR_Handler
- 
+    pushl $55      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR56
 .type ISR56, @function
 ISR56:
-    call ISR_Handler
- 
+    pushl $56      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR57
 .type ISR57, @function
 ISR57:
-    call ISR_Handler
- 
+    pushl $57      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR58
 .type ISR58, @function
 ISR58:
-    call ISR_Handler
- 
+    pushl $58      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR59
 .type ISR59, @function
 ISR59:
-    call ISR_Handler
- 
+    pushl $59      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR60
 .type ISR60, @function
 ISR60:
-    call ISR_Handler
- 
+    pushl $60      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR61
 .type ISR61, @function
 ISR61:
-    call ISR_Handler
- 
+    pushl $61      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR62
 .type ISR62, @function
 ISR62:
-    call ISR_Handler
- 
+    pushl $62      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR63
 .type ISR63, @function
 ISR63:
-    call ISR_Handler
- 
+    pushl $63      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR64
 .type ISR64, @function
 ISR64:
-    call ISR_Handler
- 
+    pushl $64      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR65
 .type ISR65, @function
 ISR65:
-    call ISR_Handler
- 
+    pushl $65      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR66
 .type ISR66, @function
 ISR66:
-    call ISR_Handler
- 
+    pushl $66      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR67
 .type ISR67, @function
 ISR67:
-    call ISR_Handler
- 
+    pushl $67      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR68
 .type ISR68, @function
 ISR68:
-    call ISR_Handler
- 
+    pushl $68      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR69
 .type ISR69, @function
 ISR69:
-    call ISR_Handler
- 
+    pushl $69      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR70
 .type ISR70, @function
 ISR70:
-    call ISR_Handler
- 
+    pushl $70      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR71
 .type ISR71, @function
 ISR71:
-    call ISR_Handler
- 
+    pushl $71      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR72
 .type ISR72, @function
 ISR72:
-    call ISR_Handler
- 
+    pushl $72      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR73
 .type ISR73, @function
 ISR73:
-    call ISR_Handler
- 
+    pushl $73      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR74
 .type ISR74, @function
 ISR74:
-    call ISR_Handler
- 
+    pushl $74      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR75
 .type ISR75, @function
 ISR75:
-    call ISR_Handler
- 
+    pushl $75      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR76
 .type ISR76, @function
 ISR76:
-    call ISR_Handler
- 
+    pushl $76      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR77
 .type ISR77, @function
 ISR77:
-    call ISR_Handler
- 
+    pushl $77      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR78
 .type ISR78, @function
 ISR78:
-    call ISR_Handler
- 
+    pushl $78      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR79
 .type ISR79, @function
 ISR79:
-    call ISR_Handler
- 
+    pushl $79      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR80
 .type ISR80, @function
 ISR80:
-    call ISR_Handler
- 
+    pushl $80      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR81
 .type ISR81, @function
 ISR81:
-    call ISR_Handler
- 
+    pushl $81      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR82
 .type ISR82, @function
 ISR82:
-    call ISR_Handler
- 
+    pushl $82      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR83
 .type ISR83, @function
 ISR83:
-    call ISR_Handler
- 
+    pushl $83      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR84
 .type ISR84, @function
 ISR84:
-    call ISR_Handler
- 
+    pushl $84      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR85
 .type ISR85, @function
 ISR85:
-    call ISR_Handler
- 
+    pushl $85      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR86
 .type ISR86, @function
 ISR86:
-    call ISR_Handler
- 
+    pushl $86      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR87
 .type ISR87, @function
 ISR87:
-    call ISR_Handler
- 
+    pushl $87      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR88
 .type ISR88, @function
 ISR88:
-    call ISR_Handler
- 
+    pushl $88      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR89
 .type ISR89, @function
 ISR89:
-    call ISR_Handler
- 
+    pushl $89      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR90
 .type ISR90, @function
 ISR90:
-    call ISR_Handler
- 
+    pushl $90      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR91
 .type ISR91, @function
 ISR91:
-    call ISR_Handler
- 
+    pushl $91      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR92
 .type ISR92, @function
 ISR92:
-    call ISR_Handler
- 
+    pushl $92      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR93
 .type ISR93, @function
 ISR93:
-    call ISR_Handler
- 
+    pushl $93      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR94
 .type ISR94, @function
 ISR94:
-    call ISR_Handler
- 
+    pushl $94      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR95
 .type ISR95, @function
 ISR95:
-    call ISR_Handler
- 
+    pushl $95      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR96
 .type ISR96, @function
 ISR96:
-    call ISR_Handler
- 
+    pushl $96      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR97
 .type ISR97, @function
 ISR97:
-    call ISR_Handler
- 
+    pushl $97      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR98
 .type ISR98, @function
 ISR98:
-    call ISR_Handler
- 
+    pushl $98      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR99
 .type ISR99, @function
 ISR99:
-    call ISR_Handler
- 
+    pushl $99      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR100
 .type ISR100, @function
 ISR100:
-    call ISR_Handler
- 
+    pushl $100      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR101
 .type ISR101, @function
 ISR101:
-    call ISR_Handler
- 
+    pushl $101      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR102
 .type ISR102, @function
 ISR102:
-    call ISR_Handler
- 
+    pushl $102      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR103
 .type ISR103, @function
 ISR103:
-    call ISR_Handler
- 
+    pushl $103      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR104
 .type ISR104, @function
 ISR104:
-    call ISR_Handler
- 
+    pushl $104      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR105
 .type ISR105, @function
 ISR105:
-    call ISR_Handler
- 
+    pushl $105      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR106
 .type ISR106, @function
 ISR106:
-    call ISR_Handler
- 
+    pushl $106      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR107
 .type ISR107, @function
 ISR107:
-    call ISR_Handler
- 
+    pushl $107      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR108
 .type ISR108, @function
 ISR108:
-    call ISR_Handler
- 
+    pushl $108      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR109
 .type ISR109, @function
 ISR109:
-    call ISR_Handler
- 
+    pushl $109      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR110
 .type ISR110, @function
 ISR110:
-    call ISR_Handler
- 
+    pushl $110      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR111
 .type ISR111, @function
 ISR111:
-    call ISR_Handler
- 
+    pushl $111      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR112
 .type ISR112, @function
 ISR112:
-    call ISR_Handler
- 
+    pushl $112      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR113
 .type ISR113, @function
 ISR113:
-    call ISR_Handler
- 
+    pushl $113      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR114
 .type ISR114, @function
 ISR114:
-    call ISR_Handler
- 
+    pushl $114      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR115
 .type ISR115, @function
 ISR115:
-    call ISR_Handler
- 
+    pushl $115      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR116
 .type ISR116, @function
 ISR116:
-    call ISR_Handler
- 
+    pushl $116      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR117
 .type ISR117, @function
 ISR117:
-    call ISR_Handler
- 
+    pushl $117      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR118
 .type ISR118, @function
 ISR118:
-    call ISR_Handler
- 
+    pushl $118      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR119
 .type ISR119, @function
 ISR119:
-    call ISR_Handler
- 
+    pushl $119      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR120
 .type ISR120, @function
 ISR120:
-    call ISR_Handler
- 
+    pushl $120      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR121
 .type ISR121, @function
 ISR121:
-    call ISR_Handler
- 
+    pushl $121      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR122
 .type ISR122, @function
 ISR122:
-    call ISR_Handler
- 
+    pushl $122      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR123
 .type ISR123, @function
 ISR123:
-    call ISR_Handler
- 
+    pushl $123      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR124
 .type ISR124, @function
 ISR124:
-    call ISR_Handler
- 
+    pushl $124      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR125
 .type ISR125, @function
 ISR125:
-    call ISR_Handler
- 
+    pushl $125      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR126
 .type ISR126, @function
 ISR126:
-    call ISR_Handler
- 
+    pushl $126      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR127
 .type ISR127, @function
 ISR127:
-    call ISR_Handler
- 
+    pushl $127      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR128
 .type ISR128, @function
 ISR128:
-    call ISR_Handler
- 
+    pushl $128      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR129
 .type ISR129, @function
 ISR129:
-    call ISR_Handler
- 
+    pushl $129      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR130
 .type ISR130, @function
 ISR130:
-    call ISR_Handler
- 
+    pushl $130      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR131
 .type ISR131, @function
 ISR131:
-    call ISR_Handler
- 
+    pushl $131      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR132
 .type ISR132, @function
 ISR132:
-    call ISR_Handler
- 
+    pushl $132      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR133
 .type ISR133, @function
 ISR133:
-    call ISR_Handler
- 
+    pushl $133      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR134
 .type ISR134, @function
 ISR134:
-    call ISR_Handler
- 
+    pushl $134      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR135
 .type ISR135, @function
 ISR135:
-    call ISR_Handler
- 
+    pushl $135      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR136
 .type ISR136, @function
 ISR136:
-    call ISR_Handler
- 
+    pushl $136      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR137
 .type ISR137, @function
 ISR137:
-    call ISR_Handler
- 
+    pushl $137      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR138
 .type ISR138, @function
 ISR138:
-    call ISR_Handler
- 
+    pushl $138      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR139
 .type ISR139, @function
 ISR139:
-    call ISR_Handler
- 
+    pushl $139      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR140
 .type ISR140, @function
 ISR140:
-    call ISR_Handler
- 
+    pushl $140      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR141
 .type ISR141, @function
 ISR141:
-    call ISR_Handler
- 
+    pushl $141      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR142
 .type ISR142, @function
 ISR142:
-    call ISR_Handler
- 
+    pushl $142      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR143
 .type ISR143, @function
 ISR143:
-    call ISR_Handler
- 
+    pushl $143      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR144
 .type ISR144, @function
 ISR144:
-    call ISR_Handler
- 
+    pushl $144      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR145
 .type ISR145, @function
 ISR145:
-    call ISR_Handler
- 
+    pushl $145      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR146
 .type ISR146, @function
 ISR146:
-    call ISR_Handler
- 
+    pushl $146      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR147
 .type ISR147, @function
 ISR147:
-    call ISR_Handler
- 
+    pushl $147      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR148
 .type ISR148, @function
 ISR148:
-    call ISR_Handler
- 
+    pushl $148      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR149
 .type ISR149, @function
 ISR149:
-    call ISR_Handler
- 
+    pushl $149      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR150
 .type ISR150, @function
 ISR150:
-    call ISR_Handler
- 
+    pushl $150      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR151
 .type ISR151, @function
 ISR151:
-    call ISR_Handler
- 
+    pushl $151      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR152
 .type ISR152, @function
 ISR152:
-    call ISR_Handler
- 
+    pushl $152      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR153
 .type ISR153, @function
 ISR153:
-    call ISR_Handler
- 
+    pushl $153      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR154
 .type ISR154, @function
 ISR154:
-    call ISR_Handler
- 
+    pushl $154      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR155
 .type ISR155, @function
 ISR155:
-    call ISR_Handler
- 
+    pushl $155      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR156
 .type ISR156, @function
 ISR156:
-    call ISR_Handler
- 
+    pushl $156      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR157
 .type ISR157, @function
 ISR157:
-    call ISR_Handler
- 
+    pushl $157      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR158
 .type ISR158, @function
 ISR158:
-    call ISR_Handler
- 
+    pushl $158      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR159
 .type ISR159, @function
 ISR159:
-    call ISR_Handler
- 
+    pushl $159      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR160
 .type ISR160, @function
 ISR160:
-    call ISR_Handler
- 
+    pushl $160      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR161
 .type ISR161, @function
 ISR161:
-    call ISR_Handler
- 
+    pushl $161      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR162
 .type ISR162, @function
 ISR162:
-    call ISR_Handler
- 
+    pushl $162      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR163
 .type ISR163, @function
 ISR163:
-    call ISR_Handler
- 
+    pushl $163      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR164
 .type ISR164, @function
 ISR164:
-    call ISR_Handler
- 
+    pushl $164      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR165
 .type ISR165, @function
 ISR165:
-    call ISR_Handler
- 
+    pushl $165      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR166
 .type ISR166, @function
 ISR166:
-    call ISR_Handler
- 
+    pushl $166      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR167
 .type ISR167, @function
 ISR167:
-    call ISR_Handler
- 
+    pushl $167      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR168
 .type ISR168, @function
 ISR168:
-    call ISR_Handler
- 
+    pushl $168      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR169
 .type ISR169, @function
 ISR169:
-    call ISR_Handler
- 
+    pushl $169      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR170
 .type ISR170, @function
 ISR170:
-    call ISR_Handler
- 
+    pushl $170      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR171
 .type ISR171, @function
 ISR171:
-    call ISR_Handler
- 
+    pushl $171      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR172
 .type ISR172, @function
 ISR172:
-    call ISR_Handler
- 
+    pushl $172      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR173
 .type ISR173, @function
 ISR173:
-    call ISR_Handler
- 
+    pushl $173      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR174
 .type ISR174, @function
 ISR174:
-    call ISR_Handler
- 
+    pushl $174      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR175
 .type ISR175, @function
 ISR175:
-    call ISR_Handler
- 
+    pushl $175      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR176
 .type ISR176, @function
 ISR176:
-    call ISR_Handler
- 
+    pushl $176      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR177
 .type ISR177, @function
 ISR177:
-    call ISR_Handler
- 
+    pushl $177      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR178
 .type ISR178, @function
 ISR178:
-    call ISR_Handler
- 
+    pushl $178      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR179
 .type ISR179, @function
 ISR179:
-    call ISR_Handler
- 
+    pushl $179      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR180
 .type ISR180, @function
 ISR180:
-    call ISR_Handler
- 
+    pushl $180      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR181
 .type ISR181, @function
 ISR181:
-    call ISR_Handler
- 
+    pushl $181      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR182
 .type ISR182, @function
 ISR182:
-    call ISR_Handler
- 
+    pushl $182      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR183
 .type ISR183, @function
 ISR183:
-    call ISR_Handler
- 
+    pushl $183      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR184
 .type ISR184, @function
 ISR184:
-    call ISR_Handler
- 
+    pushl $184      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR185
 .type ISR185, @function
 ISR185:
-    call ISR_Handler
- 
+    pushl $185      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR186
 .type ISR186, @function
 ISR186:
-    call ISR_Handler
- 
+    pushl $186      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR187
 .type ISR187, @function
 ISR187:
-    call ISR_Handler
- 
+    pushl $187      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR188
 .type ISR188, @function
 ISR188:
-    call ISR_Handler
- 
+    pushl $188      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR189
 .type ISR189, @function
 ISR189:
-    call ISR_Handler
- 
+    pushl $189      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR190
 .type ISR190, @function
 ISR190:
-    call ISR_Handler
- 
+    pushl $190      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR191
 .type ISR191, @function
 ISR191:
-    call ISR_Handler
- 
+    pushl $191      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR192
 .type ISR192, @function
 ISR192:
-    call ISR_Handler
- 
+    pushl $192      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR193
 .type ISR193, @function
 ISR193:
-    call ISR_Handler
- 
+    pushl $193      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR194
 .type ISR194, @function
 ISR194:
-    call ISR_Handler
- 
+    pushl $194      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR195
 .type ISR195, @function
 ISR195:
-    call ISR_Handler
- 
+    pushl $195      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR196
 .type ISR196, @function
 ISR196:
-    call ISR_Handler
- 
+    pushl $196      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR197
 .type ISR197, @function
 ISR197:
-    call ISR_Handler
- 
+    pushl $197      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR198
 .type ISR198, @function
 ISR198:
-    call ISR_Handler
- 
+    pushl $198      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR199
 .type ISR199, @function
 ISR199:
-    call ISR_Handler
- 
+    pushl $199      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR200
 .type ISR200, @function
 ISR200:
-    call ISR_Handler
- 
+    pushl $200      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR201
 .type ISR201, @function
 ISR201:
-    call ISR_Handler
- 
+    pushl $201      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR202
 .type ISR202, @function
 ISR202:
-    call ISR_Handler
- 
+    pushl $202      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR203
 .type ISR203, @function
 ISR203:
-    call ISR_Handler
- 
+    pushl $203      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR204
 .type ISR204, @function
 ISR204:
-    call ISR_Handler
- 
+    pushl $204      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR205
 .type ISR205, @function
 ISR205:
-    call ISR_Handler
- 
+    pushl $205      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR206
 .type ISR206, @function
 ISR206:
-    call ISR_Handler
- 
+    pushl $206      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR207
 .type ISR207, @function
 ISR207:
-    call ISR_Handler
- 
+    pushl $207      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR208
 .type ISR208, @function
 ISR208:
-    call ISR_Handler
- 
+    pushl $208      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR209
 .type ISR209, @function
 ISR209:
-    call ISR_Handler
- 
+    pushl $209      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR210
 .type ISR210, @function
 ISR210:
-    call ISR_Handler
- 
+    pushl $210      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR211
 .type ISR211, @function
 ISR211:
-    call ISR_Handler
- 
+    pushl $211      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR212
 .type ISR212, @function
 ISR212:
-    call ISR_Handler
- 
+    pushl $212      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR213
 .type ISR213, @function
 ISR213:
-    call ISR_Handler
- 
+    pushl $213      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR214
 .type ISR214, @function
 ISR214:
-    call ISR_Handler
- 
+    pushl $214      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR215
 .type ISR215, @function
 ISR215:
-    call ISR_Handler
- 
+    pushl $215      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR216
 .type ISR216, @function
 ISR216:
-    call ISR_Handler
- 
+    pushl $216      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR217
 .type ISR217, @function
 ISR217:
-    call ISR_Handler
- 
+    pushl $217      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR218
 .type ISR218, @function
 ISR218:
-    call ISR_Handler
- 
+    pushl $218      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR219
 .type ISR219, @function
 ISR219:
-    call ISR_Handler
- 
+    pushl $219      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR220
 .type ISR220, @function
 ISR220:
-    call ISR_Handler
- 
+    pushl $220      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR221
 .type ISR221, @function
 ISR221:
-    call ISR_Handler
- 
+    pushl $221      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR222
 .type ISR222, @function
 ISR222:
-    call ISR_Handler
- 
+    pushl $222      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR223
 .type ISR223, @function
 ISR223:
-    call ISR_Handler
- 
+    pushl $223      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR224
 .type ISR224, @function
 ISR224:
-    call ISR_Handler
- 
+    pushl $224      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR225
 .type ISR225, @function
 ISR225:
-    call ISR_Handler
- 
+    pushl $225      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR226
 .type ISR226, @function
 ISR226:
-    call ISR_Handler
- 
+    pushl $226      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR227
 .type ISR227, @function
 ISR227:
-    call ISR_Handler
- 
+    pushl $227      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR228
 .type ISR228, @function
 ISR228:
-    call ISR_Handler
- 
+    pushl $228      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR229
 .type ISR229, @function
 ISR229:
-    call ISR_Handler
- 
+    pushl $229      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR230
 .type ISR230, @function
 ISR230:
-    call ISR_Handler
- 
+    pushl $230      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR231
 .type ISR231, @function
 ISR231:
-    call ISR_Handler
- 
+    pushl $231      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR232
 .type ISR232, @function
 ISR232:
-    call ISR_Handler
- 
+    pushl $232      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR233
 .type ISR233, @function
 ISR233:
-    call ISR_Handler
- 
+    pushl $233      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR234
 .type ISR234, @function
 ISR234:
-    call ISR_Handler
- 
+    pushl $234      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR235
 .type ISR235, @function
 ISR235:
-    call ISR_Handler
- 
+    pushl $235      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR236
 .type ISR236, @function
 ISR236:
-    call ISR_Handler
- 
+    pushl $236      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR237
 .type ISR237, @function
 ISR237:
-    call ISR_Handler
- 
+    pushl $237      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR238
 .type ISR238, @function
 ISR238:
-    call ISR_Handler
- 
+    pushl $238      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR239
 .type ISR239, @function
 ISR239:
-    call ISR_Handler
- 
+    pushl $239      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR240
 .type ISR240, @function
 ISR240:
-    call ISR_Handler
- 
+    pushl $240      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR241
 .type ISR241, @function
 ISR241:
-    call ISR_Handler
- 
+    pushl $241      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR242
 .type ISR242, @function
 ISR242:
-    call ISR_Handler
- 
+    pushl $242      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR243
 .type ISR243, @function
 ISR243:
-    call ISR_Handler
- 
+    pushl $243      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR244
 .type ISR244, @function
 ISR244:
-    call ISR_Handler
- 
+    pushl $244      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR245
 .type ISR245, @function
 ISR245:
-    call ISR_Handler
- 
+    pushl $245      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR246
 .type ISR246, @function
 ISR246:
-    call ISR_Handler
- 
+    pushl $246      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR247
 .type ISR247, @function
 ISR247:
-    call ISR_Handler
- 
+    pushl $247      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR248
 .type ISR248, @function
 ISR248:
-    call ISR_Handler
- 
+    pushl $248      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR249
 .type ISR249, @function
 ISR249:
-    call ISR_Handler
- 
+    pushl $249      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR250
 .type ISR250, @function
 ISR250:
-    call ISR_Handler
- 
+    pushl $250      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR251
 .type ISR251, @function
 ISR251:
-    call ISR_Handler
- 
+    pushl $251      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR252
 .type ISR252, @function
 ISR252:
-    call ISR_Handler
- 
+    pushl $252      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR253
 .type ISR253, @function
 ISR253:
-    call ISR_Handler
- 
+    pushl $253      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR254
 .type ISR254, @function
 ISR254:
-    call ISR_Handler
- 
+    pushl $254      # Push interrupt number
+    jmp isr_common
+        
 
 .globl ISR255
 .type ISR255, @function
 ISR255:
-    call ISR_Handler
- 
+    pushl $255      # Push interrupt number
+    jmp isr_common
+        
 
 isr_common:
   pushal       # Pushes in order: eax, ecx, edx, ebx, esp, ebp, esi, edi
