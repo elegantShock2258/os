@@ -12,7 +12,7 @@
 #define IDT_FLAG_RING3 (3 << 5)
 
 #define IDT_FLAG_PRESENT 0x80
-#include "IDT.c"
+#include "../IDT.h"
 
 extern void ISR0();
 extern void ISR1();

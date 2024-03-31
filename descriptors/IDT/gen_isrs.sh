@@ -3,15 +3,12 @@
 # exit on error
 set -e
 
-# print usage
-if [ $# -le 1 ]; then
-    echo "Usage: generate_isrs.sh IDT/isrs_gen.c IDT/isrs_gen.S"
-    exit 1
-fi
-
+rm -rf isrs_gen
+mkdir -p isrs_gen
+cd isrs_gen
 # vars
-ISRS_GEN_C=$1
-ISRS_GEN_ASM=$2
+ISRS_GEN_C="isrs_gen.c"
+ISRS_GEN_ASM="isrs_gen.S"
 
 ISRS_WITH_ERROR_CODE="8 10 11 12 13 14 17 21"
 
@@ -33,7 +30,7 @@ echo "
 #define IDT_FLAG_RING3 (3 << 5)
 
 #define IDT_FLAG_PRESENT 0x80" >> $ISRS_GEN_C
-echo "#include \"IDT.c\"" >> $ISRS_GEN_C
+echo "#include \"../IDT.h\"" >> $ISRS_GEN_C
 echo "" >> $ISRS_GEN_C
 
 for i in $(seq 0 255); do
