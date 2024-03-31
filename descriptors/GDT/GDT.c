@@ -1,5 +1,5 @@
-#include "../../utils/types.h"
 #include "../../utils/kernel_utils.c"
+#include "../../utils/types.h"
 #ifndef ___GDTC
 
 #define ___GDTC
@@ -29,13 +29,12 @@ struct gdt_entry {
 typedef struct gdt_entry gdt_entry;
 
 struct gdt_ptr {
-  u16 limit; // start address
-  u32 base;  // size
+  u16 limit;       // start address
+  gdt_entry *base; // size
 } __attribute__((packed));
 typedef struct gdt_ptr gdt_ptr;
 
 gdt_entry gdt_entries[7];
-
 
 extern void gdt_flush(u32);
 
@@ -75,26 +74,30 @@ static void gdt_set_entry_info(u32 num, u32 base, u32 limit, u8 access,
 void gdt_init() {
   gdt_ptr gdtPtr;
   gdtPtr.limit = (sizeof(gdt_entry) * 3) - 1;
-  gdtPtr.base = (u32)&gdt_entries;
+  gdtPtr.base = &gdt_entries[0];
 
-  gdt_set_entry_info(0, 0, 0, 0, 0);                // Null segment
-  kernel_log("GDT: Create NULL Segment: (%o,%o,%o,%o,%o)\n",0,0,0,0,0);
+  gdt_set_entry_info(0, 0, 0, 0, 0); // Null segment
+  kernel_log("GDT: Create NULL Segment: (%o,%o,%o,%o,%o)\n", 0, 0, 0, 0, 0);
   gdt_set_entry_info(1, 0, 0xFFFFFFFF, 0x9A, 0xCF); // Kernel Code segment
-  kernel_log("GDT: Create Kernel Code Segment: (%o,%o,%o,%o,%o)\n",1,0,0xFFFFFFFF,0x9A,0xCF);
+  kernel_log("GDT: Create Kernel Code Segment: (%o,%o,%o,%o,%o)\n", 1, 0,
+             0xFFFFFFFF, 0x9A, 0xCF);
   gdt_set_entry_info(2, 0, 0xFFFFFFFF, 0x92, 0xCF); // Kernel Data segment
-  kernel_log("GDT: Create Kernel Data Segment: (%o,%o,%o,%o,%o)\n",1,0,0xFFFFFFFF,0x92,0xCF);
+  kernel_log("GDT: Create Kernel Data Segment: (%o,%o,%o,%o,%o)\n", 1, 0,
+             0xFFFFFFFF, 0x92, 0xCF);
   gdt_set_entry_info(3, 0, 0xFFFFFFFF, 0xFA, 0xCF); // User Code segment
-  kernel_log("GDT: Create User Code Segment: (%o,%o,%o,%o,%o)\n",1,0,0xFFFFFFFF,0xFA,0xCF);
+  kernel_log("GDT: Create User Code Segment: (%o,%o,%o,%o,%o)\n", 1, 0,
+             0xFFFFFFFF, 0xFA, 0xCF);
   gdt_set_entry_info(4, 0, 0xFFFFFFFF, 0xF2, 0xCF); // User Data segment
-  kernel_log("GDT: Create User Data Segment: (%o,%o,%o,%o,%o)\n",1,0,0xFFFFFFFF,0xF2,0xCF);
+  kernel_log("GDT: Create User Data Segment: (%o,%o,%o,%o,%o)\n", 1, 0,
+             0xFFFFFFFF, 0xF2, 0xCF);
   // TODO: figure out sizeof TSS and put as limit
   // gdt_set_entry_info(5, 0, 0xFFFFFFFF, 0x89, 0x0F); // Task State segment
   gdt_set_entry_info(5, 0, 0xFFFFFFFF, 0x89, 0xCF); //  Dummy Task State segment
-  kernel_log("GDT: Create (Dummy) Task State Segment: (%o,%o,%o,%o,%o)\n",1,0,0xFFFFFFFF,0x89,0xCF);
+  kernel_log("GDT: Create (Dummy) Task State Segment: (%o,%o,%o,%o,%o)\n", 1, 0,
+             0xFFFFFFFF, 0x89, 0xCF);
 
-  gdt_flush((u32)&gdtPtr);
+  __asm__ volatile("lgdt %0" : : "m"(gdtPtr)); // load the new IDT
 
   kernel_log("GDT: Set GDT.\n");
-
 }
 #endif
