@@ -3,6 +3,7 @@
 .globl ISR0
 .type ISR0, @function
 ISR0:
+    pushl $0       # Push dummy error code
     pushl $0      # Push interrupt number
     jmp isr_common
         
@@ -10,6 +11,7 @@ ISR0:
 .globl ISR1
 .type ISR1, @function
 ISR1:
+    pushl $0       # Push dummy error code
     pushl $1      # Push interrupt number
     jmp isr_common
         
@@ -17,6 +19,7 @@ ISR1:
 .globl ISR2
 .type ISR2, @function
 ISR2:
+    pushl $0       # Push dummy error code
     pushl $2      # Push interrupt number
     jmp isr_common
         
@@ -24,6 +27,7 @@ ISR2:
 .globl ISR3
 .type ISR3, @function
 ISR3:
+    pushl $0       # Push dummy error code
     pushl $3      # Push interrupt number
     jmp isr_common
         
@@ -31,6 +35,7 @@ ISR3:
 .globl ISR4
 .type ISR4, @function
 ISR4:
+    pushl $0       # Push dummy error code
     pushl $4      # Push interrupt number
     jmp isr_common
         
@@ -38,6 +43,7 @@ ISR4:
 .globl ISR5
 .type ISR5, @function
 ISR5:
+    pushl $0       # Push dummy error code
     pushl $5      # Push interrupt number
     jmp isr_common
         
@@ -45,6 +51,7 @@ ISR5:
 .globl ISR6
 .type ISR6, @function
 ISR6:
+    pushl $0       # Push dummy error code
     pushl $6      # Push interrupt number
     jmp isr_common
         
@@ -52,6 +59,7 @@ ISR6:
 .globl ISR7
 .type ISR7, @function
 ISR7:
+    pushl $0       # Push dummy error code
     pushl $7      # Push interrupt number
     jmp isr_common
         
@@ -59,7 +67,6 @@ ISR7:
 .globl ISR8
 .type ISR8, @function
 ISR8:
-    pushl $0       # Push dummy error code
     pushl $8      # Push interrupt number
     jmp isr_common
         
@@ -67,6 +74,7 @@ ISR8:
 .globl ISR9
 .type ISR9, @function
 ISR9:
+    pushl $0       # Push dummy error code
     pushl $9      # Push interrupt number
     jmp isr_common
         
@@ -74,7 +82,6 @@ ISR9:
 .globl ISR10
 .type ISR10, @function
 ISR10:
-    pushl $0       # Push dummy error code
     pushl $10      # Push interrupt number
     jmp isr_common
         
@@ -82,7 +89,6 @@ ISR10:
 .globl ISR11
 .type ISR11, @function
 ISR11:
-    pushl $0       # Push dummy error code
     pushl $11      # Push interrupt number
     jmp isr_common
         
@@ -90,7 +96,6 @@ ISR11:
 .globl ISR12
 .type ISR12, @function
 ISR12:
-    pushl $0       # Push dummy error code
     pushl $12      # Push interrupt number
     jmp isr_common
         
@@ -98,7 +103,6 @@ ISR12:
 .globl ISR13
 .type ISR13, @function
 ISR13:
-    pushl $0       # Push dummy error code
     pushl $13      # Push interrupt number
     jmp isr_common
         
@@ -106,7 +110,6 @@ ISR13:
 .globl ISR14
 .type ISR14, @function
 ISR14:
-    pushl $0       # Push dummy error code
     pushl $14      # Push interrupt number
     jmp isr_common
         
@@ -114,6 +117,7 @@ ISR14:
 .globl ISR15
 .type ISR15, @function
 ISR15:
+    pushl $0       # Push dummy error code
     pushl $15      # Push interrupt number
     jmp isr_common
         
@@ -121,6 +125,7 @@ ISR15:
 .globl ISR16
 .type ISR16, @function
 ISR16:
+    pushl $0       # Push dummy error code
     pushl $16      # Push interrupt number
     jmp isr_common
         
@@ -128,7 +133,6 @@ ISR16:
 .globl ISR17
 .type ISR17, @function
 ISR17:
-    pushl $0       # Push dummy error code
     pushl $17      # Push interrupt number
     jmp isr_common
         
@@ -136,6 +140,7 @@ ISR17:
 .globl ISR18
 .type ISR18, @function
 ISR18:
+    pushl $0       # Push dummy error code
     pushl $18      # Push interrupt number
     jmp isr_common
         
@@ -143,6 +148,7 @@ ISR18:
 .globl ISR19
 .type ISR19, @function
 ISR19:
+    pushl $0       # Push dummy error code
     pushl $19      # Push interrupt number
     jmp isr_common
         
@@ -150,6 +156,7 @@ ISR19:
 .globl ISR20
 .type ISR20, @function
 ISR20:
+    pushl $0       # Push dummy error code
     pushl $20      # Push interrupt number
     jmp isr_common
         
@@ -157,7 +164,6 @@ ISR20:
 .globl ISR21
 .type ISR21, @function
 ISR21:
-    pushl $0       # Push dummy error code
     pushl $21      # Push interrupt number
     jmp isr_common
         
@@ -165,6 +171,7 @@ ISR21:
 .globl ISR22
 .type ISR22, @function
 ISR22:
+    pushl $0       # Push dummy error code
     pushl $22      # Push interrupt number
     jmp isr_common
         
@@ -172,6 +179,7 @@ ISR22:
 .globl ISR23
 .type ISR23, @function
 ISR23:
+    pushl $0       # Push dummy error code
     pushl $23      # Push interrupt number
     jmp isr_common
         
@@ -179,6 +187,7 @@ ISR23:
 .globl ISR24
 .type ISR24, @function
 ISR24:
+    pushl $0       # Push dummy error code
     pushl $24      # Push interrupt number
     jmp isr_common
         
@@ -186,6 +195,7 @@ ISR24:
 .globl ISR25
 .type ISR25, @function
 ISR25:
+    pushl $0       # Push dummy error code
     pushl $25      # Push interrupt number
     jmp isr_common
         
@@ -193,6 +203,7 @@ ISR25:
 .globl ISR26
 .type ISR26, @function
 ISR26:
+    pushl $0       # Push dummy error code
     pushl $26      # Push interrupt number
     jmp isr_common
         
@@ -200,6 +211,7 @@ ISR26:
 .globl ISR27
 .type ISR27, @function
 ISR27:
+    pushl $0       # Push dummy error code
     pushl $27      # Push interrupt number
     jmp isr_common
         
@@ -207,6 +219,7 @@ ISR27:
 .globl ISR28
 .type ISR28, @function
 ISR28:
+    pushl $0       # Push dummy error code
     pushl $28      # Push interrupt number
     jmp isr_common
         
@@ -214,6 +227,7 @@ ISR28:
 .globl ISR29
 .type ISR29, @function
 ISR29:
+    pushl $0       # Push dummy error code
     pushl $29      # Push interrupt number
     jmp isr_common
         
@@ -221,6 +235,7 @@ ISR29:
 .globl ISR30
 .type ISR30, @function
 ISR30:
+    pushl $0       # Push dummy error code
     pushl $30      # Push interrupt number
     jmp isr_common
         
@@ -228,6 +243,7 @@ ISR30:
 .globl ISR31
 .type ISR31, @function
 ISR31:
+    pushl $0       # Push dummy error code
     pushl $31      # Push interrupt number
     jmp isr_common
         
@@ -235,6 +251,7 @@ ISR31:
 .globl ISR32
 .type ISR32, @function
 ISR32:
+    pushl $0       # Push dummy error code
     pushl $32      # Push interrupt number
     jmp isr_common
         
@@ -242,6 +259,7 @@ ISR32:
 .globl ISR33
 .type ISR33, @function
 ISR33:
+    pushl $0       # Push dummy error code
     pushl $33      # Push interrupt number
     jmp isr_common
         
@@ -249,6 +267,7 @@ ISR33:
 .globl ISR34
 .type ISR34, @function
 ISR34:
+    pushl $0       # Push dummy error code
     pushl $34      # Push interrupt number
     jmp isr_common
         
@@ -256,6 +275,7 @@ ISR34:
 .globl ISR35
 .type ISR35, @function
 ISR35:
+    pushl $0       # Push dummy error code
     pushl $35      # Push interrupt number
     jmp isr_common
         
@@ -263,6 +283,7 @@ ISR35:
 .globl ISR36
 .type ISR36, @function
 ISR36:
+    pushl $0       # Push dummy error code
     pushl $36      # Push interrupt number
     jmp isr_common
         
@@ -270,6 +291,7 @@ ISR36:
 .globl ISR37
 .type ISR37, @function
 ISR37:
+    pushl $0       # Push dummy error code
     pushl $37      # Push interrupt number
     jmp isr_common
         
@@ -277,6 +299,7 @@ ISR37:
 .globl ISR38
 .type ISR38, @function
 ISR38:
+    pushl $0       # Push dummy error code
     pushl $38      # Push interrupt number
     jmp isr_common
         
@@ -284,6 +307,7 @@ ISR38:
 .globl ISR39
 .type ISR39, @function
 ISR39:
+    pushl $0       # Push dummy error code
     pushl $39      # Push interrupt number
     jmp isr_common
         
@@ -291,6 +315,7 @@ ISR39:
 .globl ISR40
 .type ISR40, @function
 ISR40:
+    pushl $0       # Push dummy error code
     pushl $40      # Push interrupt number
     jmp isr_common
         
@@ -298,6 +323,7 @@ ISR40:
 .globl ISR41
 .type ISR41, @function
 ISR41:
+    pushl $0       # Push dummy error code
     pushl $41      # Push interrupt number
     jmp isr_common
         
@@ -305,6 +331,7 @@ ISR41:
 .globl ISR42
 .type ISR42, @function
 ISR42:
+    pushl $0       # Push dummy error code
     pushl $42      # Push interrupt number
     jmp isr_common
         
@@ -312,6 +339,7 @@ ISR42:
 .globl ISR43
 .type ISR43, @function
 ISR43:
+    pushl $0       # Push dummy error code
     pushl $43      # Push interrupt number
     jmp isr_common
         
@@ -319,6 +347,7 @@ ISR43:
 .globl ISR44
 .type ISR44, @function
 ISR44:
+    pushl $0       # Push dummy error code
     pushl $44      # Push interrupt number
     jmp isr_common
         
@@ -326,6 +355,7 @@ ISR44:
 .globl ISR45
 .type ISR45, @function
 ISR45:
+    pushl $0       # Push dummy error code
     pushl $45      # Push interrupt number
     jmp isr_common
         
@@ -333,6 +363,7 @@ ISR45:
 .globl ISR46
 .type ISR46, @function
 ISR46:
+    pushl $0       # Push dummy error code
     pushl $46      # Push interrupt number
     jmp isr_common
         
@@ -340,6 +371,7 @@ ISR46:
 .globl ISR47
 .type ISR47, @function
 ISR47:
+    pushl $0       # Push dummy error code
     pushl $47      # Push interrupt number
     jmp isr_common
         
@@ -347,6 +379,7 @@ ISR47:
 .globl ISR48
 .type ISR48, @function
 ISR48:
+    pushl $0       # Push dummy error code
     pushl $48      # Push interrupt number
     jmp isr_common
         
@@ -354,6 +387,7 @@ ISR48:
 .globl ISR49
 .type ISR49, @function
 ISR49:
+    pushl $0       # Push dummy error code
     pushl $49      # Push interrupt number
     jmp isr_common
         
@@ -361,6 +395,7 @@ ISR49:
 .globl ISR50
 .type ISR50, @function
 ISR50:
+    pushl $0       # Push dummy error code
     pushl $50      # Push interrupt number
     jmp isr_common
         
@@ -368,6 +403,7 @@ ISR50:
 .globl ISR51
 .type ISR51, @function
 ISR51:
+    pushl $0       # Push dummy error code
     pushl $51      # Push interrupt number
     jmp isr_common
         
@@ -375,6 +411,7 @@ ISR51:
 .globl ISR52
 .type ISR52, @function
 ISR52:
+    pushl $0       # Push dummy error code
     pushl $52      # Push interrupt number
     jmp isr_common
         
@@ -382,6 +419,7 @@ ISR52:
 .globl ISR53
 .type ISR53, @function
 ISR53:
+    pushl $0       # Push dummy error code
     pushl $53      # Push interrupt number
     jmp isr_common
         
@@ -389,6 +427,7 @@ ISR53:
 .globl ISR54
 .type ISR54, @function
 ISR54:
+    pushl $0       # Push dummy error code
     pushl $54      # Push interrupt number
     jmp isr_common
         
@@ -396,6 +435,7 @@ ISR54:
 .globl ISR55
 .type ISR55, @function
 ISR55:
+    pushl $0       # Push dummy error code
     pushl $55      # Push interrupt number
     jmp isr_common
         
@@ -403,6 +443,7 @@ ISR55:
 .globl ISR56
 .type ISR56, @function
 ISR56:
+    pushl $0       # Push dummy error code
     pushl $56      # Push interrupt number
     jmp isr_common
         
@@ -410,6 +451,7 @@ ISR56:
 .globl ISR57
 .type ISR57, @function
 ISR57:
+    pushl $0       # Push dummy error code
     pushl $57      # Push interrupt number
     jmp isr_common
         
@@ -417,6 +459,7 @@ ISR57:
 .globl ISR58
 .type ISR58, @function
 ISR58:
+    pushl $0       # Push dummy error code
     pushl $58      # Push interrupt number
     jmp isr_common
         
@@ -424,6 +467,7 @@ ISR58:
 .globl ISR59
 .type ISR59, @function
 ISR59:
+    pushl $0       # Push dummy error code
     pushl $59      # Push interrupt number
     jmp isr_common
         
@@ -431,6 +475,7 @@ ISR59:
 .globl ISR60
 .type ISR60, @function
 ISR60:
+    pushl $0       # Push dummy error code
     pushl $60      # Push interrupt number
     jmp isr_common
         
@@ -438,6 +483,7 @@ ISR60:
 .globl ISR61
 .type ISR61, @function
 ISR61:
+    pushl $0       # Push dummy error code
     pushl $61      # Push interrupt number
     jmp isr_common
         
@@ -445,6 +491,7 @@ ISR61:
 .globl ISR62
 .type ISR62, @function
 ISR62:
+    pushl $0       # Push dummy error code
     pushl $62      # Push interrupt number
     jmp isr_common
         
@@ -452,6 +499,7 @@ ISR62:
 .globl ISR63
 .type ISR63, @function
 ISR63:
+    pushl $0       # Push dummy error code
     pushl $63      # Push interrupt number
     jmp isr_common
         
@@ -459,6 +507,7 @@ ISR63:
 .globl ISR64
 .type ISR64, @function
 ISR64:
+    pushl $0       # Push dummy error code
     pushl $64      # Push interrupt number
     jmp isr_common
         
@@ -466,6 +515,7 @@ ISR64:
 .globl ISR65
 .type ISR65, @function
 ISR65:
+    pushl $0       # Push dummy error code
     pushl $65      # Push interrupt number
     jmp isr_common
         
@@ -473,6 +523,7 @@ ISR65:
 .globl ISR66
 .type ISR66, @function
 ISR66:
+    pushl $0       # Push dummy error code
     pushl $66      # Push interrupt number
     jmp isr_common
         
@@ -480,6 +531,7 @@ ISR66:
 .globl ISR67
 .type ISR67, @function
 ISR67:
+    pushl $0       # Push dummy error code
     pushl $67      # Push interrupt number
     jmp isr_common
         
@@ -487,6 +539,7 @@ ISR67:
 .globl ISR68
 .type ISR68, @function
 ISR68:
+    pushl $0       # Push dummy error code
     pushl $68      # Push interrupt number
     jmp isr_common
         
@@ -494,6 +547,7 @@ ISR68:
 .globl ISR69
 .type ISR69, @function
 ISR69:
+    pushl $0       # Push dummy error code
     pushl $69      # Push interrupt number
     jmp isr_common
         
@@ -501,6 +555,7 @@ ISR69:
 .globl ISR70
 .type ISR70, @function
 ISR70:
+    pushl $0       # Push dummy error code
     pushl $70      # Push interrupt number
     jmp isr_common
         
@@ -508,6 +563,7 @@ ISR70:
 .globl ISR71
 .type ISR71, @function
 ISR71:
+    pushl $0       # Push dummy error code
     pushl $71      # Push interrupt number
     jmp isr_common
         
@@ -515,6 +571,7 @@ ISR71:
 .globl ISR72
 .type ISR72, @function
 ISR72:
+    pushl $0       # Push dummy error code
     pushl $72      # Push interrupt number
     jmp isr_common
         
@@ -522,6 +579,7 @@ ISR72:
 .globl ISR73
 .type ISR73, @function
 ISR73:
+    pushl $0       # Push dummy error code
     pushl $73      # Push interrupt number
     jmp isr_common
         
@@ -529,6 +587,7 @@ ISR73:
 .globl ISR74
 .type ISR74, @function
 ISR74:
+    pushl $0       # Push dummy error code
     pushl $74      # Push interrupt number
     jmp isr_common
         
@@ -536,6 +595,7 @@ ISR74:
 .globl ISR75
 .type ISR75, @function
 ISR75:
+    pushl $0       # Push dummy error code
     pushl $75      # Push interrupt number
     jmp isr_common
         
@@ -543,6 +603,7 @@ ISR75:
 .globl ISR76
 .type ISR76, @function
 ISR76:
+    pushl $0       # Push dummy error code
     pushl $76      # Push interrupt number
     jmp isr_common
         
@@ -550,6 +611,7 @@ ISR76:
 .globl ISR77
 .type ISR77, @function
 ISR77:
+    pushl $0       # Push dummy error code
     pushl $77      # Push interrupt number
     jmp isr_common
         
@@ -557,6 +619,7 @@ ISR77:
 .globl ISR78
 .type ISR78, @function
 ISR78:
+    pushl $0       # Push dummy error code
     pushl $78      # Push interrupt number
     jmp isr_common
         
@@ -564,6 +627,7 @@ ISR78:
 .globl ISR79
 .type ISR79, @function
 ISR79:
+    pushl $0       # Push dummy error code
     pushl $79      # Push interrupt number
     jmp isr_common
         
@@ -571,6 +635,7 @@ ISR79:
 .globl ISR80
 .type ISR80, @function
 ISR80:
+    pushl $0       # Push dummy error code
     pushl $80      # Push interrupt number
     jmp isr_common
         
@@ -578,6 +643,7 @@ ISR80:
 .globl ISR81
 .type ISR81, @function
 ISR81:
+    pushl $0       # Push dummy error code
     pushl $81      # Push interrupt number
     jmp isr_common
         
@@ -585,6 +651,7 @@ ISR81:
 .globl ISR82
 .type ISR82, @function
 ISR82:
+    pushl $0       # Push dummy error code
     pushl $82      # Push interrupt number
     jmp isr_common
         
@@ -592,6 +659,7 @@ ISR82:
 .globl ISR83
 .type ISR83, @function
 ISR83:
+    pushl $0       # Push dummy error code
     pushl $83      # Push interrupt number
     jmp isr_common
         
@@ -599,6 +667,7 @@ ISR83:
 .globl ISR84
 .type ISR84, @function
 ISR84:
+    pushl $0       # Push dummy error code
     pushl $84      # Push interrupt number
     jmp isr_common
         
@@ -606,6 +675,7 @@ ISR84:
 .globl ISR85
 .type ISR85, @function
 ISR85:
+    pushl $0       # Push dummy error code
     pushl $85      # Push interrupt number
     jmp isr_common
         
@@ -613,6 +683,7 @@ ISR85:
 .globl ISR86
 .type ISR86, @function
 ISR86:
+    pushl $0       # Push dummy error code
     pushl $86      # Push interrupt number
     jmp isr_common
         
@@ -620,6 +691,7 @@ ISR86:
 .globl ISR87
 .type ISR87, @function
 ISR87:
+    pushl $0       # Push dummy error code
     pushl $87      # Push interrupt number
     jmp isr_common
         
@@ -627,6 +699,7 @@ ISR87:
 .globl ISR88
 .type ISR88, @function
 ISR88:
+    pushl $0       # Push dummy error code
     pushl $88      # Push interrupt number
     jmp isr_common
         
@@ -634,6 +707,7 @@ ISR88:
 .globl ISR89
 .type ISR89, @function
 ISR89:
+    pushl $0       # Push dummy error code
     pushl $89      # Push interrupt number
     jmp isr_common
         
@@ -641,6 +715,7 @@ ISR89:
 .globl ISR90
 .type ISR90, @function
 ISR90:
+    pushl $0       # Push dummy error code
     pushl $90      # Push interrupt number
     jmp isr_common
         
@@ -648,6 +723,7 @@ ISR90:
 .globl ISR91
 .type ISR91, @function
 ISR91:
+    pushl $0       # Push dummy error code
     pushl $91      # Push interrupt number
     jmp isr_common
         
@@ -655,6 +731,7 @@ ISR91:
 .globl ISR92
 .type ISR92, @function
 ISR92:
+    pushl $0       # Push dummy error code
     pushl $92      # Push interrupt number
     jmp isr_common
         
@@ -662,6 +739,7 @@ ISR92:
 .globl ISR93
 .type ISR93, @function
 ISR93:
+    pushl $0       # Push dummy error code
     pushl $93      # Push interrupt number
     jmp isr_common
         
@@ -669,6 +747,7 @@ ISR93:
 .globl ISR94
 .type ISR94, @function
 ISR94:
+    pushl $0       # Push dummy error code
     pushl $94      # Push interrupt number
     jmp isr_common
         
@@ -676,6 +755,7 @@ ISR94:
 .globl ISR95
 .type ISR95, @function
 ISR95:
+    pushl $0       # Push dummy error code
     pushl $95      # Push interrupt number
     jmp isr_common
         
@@ -683,6 +763,7 @@ ISR95:
 .globl ISR96
 .type ISR96, @function
 ISR96:
+    pushl $0       # Push dummy error code
     pushl $96      # Push interrupt number
     jmp isr_common
         
@@ -690,6 +771,7 @@ ISR96:
 .globl ISR97
 .type ISR97, @function
 ISR97:
+    pushl $0       # Push dummy error code
     pushl $97      # Push interrupt number
     jmp isr_common
         
@@ -697,6 +779,7 @@ ISR97:
 .globl ISR98
 .type ISR98, @function
 ISR98:
+    pushl $0       # Push dummy error code
     pushl $98      # Push interrupt number
     jmp isr_common
         
@@ -704,6 +787,7 @@ ISR98:
 .globl ISR99
 .type ISR99, @function
 ISR99:
+    pushl $0       # Push dummy error code
     pushl $99      # Push interrupt number
     jmp isr_common
         
@@ -711,6 +795,7 @@ ISR99:
 .globl ISR100
 .type ISR100, @function
 ISR100:
+    pushl $0       # Push dummy error code
     pushl $100      # Push interrupt number
     jmp isr_common
         
@@ -718,6 +803,7 @@ ISR100:
 .globl ISR101
 .type ISR101, @function
 ISR101:
+    pushl $0       # Push dummy error code
     pushl $101      # Push interrupt number
     jmp isr_common
         
@@ -725,6 +811,7 @@ ISR101:
 .globl ISR102
 .type ISR102, @function
 ISR102:
+    pushl $0       # Push dummy error code
     pushl $102      # Push interrupt number
     jmp isr_common
         
@@ -732,6 +819,7 @@ ISR102:
 .globl ISR103
 .type ISR103, @function
 ISR103:
+    pushl $0       # Push dummy error code
     pushl $103      # Push interrupt number
     jmp isr_common
         
@@ -739,6 +827,7 @@ ISR103:
 .globl ISR104
 .type ISR104, @function
 ISR104:
+    pushl $0       # Push dummy error code
     pushl $104      # Push interrupt number
     jmp isr_common
         
@@ -746,6 +835,7 @@ ISR104:
 .globl ISR105
 .type ISR105, @function
 ISR105:
+    pushl $0       # Push dummy error code
     pushl $105      # Push interrupt number
     jmp isr_common
         
@@ -753,6 +843,7 @@ ISR105:
 .globl ISR106
 .type ISR106, @function
 ISR106:
+    pushl $0       # Push dummy error code
     pushl $106      # Push interrupt number
     jmp isr_common
         
@@ -760,6 +851,7 @@ ISR106:
 .globl ISR107
 .type ISR107, @function
 ISR107:
+    pushl $0       # Push dummy error code
     pushl $107      # Push interrupt number
     jmp isr_common
         
@@ -767,6 +859,7 @@ ISR107:
 .globl ISR108
 .type ISR108, @function
 ISR108:
+    pushl $0       # Push dummy error code
     pushl $108      # Push interrupt number
     jmp isr_common
         
@@ -774,6 +867,7 @@ ISR108:
 .globl ISR109
 .type ISR109, @function
 ISR109:
+    pushl $0       # Push dummy error code
     pushl $109      # Push interrupt number
     jmp isr_common
         
@@ -781,6 +875,7 @@ ISR109:
 .globl ISR110
 .type ISR110, @function
 ISR110:
+    pushl $0       # Push dummy error code
     pushl $110      # Push interrupt number
     jmp isr_common
         
@@ -788,6 +883,7 @@ ISR110:
 .globl ISR111
 .type ISR111, @function
 ISR111:
+    pushl $0       # Push dummy error code
     pushl $111      # Push interrupt number
     jmp isr_common
         
@@ -795,6 +891,7 @@ ISR111:
 .globl ISR112
 .type ISR112, @function
 ISR112:
+    pushl $0       # Push dummy error code
     pushl $112      # Push interrupt number
     jmp isr_common
         
@@ -802,6 +899,7 @@ ISR112:
 .globl ISR113
 .type ISR113, @function
 ISR113:
+    pushl $0       # Push dummy error code
     pushl $113      # Push interrupt number
     jmp isr_common
         
@@ -809,6 +907,7 @@ ISR113:
 .globl ISR114
 .type ISR114, @function
 ISR114:
+    pushl $0       # Push dummy error code
     pushl $114      # Push interrupt number
     jmp isr_common
         
@@ -816,6 +915,7 @@ ISR114:
 .globl ISR115
 .type ISR115, @function
 ISR115:
+    pushl $0       # Push dummy error code
     pushl $115      # Push interrupt number
     jmp isr_common
         
@@ -823,6 +923,7 @@ ISR115:
 .globl ISR116
 .type ISR116, @function
 ISR116:
+    pushl $0       # Push dummy error code
     pushl $116      # Push interrupt number
     jmp isr_common
         
@@ -830,6 +931,7 @@ ISR116:
 .globl ISR117
 .type ISR117, @function
 ISR117:
+    pushl $0       # Push dummy error code
     pushl $117      # Push interrupt number
     jmp isr_common
         
@@ -837,6 +939,7 @@ ISR117:
 .globl ISR118
 .type ISR118, @function
 ISR118:
+    pushl $0       # Push dummy error code
     pushl $118      # Push interrupt number
     jmp isr_common
         
@@ -844,6 +947,7 @@ ISR118:
 .globl ISR119
 .type ISR119, @function
 ISR119:
+    pushl $0       # Push dummy error code
     pushl $119      # Push interrupt number
     jmp isr_common
         
@@ -851,6 +955,7 @@ ISR119:
 .globl ISR120
 .type ISR120, @function
 ISR120:
+    pushl $0       # Push dummy error code
     pushl $120      # Push interrupt number
     jmp isr_common
         
@@ -858,6 +963,7 @@ ISR120:
 .globl ISR121
 .type ISR121, @function
 ISR121:
+    pushl $0       # Push dummy error code
     pushl $121      # Push interrupt number
     jmp isr_common
         
@@ -865,6 +971,7 @@ ISR121:
 .globl ISR122
 .type ISR122, @function
 ISR122:
+    pushl $0       # Push dummy error code
     pushl $122      # Push interrupt number
     jmp isr_common
         
@@ -872,6 +979,7 @@ ISR122:
 .globl ISR123
 .type ISR123, @function
 ISR123:
+    pushl $0       # Push dummy error code
     pushl $123      # Push interrupt number
     jmp isr_common
         
@@ -879,6 +987,7 @@ ISR123:
 .globl ISR124
 .type ISR124, @function
 ISR124:
+    pushl $0       # Push dummy error code
     pushl $124      # Push interrupt number
     jmp isr_common
         
@@ -886,6 +995,7 @@ ISR124:
 .globl ISR125
 .type ISR125, @function
 ISR125:
+    pushl $0       # Push dummy error code
     pushl $125      # Push interrupt number
     jmp isr_common
         
@@ -893,6 +1003,7 @@ ISR125:
 .globl ISR126
 .type ISR126, @function
 ISR126:
+    pushl $0       # Push dummy error code
     pushl $126      # Push interrupt number
     jmp isr_common
         
@@ -900,6 +1011,7 @@ ISR126:
 .globl ISR127
 .type ISR127, @function
 ISR127:
+    pushl $0       # Push dummy error code
     pushl $127      # Push interrupt number
     jmp isr_common
         
@@ -907,6 +1019,7 @@ ISR127:
 .globl ISR128
 .type ISR128, @function
 ISR128:
+    pushl $0       # Push dummy error code
     pushl $128      # Push interrupt number
     jmp isr_common
         
@@ -914,6 +1027,7 @@ ISR128:
 .globl ISR129
 .type ISR129, @function
 ISR129:
+    pushl $0       # Push dummy error code
     pushl $129      # Push interrupt number
     jmp isr_common
         
@@ -921,6 +1035,7 @@ ISR129:
 .globl ISR130
 .type ISR130, @function
 ISR130:
+    pushl $0       # Push dummy error code
     pushl $130      # Push interrupt number
     jmp isr_common
         
@@ -928,6 +1043,7 @@ ISR130:
 .globl ISR131
 .type ISR131, @function
 ISR131:
+    pushl $0       # Push dummy error code
     pushl $131      # Push interrupt number
     jmp isr_common
         
@@ -935,6 +1051,7 @@ ISR131:
 .globl ISR132
 .type ISR132, @function
 ISR132:
+    pushl $0       # Push dummy error code
     pushl $132      # Push interrupt number
     jmp isr_common
         
@@ -942,6 +1059,7 @@ ISR132:
 .globl ISR133
 .type ISR133, @function
 ISR133:
+    pushl $0       # Push dummy error code
     pushl $133      # Push interrupt number
     jmp isr_common
         
@@ -949,6 +1067,7 @@ ISR133:
 .globl ISR134
 .type ISR134, @function
 ISR134:
+    pushl $0       # Push dummy error code
     pushl $134      # Push interrupt number
     jmp isr_common
         
@@ -956,6 +1075,7 @@ ISR134:
 .globl ISR135
 .type ISR135, @function
 ISR135:
+    pushl $0       # Push dummy error code
     pushl $135      # Push interrupt number
     jmp isr_common
         
@@ -963,6 +1083,7 @@ ISR135:
 .globl ISR136
 .type ISR136, @function
 ISR136:
+    pushl $0       # Push dummy error code
     pushl $136      # Push interrupt number
     jmp isr_common
         
@@ -970,6 +1091,7 @@ ISR136:
 .globl ISR137
 .type ISR137, @function
 ISR137:
+    pushl $0       # Push dummy error code
     pushl $137      # Push interrupt number
     jmp isr_common
         
@@ -977,6 +1099,7 @@ ISR137:
 .globl ISR138
 .type ISR138, @function
 ISR138:
+    pushl $0       # Push dummy error code
     pushl $138      # Push interrupt number
     jmp isr_common
         
@@ -984,6 +1107,7 @@ ISR138:
 .globl ISR139
 .type ISR139, @function
 ISR139:
+    pushl $0       # Push dummy error code
     pushl $139      # Push interrupt number
     jmp isr_common
         
@@ -991,6 +1115,7 @@ ISR139:
 .globl ISR140
 .type ISR140, @function
 ISR140:
+    pushl $0       # Push dummy error code
     pushl $140      # Push interrupt number
     jmp isr_common
         
@@ -998,6 +1123,7 @@ ISR140:
 .globl ISR141
 .type ISR141, @function
 ISR141:
+    pushl $0       # Push dummy error code
     pushl $141      # Push interrupt number
     jmp isr_common
         
@@ -1005,6 +1131,7 @@ ISR141:
 .globl ISR142
 .type ISR142, @function
 ISR142:
+    pushl $0       # Push dummy error code
     pushl $142      # Push interrupt number
     jmp isr_common
         
@@ -1012,6 +1139,7 @@ ISR142:
 .globl ISR143
 .type ISR143, @function
 ISR143:
+    pushl $0       # Push dummy error code
     pushl $143      # Push interrupt number
     jmp isr_common
         
@@ -1019,6 +1147,7 @@ ISR143:
 .globl ISR144
 .type ISR144, @function
 ISR144:
+    pushl $0       # Push dummy error code
     pushl $144      # Push interrupt number
     jmp isr_common
         
@@ -1026,6 +1155,7 @@ ISR144:
 .globl ISR145
 .type ISR145, @function
 ISR145:
+    pushl $0       # Push dummy error code
     pushl $145      # Push interrupt number
     jmp isr_common
         
@@ -1033,6 +1163,7 @@ ISR145:
 .globl ISR146
 .type ISR146, @function
 ISR146:
+    pushl $0       # Push dummy error code
     pushl $146      # Push interrupt number
     jmp isr_common
         
@@ -1040,6 +1171,7 @@ ISR146:
 .globl ISR147
 .type ISR147, @function
 ISR147:
+    pushl $0       # Push dummy error code
     pushl $147      # Push interrupt number
     jmp isr_common
         
@@ -1047,6 +1179,7 @@ ISR147:
 .globl ISR148
 .type ISR148, @function
 ISR148:
+    pushl $0       # Push dummy error code
     pushl $148      # Push interrupt number
     jmp isr_common
         
@@ -1054,6 +1187,7 @@ ISR148:
 .globl ISR149
 .type ISR149, @function
 ISR149:
+    pushl $0       # Push dummy error code
     pushl $149      # Push interrupt number
     jmp isr_common
         
@@ -1061,6 +1195,7 @@ ISR149:
 .globl ISR150
 .type ISR150, @function
 ISR150:
+    pushl $0       # Push dummy error code
     pushl $150      # Push interrupt number
     jmp isr_common
         
@@ -1068,6 +1203,7 @@ ISR150:
 .globl ISR151
 .type ISR151, @function
 ISR151:
+    pushl $0       # Push dummy error code
     pushl $151      # Push interrupt number
     jmp isr_common
         
@@ -1075,6 +1211,7 @@ ISR151:
 .globl ISR152
 .type ISR152, @function
 ISR152:
+    pushl $0       # Push dummy error code
     pushl $152      # Push interrupt number
     jmp isr_common
         
@@ -1082,6 +1219,7 @@ ISR152:
 .globl ISR153
 .type ISR153, @function
 ISR153:
+    pushl $0       # Push dummy error code
     pushl $153      # Push interrupt number
     jmp isr_common
         
@@ -1089,6 +1227,7 @@ ISR153:
 .globl ISR154
 .type ISR154, @function
 ISR154:
+    pushl $0       # Push dummy error code
     pushl $154      # Push interrupt number
     jmp isr_common
         
@@ -1096,6 +1235,7 @@ ISR154:
 .globl ISR155
 .type ISR155, @function
 ISR155:
+    pushl $0       # Push dummy error code
     pushl $155      # Push interrupt number
     jmp isr_common
         
@@ -1103,6 +1243,7 @@ ISR155:
 .globl ISR156
 .type ISR156, @function
 ISR156:
+    pushl $0       # Push dummy error code
     pushl $156      # Push interrupt number
     jmp isr_common
         
@@ -1110,6 +1251,7 @@ ISR156:
 .globl ISR157
 .type ISR157, @function
 ISR157:
+    pushl $0       # Push dummy error code
     pushl $157      # Push interrupt number
     jmp isr_common
         
@@ -1117,6 +1259,7 @@ ISR157:
 .globl ISR158
 .type ISR158, @function
 ISR158:
+    pushl $0       # Push dummy error code
     pushl $158      # Push interrupt number
     jmp isr_common
         
@@ -1124,6 +1267,7 @@ ISR158:
 .globl ISR159
 .type ISR159, @function
 ISR159:
+    pushl $0       # Push dummy error code
     pushl $159      # Push interrupt number
     jmp isr_common
         
@@ -1131,6 +1275,7 @@ ISR159:
 .globl ISR160
 .type ISR160, @function
 ISR160:
+    pushl $0       # Push dummy error code
     pushl $160      # Push interrupt number
     jmp isr_common
         
@@ -1138,6 +1283,7 @@ ISR160:
 .globl ISR161
 .type ISR161, @function
 ISR161:
+    pushl $0       # Push dummy error code
     pushl $161      # Push interrupt number
     jmp isr_common
         
@@ -1145,6 +1291,7 @@ ISR161:
 .globl ISR162
 .type ISR162, @function
 ISR162:
+    pushl $0       # Push dummy error code
     pushl $162      # Push interrupt number
     jmp isr_common
         
@@ -1152,6 +1299,7 @@ ISR162:
 .globl ISR163
 .type ISR163, @function
 ISR163:
+    pushl $0       # Push dummy error code
     pushl $163      # Push interrupt number
     jmp isr_common
         
@@ -1159,6 +1307,7 @@ ISR163:
 .globl ISR164
 .type ISR164, @function
 ISR164:
+    pushl $0       # Push dummy error code
     pushl $164      # Push interrupt number
     jmp isr_common
         
@@ -1166,6 +1315,7 @@ ISR164:
 .globl ISR165
 .type ISR165, @function
 ISR165:
+    pushl $0       # Push dummy error code
     pushl $165      # Push interrupt number
     jmp isr_common
         
@@ -1173,6 +1323,7 @@ ISR165:
 .globl ISR166
 .type ISR166, @function
 ISR166:
+    pushl $0       # Push dummy error code
     pushl $166      # Push interrupt number
     jmp isr_common
         
@@ -1180,6 +1331,7 @@ ISR166:
 .globl ISR167
 .type ISR167, @function
 ISR167:
+    pushl $0       # Push dummy error code
     pushl $167      # Push interrupt number
     jmp isr_common
         
@@ -1187,6 +1339,7 @@ ISR167:
 .globl ISR168
 .type ISR168, @function
 ISR168:
+    pushl $0       # Push dummy error code
     pushl $168      # Push interrupt number
     jmp isr_common
         
@@ -1194,6 +1347,7 @@ ISR168:
 .globl ISR169
 .type ISR169, @function
 ISR169:
+    pushl $0       # Push dummy error code
     pushl $169      # Push interrupt number
     jmp isr_common
         
@@ -1201,6 +1355,7 @@ ISR169:
 .globl ISR170
 .type ISR170, @function
 ISR170:
+    pushl $0       # Push dummy error code
     pushl $170      # Push interrupt number
     jmp isr_common
         
@@ -1208,6 +1363,7 @@ ISR170:
 .globl ISR171
 .type ISR171, @function
 ISR171:
+    pushl $0       # Push dummy error code
     pushl $171      # Push interrupt number
     jmp isr_common
         
@@ -1215,6 +1371,7 @@ ISR171:
 .globl ISR172
 .type ISR172, @function
 ISR172:
+    pushl $0       # Push dummy error code
     pushl $172      # Push interrupt number
     jmp isr_common
         
@@ -1222,6 +1379,7 @@ ISR172:
 .globl ISR173
 .type ISR173, @function
 ISR173:
+    pushl $0       # Push dummy error code
     pushl $173      # Push interrupt number
     jmp isr_common
         
@@ -1229,6 +1387,7 @@ ISR173:
 .globl ISR174
 .type ISR174, @function
 ISR174:
+    pushl $0       # Push dummy error code
     pushl $174      # Push interrupt number
     jmp isr_common
         
@@ -1236,6 +1395,7 @@ ISR174:
 .globl ISR175
 .type ISR175, @function
 ISR175:
+    pushl $0       # Push dummy error code
     pushl $175      # Push interrupt number
     jmp isr_common
         
@@ -1243,6 +1403,7 @@ ISR175:
 .globl ISR176
 .type ISR176, @function
 ISR176:
+    pushl $0       # Push dummy error code
     pushl $176      # Push interrupt number
     jmp isr_common
         
@@ -1250,6 +1411,7 @@ ISR176:
 .globl ISR177
 .type ISR177, @function
 ISR177:
+    pushl $0       # Push dummy error code
     pushl $177      # Push interrupt number
     jmp isr_common
         
@@ -1257,6 +1419,7 @@ ISR177:
 .globl ISR178
 .type ISR178, @function
 ISR178:
+    pushl $0       # Push dummy error code
     pushl $178      # Push interrupt number
     jmp isr_common
         
@@ -1264,6 +1427,7 @@ ISR178:
 .globl ISR179
 .type ISR179, @function
 ISR179:
+    pushl $0       # Push dummy error code
     pushl $179      # Push interrupt number
     jmp isr_common
         
@@ -1271,6 +1435,7 @@ ISR179:
 .globl ISR180
 .type ISR180, @function
 ISR180:
+    pushl $0       # Push dummy error code
     pushl $180      # Push interrupt number
     jmp isr_common
         
@@ -1278,6 +1443,7 @@ ISR180:
 .globl ISR181
 .type ISR181, @function
 ISR181:
+    pushl $0       # Push dummy error code
     pushl $181      # Push interrupt number
     jmp isr_common
         
@@ -1285,6 +1451,7 @@ ISR181:
 .globl ISR182
 .type ISR182, @function
 ISR182:
+    pushl $0       # Push dummy error code
     pushl $182      # Push interrupt number
     jmp isr_common
         
@@ -1292,6 +1459,7 @@ ISR182:
 .globl ISR183
 .type ISR183, @function
 ISR183:
+    pushl $0       # Push dummy error code
     pushl $183      # Push interrupt number
     jmp isr_common
         
@@ -1299,6 +1467,7 @@ ISR183:
 .globl ISR184
 .type ISR184, @function
 ISR184:
+    pushl $0       # Push dummy error code
     pushl $184      # Push interrupt number
     jmp isr_common
         
@@ -1306,6 +1475,7 @@ ISR184:
 .globl ISR185
 .type ISR185, @function
 ISR185:
+    pushl $0       # Push dummy error code
     pushl $185      # Push interrupt number
     jmp isr_common
         
@@ -1313,6 +1483,7 @@ ISR185:
 .globl ISR186
 .type ISR186, @function
 ISR186:
+    pushl $0       # Push dummy error code
     pushl $186      # Push interrupt number
     jmp isr_common
         
@@ -1320,6 +1491,7 @@ ISR186:
 .globl ISR187
 .type ISR187, @function
 ISR187:
+    pushl $0       # Push dummy error code
     pushl $187      # Push interrupt number
     jmp isr_common
         
@@ -1327,6 +1499,7 @@ ISR187:
 .globl ISR188
 .type ISR188, @function
 ISR188:
+    pushl $0       # Push dummy error code
     pushl $188      # Push interrupt number
     jmp isr_common
         
@@ -1334,6 +1507,7 @@ ISR188:
 .globl ISR189
 .type ISR189, @function
 ISR189:
+    pushl $0       # Push dummy error code
     pushl $189      # Push interrupt number
     jmp isr_common
         
@@ -1341,6 +1515,7 @@ ISR189:
 .globl ISR190
 .type ISR190, @function
 ISR190:
+    pushl $0       # Push dummy error code
     pushl $190      # Push interrupt number
     jmp isr_common
         
@@ -1348,6 +1523,7 @@ ISR190:
 .globl ISR191
 .type ISR191, @function
 ISR191:
+    pushl $0       # Push dummy error code
     pushl $191      # Push interrupt number
     jmp isr_common
         
@@ -1355,6 +1531,7 @@ ISR191:
 .globl ISR192
 .type ISR192, @function
 ISR192:
+    pushl $0       # Push dummy error code
     pushl $192      # Push interrupt number
     jmp isr_common
         
@@ -1362,6 +1539,7 @@ ISR192:
 .globl ISR193
 .type ISR193, @function
 ISR193:
+    pushl $0       # Push dummy error code
     pushl $193      # Push interrupt number
     jmp isr_common
         
@@ -1369,6 +1547,7 @@ ISR193:
 .globl ISR194
 .type ISR194, @function
 ISR194:
+    pushl $0       # Push dummy error code
     pushl $194      # Push interrupt number
     jmp isr_common
         
@@ -1376,6 +1555,7 @@ ISR194:
 .globl ISR195
 .type ISR195, @function
 ISR195:
+    pushl $0       # Push dummy error code
     pushl $195      # Push interrupt number
     jmp isr_common
         
@@ -1383,6 +1563,7 @@ ISR195:
 .globl ISR196
 .type ISR196, @function
 ISR196:
+    pushl $0       # Push dummy error code
     pushl $196      # Push interrupt number
     jmp isr_common
         
@@ -1390,6 +1571,7 @@ ISR196:
 .globl ISR197
 .type ISR197, @function
 ISR197:
+    pushl $0       # Push dummy error code
     pushl $197      # Push interrupt number
     jmp isr_common
         
@@ -1397,6 +1579,7 @@ ISR197:
 .globl ISR198
 .type ISR198, @function
 ISR198:
+    pushl $0       # Push dummy error code
     pushl $198      # Push interrupt number
     jmp isr_common
         
@@ -1404,6 +1587,7 @@ ISR198:
 .globl ISR199
 .type ISR199, @function
 ISR199:
+    pushl $0       # Push dummy error code
     pushl $199      # Push interrupt number
     jmp isr_common
         
@@ -1411,6 +1595,7 @@ ISR199:
 .globl ISR200
 .type ISR200, @function
 ISR200:
+    pushl $0       # Push dummy error code
     pushl $200      # Push interrupt number
     jmp isr_common
         
@@ -1418,6 +1603,7 @@ ISR200:
 .globl ISR201
 .type ISR201, @function
 ISR201:
+    pushl $0       # Push dummy error code
     pushl $201      # Push interrupt number
     jmp isr_common
         
@@ -1425,6 +1611,7 @@ ISR201:
 .globl ISR202
 .type ISR202, @function
 ISR202:
+    pushl $0       # Push dummy error code
     pushl $202      # Push interrupt number
     jmp isr_common
         
@@ -1432,6 +1619,7 @@ ISR202:
 .globl ISR203
 .type ISR203, @function
 ISR203:
+    pushl $0       # Push dummy error code
     pushl $203      # Push interrupt number
     jmp isr_common
         
@@ -1439,6 +1627,7 @@ ISR203:
 .globl ISR204
 .type ISR204, @function
 ISR204:
+    pushl $0       # Push dummy error code
     pushl $204      # Push interrupt number
     jmp isr_common
         
@@ -1446,6 +1635,7 @@ ISR204:
 .globl ISR205
 .type ISR205, @function
 ISR205:
+    pushl $0       # Push dummy error code
     pushl $205      # Push interrupt number
     jmp isr_common
         
@@ -1453,6 +1643,7 @@ ISR205:
 .globl ISR206
 .type ISR206, @function
 ISR206:
+    pushl $0       # Push dummy error code
     pushl $206      # Push interrupt number
     jmp isr_common
         
@@ -1460,6 +1651,7 @@ ISR206:
 .globl ISR207
 .type ISR207, @function
 ISR207:
+    pushl $0       # Push dummy error code
     pushl $207      # Push interrupt number
     jmp isr_common
         
@@ -1467,6 +1659,7 @@ ISR207:
 .globl ISR208
 .type ISR208, @function
 ISR208:
+    pushl $0       # Push dummy error code
     pushl $208      # Push interrupt number
     jmp isr_common
         
@@ -1474,6 +1667,7 @@ ISR208:
 .globl ISR209
 .type ISR209, @function
 ISR209:
+    pushl $0       # Push dummy error code
     pushl $209      # Push interrupt number
     jmp isr_common
         
@@ -1481,6 +1675,7 @@ ISR209:
 .globl ISR210
 .type ISR210, @function
 ISR210:
+    pushl $0       # Push dummy error code
     pushl $210      # Push interrupt number
     jmp isr_common
         
@@ -1488,6 +1683,7 @@ ISR210:
 .globl ISR211
 .type ISR211, @function
 ISR211:
+    pushl $0       # Push dummy error code
     pushl $211      # Push interrupt number
     jmp isr_common
         
@@ -1495,6 +1691,7 @@ ISR211:
 .globl ISR212
 .type ISR212, @function
 ISR212:
+    pushl $0       # Push dummy error code
     pushl $212      # Push interrupt number
     jmp isr_common
         
@@ -1502,6 +1699,7 @@ ISR212:
 .globl ISR213
 .type ISR213, @function
 ISR213:
+    pushl $0       # Push dummy error code
     pushl $213      # Push interrupt number
     jmp isr_common
         
@@ -1509,6 +1707,7 @@ ISR213:
 .globl ISR214
 .type ISR214, @function
 ISR214:
+    pushl $0       # Push dummy error code
     pushl $214      # Push interrupt number
     jmp isr_common
         
@@ -1516,6 +1715,7 @@ ISR214:
 .globl ISR215
 .type ISR215, @function
 ISR215:
+    pushl $0       # Push dummy error code
     pushl $215      # Push interrupt number
     jmp isr_common
         
@@ -1523,6 +1723,7 @@ ISR215:
 .globl ISR216
 .type ISR216, @function
 ISR216:
+    pushl $0       # Push dummy error code
     pushl $216      # Push interrupt number
     jmp isr_common
         
@@ -1530,6 +1731,7 @@ ISR216:
 .globl ISR217
 .type ISR217, @function
 ISR217:
+    pushl $0       # Push dummy error code
     pushl $217      # Push interrupt number
     jmp isr_common
         
@@ -1537,6 +1739,7 @@ ISR217:
 .globl ISR218
 .type ISR218, @function
 ISR218:
+    pushl $0       # Push dummy error code
     pushl $218      # Push interrupt number
     jmp isr_common
         
@@ -1544,6 +1747,7 @@ ISR218:
 .globl ISR219
 .type ISR219, @function
 ISR219:
+    pushl $0       # Push dummy error code
     pushl $219      # Push interrupt number
     jmp isr_common
         
@@ -1551,6 +1755,7 @@ ISR219:
 .globl ISR220
 .type ISR220, @function
 ISR220:
+    pushl $0       # Push dummy error code
     pushl $220      # Push interrupt number
     jmp isr_common
         
@@ -1558,6 +1763,7 @@ ISR220:
 .globl ISR221
 .type ISR221, @function
 ISR221:
+    pushl $0       # Push dummy error code
     pushl $221      # Push interrupt number
     jmp isr_common
         
@@ -1565,6 +1771,7 @@ ISR221:
 .globl ISR222
 .type ISR222, @function
 ISR222:
+    pushl $0       # Push dummy error code
     pushl $222      # Push interrupt number
     jmp isr_common
         
@@ -1572,6 +1779,7 @@ ISR222:
 .globl ISR223
 .type ISR223, @function
 ISR223:
+    pushl $0       # Push dummy error code
     pushl $223      # Push interrupt number
     jmp isr_common
         
@@ -1579,6 +1787,7 @@ ISR223:
 .globl ISR224
 .type ISR224, @function
 ISR224:
+    pushl $0       # Push dummy error code
     pushl $224      # Push interrupt number
     jmp isr_common
         
@@ -1586,6 +1795,7 @@ ISR224:
 .globl ISR225
 .type ISR225, @function
 ISR225:
+    pushl $0       # Push dummy error code
     pushl $225      # Push interrupt number
     jmp isr_common
         
@@ -1593,6 +1803,7 @@ ISR225:
 .globl ISR226
 .type ISR226, @function
 ISR226:
+    pushl $0       # Push dummy error code
     pushl $226      # Push interrupt number
     jmp isr_common
         
@@ -1600,6 +1811,7 @@ ISR226:
 .globl ISR227
 .type ISR227, @function
 ISR227:
+    pushl $0       # Push dummy error code
     pushl $227      # Push interrupt number
     jmp isr_common
         
@@ -1607,6 +1819,7 @@ ISR227:
 .globl ISR228
 .type ISR228, @function
 ISR228:
+    pushl $0       # Push dummy error code
     pushl $228      # Push interrupt number
     jmp isr_common
         
@@ -1614,6 +1827,7 @@ ISR228:
 .globl ISR229
 .type ISR229, @function
 ISR229:
+    pushl $0       # Push dummy error code
     pushl $229      # Push interrupt number
     jmp isr_common
         
@@ -1621,6 +1835,7 @@ ISR229:
 .globl ISR230
 .type ISR230, @function
 ISR230:
+    pushl $0       # Push dummy error code
     pushl $230      # Push interrupt number
     jmp isr_common
         
@@ -1628,6 +1843,7 @@ ISR230:
 .globl ISR231
 .type ISR231, @function
 ISR231:
+    pushl $0       # Push dummy error code
     pushl $231      # Push interrupt number
     jmp isr_common
         
@@ -1635,6 +1851,7 @@ ISR231:
 .globl ISR232
 .type ISR232, @function
 ISR232:
+    pushl $0       # Push dummy error code
     pushl $232      # Push interrupt number
     jmp isr_common
         
@@ -1642,6 +1859,7 @@ ISR232:
 .globl ISR233
 .type ISR233, @function
 ISR233:
+    pushl $0       # Push dummy error code
     pushl $233      # Push interrupt number
     jmp isr_common
         
@@ -1649,6 +1867,7 @@ ISR233:
 .globl ISR234
 .type ISR234, @function
 ISR234:
+    pushl $0       # Push dummy error code
     pushl $234      # Push interrupt number
     jmp isr_common
         
@@ -1656,6 +1875,7 @@ ISR234:
 .globl ISR235
 .type ISR235, @function
 ISR235:
+    pushl $0       # Push dummy error code
     pushl $235      # Push interrupt number
     jmp isr_common
         
@@ -1663,6 +1883,7 @@ ISR235:
 .globl ISR236
 .type ISR236, @function
 ISR236:
+    pushl $0       # Push dummy error code
     pushl $236      # Push interrupt number
     jmp isr_common
         
@@ -1670,6 +1891,7 @@ ISR236:
 .globl ISR237
 .type ISR237, @function
 ISR237:
+    pushl $0       # Push dummy error code
     pushl $237      # Push interrupt number
     jmp isr_common
         
@@ -1677,6 +1899,7 @@ ISR237:
 .globl ISR238
 .type ISR238, @function
 ISR238:
+    pushl $0       # Push dummy error code
     pushl $238      # Push interrupt number
     jmp isr_common
         
@@ -1684,6 +1907,7 @@ ISR238:
 .globl ISR239
 .type ISR239, @function
 ISR239:
+    pushl $0       # Push dummy error code
     pushl $239      # Push interrupt number
     jmp isr_common
         
@@ -1691,6 +1915,7 @@ ISR239:
 .globl ISR240
 .type ISR240, @function
 ISR240:
+    pushl $0       # Push dummy error code
     pushl $240      # Push interrupt number
     jmp isr_common
         
@@ -1698,6 +1923,7 @@ ISR240:
 .globl ISR241
 .type ISR241, @function
 ISR241:
+    pushl $0       # Push dummy error code
     pushl $241      # Push interrupt number
     jmp isr_common
         
@@ -1705,6 +1931,7 @@ ISR241:
 .globl ISR242
 .type ISR242, @function
 ISR242:
+    pushl $0       # Push dummy error code
     pushl $242      # Push interrupt number
     jmp isr_common
         
@@ -1712,6 +1939,7 @@ ISR242:
 .globl ISR243
 .type ISR243, @function
 ISR243:
+    pushl $0       # Push dummy error code
     pushl $243      # Push interrupt number
     jmp isr_common
         
@@ -1719,6 +1947,7 @@ ISR243:
 .globl ISR244
 .type ISR244, @function
 ISR244:
+    pushl $0       # Push dummy error code
     pushl $244      # Push interrupt number
     jmp isr_common
         
@@ -1726,6 +1955,7 @@ ISR244:
 .globl ISR245
 .type ISR245, @function
 ISR245:
+    pushl $0       # Push dummy error code
     pushl $245      # Push interrupt number
     jmp isr_common
         
@@ -1733,6 +1963,7 @@ ISR245:
 .globl ISR246
 .type ISR246, @function
 ISR246:
+    pushl $0       # Push dummy error code
     pushl $246      # Push interrupt number
     jmp isr_common
         
@@ -1740,6 +1971,7 @@ ISR246:
 .globl ISR247
 .type ISR247, @function
 ISR247:
+    pushl $0       # Push dummy error code
     pushl $247      # Push interrupt number
     jmp isr_common
         
@@ -1747,6 +1979,7 @@ ISR247:
 .globl ISR248
 .type ISR248, @function
 ISR248:
+    pushl $0       # Push dummy error code
     pushl $248      # Push interrupt number
     jmp isr_common
         
@@ -1754,6 +1987,7 @@ ISR248:
 .globl ISR249
 .type ISR249, @function
 ISR249:
+    pushl $0       # Push dummy error code
     pushl $249      # Push interrupt number
     jmp isr_common
         
@@ -1761,6 +1995,7 @@ ISR249:
 .globl ISR250
 .type ISR250, @function
 ISR250:
+    pushl $0       # Push dummy error code
     pushl $250      # Push interrupt number
     jmp isr_common
         
@@ -1768,6 +2003,7 @@ ISR250:
 .globl ISR251
 .type ISR251, @function
 ISR251:
+    pushl $0       # Push dummy error code
     pushl $251      # Push interrupt number
     jmp isr_common
         
@@ -1775,6 +2011,7 @@ ISR251:
 .globl ISR252
 .type ISR252, @function
 ISR252:
+    pushl $0       # Push dummy error code
     pushl $252      # Push interrupt number
     jmp isr_common
         
@@ -1782,6 +2019,7 @@ ISR252:
 .globl ISR253
 .type ISR253, @function
 ISR253:
+    pushl $0       # Push dummy error code
     pushl $253      # Push interrupt number
     jmp isr_common
         
@@ -1789,6 +2027,7 @@ ISR253:
 .globl ISR254
 .type ISR254, @function
 ISR254:
+    pushl $0       # Push dummy error code
     pushl $254      # Push interrupt number
     jmp isr_common
         
@@ -1796,6 +2035,7 @@ ISR254:
 .globl ISR255
 .type ISR255, @function
 ISR255:
+    pushl $0       # Push dummy error code
     pushl $255      # Push interrupt number
     jmp isr_common
         

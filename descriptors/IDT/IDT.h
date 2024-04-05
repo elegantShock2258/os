@@ -8,7 +8,7 @@ typedef struct {
   u8 Reserved;
   u8 Flags;
   u16 BaseHigh;
-} __attribute__((packed)) IDTEntry;
+}  IDTEntry;
 
 typedef struct {
   u16 limit;
@@ -37,4 +37,3 @@ void IDT_DisableGate(int interrupt);
 
 void idt_set_descriptor(u8 interrupt, void (*base)(), u8 flags);
 void idt_init();
-

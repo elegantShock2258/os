@@ -11,5 +11,5 @@ typedef struct {
 } __attribute__((packed)) Registers;
 
 [[noreturn]] void __attribute__((cdecl)) ISR_Handler(Registers *regs);
-
+typedef void (*ISRHandler)(Registers* regs);
 void isr_init();

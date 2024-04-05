@@ -1,6 +1,6 @@
 #pragma once
-#include "../../utils/kernel_utils.c"
 #include "GDT.h"
+#include "../../utils/kernel_utils.c"
 
 gdt_entry gdt_entries[7];
 
@@ -16,8 +16,10 @@ static void gdt_set_entry_info(u32 num, u32 base, u32 limit, u8 access,
 
   gdt_entries[num].granularity = gran;
 }
+extern void reloadSegments();
 
 void gdt_init() {
+  asm("cli");
   gdt_ptr gdtPtr;
   gdtPtr.limit = (sizeof(gdt_entry) * 3) - 1;
   gdtPtr.base = &gdt_entries[0];
@@ -44,5 +46,6 @@ void gdt_init() {
 
   __asm__ volatile("lgdt %0" : : "m"(gdtPtr)); // load the new GDT
 
+  reloadSegments();
   kernel_log("GDT: Set GDT.\n");
 }

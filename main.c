@@ -7,11 +7,10 @@ void main(void) {
   printf("de"
          "hie %d\n",
          49);
-  
-  unsigned char scancode = keyboard_read_scan_code();
-  char asciicode[2];
-  asciicode[0] = keyboard_scan_code_to_ascii(scancode);
+  printf("a");
+  asm("int $4");
+  printf("b");
+  asm("int $5");
+  printf("c");
 
-  printf("%s %d", asciicode,scancode);
-  serial_write(asciicode,sizeof(asciicode));
 }

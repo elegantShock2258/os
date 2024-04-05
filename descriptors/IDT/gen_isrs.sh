@@ -59,7 +59,6 @@ for i in $(seq 0 255); do
 .globl ISR${i}
 .type ISR${i}, @function
 ISR${i}:
-    pushl \$0       # Push dummy error code
     pushl \$${i}      # Push interrupt number
     jmp isr_common
         " >> $ISRS_GEN_ASM
@@ -68,6 +67,7 @@ ISR${i}:
 .globl ISR${i}
 .type ISR${i}, @function
 ISR${i}:
+    pushl \$0       # Push dummy error code
     pushl \$${i}      # Push interrupt number
     jmp isr_common
         " >> $ISRS_GEN_ASM

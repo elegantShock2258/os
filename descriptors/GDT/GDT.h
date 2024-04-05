@@ -21,7 +21,7 @@ struct gdt_entry {
   u8 access;
   u8 granularity; // this includes the flags and limits in the pic
   u8 base_high;
-} __attribute__((packed));
+} ;
 typedef struct gdt_entry gdt_entry;
 
 struct gdt_ptr {
