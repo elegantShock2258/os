@@ -27,6 +27,5 @@ void idt_init() {
   idtr.limit = (u16)sizeof(IDTEntry) * (256 - 1);
 
   __asm__ volatile("lidt %0" : : "m"(idtr)); // load the new IDT
-  __asm__ volatile("sti");                   // enable interrupts
   // kernel_log("IDT: done\n");
 }
