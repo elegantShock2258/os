@@ -18,11 +18,14 @@ void keyboard(Registers *regs) {
     setcursor(terminal_column, terminal_row);
     return;
   }
-  if (code == 0x0E) {
+  if (scancode == 0x0E) {
     terminal_column--;
     terminal_putentryat(' ', terminal_color, terminal_column, terminal_row);
     setcursor(terminal_column, terminal_row);
     return;
+  }
+  if (scancode == 0xE0) {
+    scrollback(1);
   }
   printf("%c", code);
 }

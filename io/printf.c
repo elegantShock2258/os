@@ -70,7 +70,8 @@
 #define FLAGS_LONG_LONG (1U << 9U)
 #define FLAGS_PRECISION (1U << 10U)
 #define FLAGS_ADAPT_EXP (1U << 11U)
-
+#define VGA_WIDTH 80
+#define VGA_HEIGHT 25
 // import float.h for DBL_MAX
 #if defined(PRINTF_SUPPORT_FLOAT)
 #include <float.h>
@@ -94,13 +95,12 @@ enum color {
   LIGHT_BROWN = 14,
   WHITE = 15,
 };
-static const size_t VGA_WIDTH = 80;
-static const size_t VGA_HEIGHT = 25;
 
 size_t terminal_row;
 size_t terminal_column;
 uint8_t terminal_color;
 uint16_t *terminal_buffer;
+uint16_t terminal_buffer_colors[VGA_WIDTH][VGA_HEIGHT];
 int _printinit = 0;
 
 static inline uint8_t vga_entry_color(enum color fg, enum color bg) {
@@ -127,28 +127,31 @@ void TermInit(void) {
     for (size_t x = 0; x < VGA_WIDTH; x++) {
       const size_t index = y * VGA_WIDTH + x;
       terminal_buffer[index] = vga_entry(' ', terminal_color);
+      terminal_buffer_colors[x][y] = terminal_color;
     }
   }
   _printinit = 1;
 }
-char getchr(int x, int y) { return terminal_buffer[2 * (y * VGA_WIDTH + x)]; }
+char getchr(int x, int y) { return terminal_buffer[(y * VGA_WIDTH + x)]; }
 void putchr(int x, int y, char c, uint8_t color) {
-  terminal_buffer[2 * (y * VGA_WIDTH + x)] = vga_entry(c, color);
+  terminal_buffer_colors[x][y] = color;
+  terminal_buffer[(y * VGA_WIDTH + x)] = vga_entry(c, color);
 }
 // TODO: fix
-uint8_t getcolor(int x, int y) {
-  return terminal_buffer[(y * VGA_WIDTH + x)] & ((uint16_t)0xFFFF << 8);
-}
+uint8_t getcolor(int x, int y) { return terminal_buffer_colors[x][y]; }
 
 void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) {
 
   const size_t index = y * VGA_WIDTH + x;
+  terminal_buffer_colors[x][y] = color;
   terminal_buffer[index] = vga_entry(c, color);
 }
 void scrollback(int lines) {
-  for (int y = lines; y < VGA_HEIGHT; y++)
-    for (int x = 0; x < VGA_WIDTH; x++) {
-      terminal_putentryat(getchr(x, y), getcolor(x,y), x, y-lines);
+  for (size_t y = lines; y < VGA_HEIGHT; y++)
+    for (size_t x = 0; x < VGA_WIDTH; x++) {
+      char c = getchr(x, y);
+      u8 color = getcolor(x, y);
+      terminal_putentryat(c, color, x, y-lines);
     }
 
   for (int y = VGA_HEIGHT - lines; y < VGA_HEIGHT; y++)

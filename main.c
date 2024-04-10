@@ -1,4 +1,3 @@
-#include "./descriptors/IDT/irq.c"
 #include "io/printf.c"
 
 void main(void) {
