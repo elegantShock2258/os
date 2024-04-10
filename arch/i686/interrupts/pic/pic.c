@@ -1,5 +1,5 @@
 #pragma once
-#include "serial.c"
+#include "../../io/serial.c"
 #define PIC1_COMMAND_PORT           0x20
 #define PIC1_DATA_PORT              0x21
 #define PIC2_COMMAND_PORT           0xA0

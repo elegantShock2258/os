@@ -1,4 +1,4 @@
-#include "io/printf.c"
+#include "arch/i686/io/printf.c"
 
 void main(void) {
   terminal_color = vga_entry_color(WHITE, BLACK);

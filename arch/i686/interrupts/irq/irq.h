@@ -1,5 +1,5 @@
 #pragma once
-#include "isr.h"
+#include "../isr/isr.h"
 
 typedef void (*IRQHandler)(Registers* regs);
 

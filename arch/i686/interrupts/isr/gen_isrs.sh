@@ -30,7 +30,7 @@ echo "
 #define IDT_FLAG_RING3 (3 << 5)
 
 #define IDT_FLAG_PRESENT 0x80" >> $ISRS_GEN_C
-echo "#include \"../IDT.h\"" >> $ISRS_GEN_C
+echo "#include \"../../idt/idt.h\"" >> $ISRS_GEN_C
 echo "" >> $ISRS_GEN_C
 
 for i in $(seq 0 255); do

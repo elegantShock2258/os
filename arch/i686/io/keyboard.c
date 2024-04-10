@@ -1,6 +1,6 @@
 #pragma once
 
-#include "serial.c"
+#include "./serial.c"
 
 #define KEYBOARD_DATA_PORT 0x60
 /** read_scan_code:

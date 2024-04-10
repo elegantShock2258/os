@@ -1,5 +1,5 @@
 #pragma once
-#include "IDT.h"
+#include "idt.h"
 
 __attribute__((aligned(0x10))) static IDTEntry idt[256];
 void IDT_EnableGate(int interrupt) {

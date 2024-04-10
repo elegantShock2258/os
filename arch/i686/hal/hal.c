@@ -2,10 +2,10 @@
 
 #include "hal.h"
 #include "../io/printf.c"
-#include "../descriptors/GDT/GDT.c"
-#include "../descriptors/IDT/IDT.c"
-#include "../descriptors/IDT/isr.c"
-#include "../descriptors/IDT/irq.c" 
+#include "../gdt/gdt.c"
+#include "../interrupts/idt/idt.c"
+#include "../interrupts/isr/isr.c"
+#include "../interrupts/irq/irq.c" 
 
 void hal_init(){
   TermInit(); // for term init

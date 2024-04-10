@@ -1,9 +1,9 @@
 #pragma once
 #include "irq.h"
 #include "../../io/printf.c"
-#include "../../pic/keyboard.c"
-#include "../../pic/pic.c"
-#include "isr.c"
+#include "../../io/keyboard.c"
+#include "../pic/pic.c"
+#include "../isr/isr.c"
 
 #define PIC_REMAP_OFFSET 0x20
 
@@ -26,6 +26,7 @@ void keyboard(Registers *regs) {
   }
   if (scancode == 0xE0) {
     scrollback(1);
+    setcursor(terminal_column, terminal_row);
   }
   printf("%c", code);
 }

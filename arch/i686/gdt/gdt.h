@@ -1,5 +1,5 @@
 #pragma once
-#include "../../utils/kernel_utils.h"
+#include "../utils/kernel_utils.h"
 struct gdtr {
   u16 limit;               // -> size of GDT
   u32 base;                // -> ptr to GDT

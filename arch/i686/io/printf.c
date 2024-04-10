@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "../pic/serial.c"
+#include "serial.c"
 #include "printf.h"
 #include <stdarg.h>
 #include <stdbool.h>

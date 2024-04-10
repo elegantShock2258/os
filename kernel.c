@@ -1,4 +1,4 @@
-#include "hal/hal.c"
+#include "arch/i686/hal/hal.c"
 #include "main.c"
 
 #if defined(__linux__)

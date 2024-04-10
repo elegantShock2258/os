@@ -1,6 +1,6 @@
 #pragma once
 #include "../../utils/kernel_utils.h"
-#include "IDT.h"
+#include "../idt/idt.h"
 typedef struct {
   // in the reverse order they are pushed:
   u32 ds;                                         // data segment pushed by us

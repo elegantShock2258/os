@@ -1,6 +1,6 @@
 #pragma once
-#include "GDT.h"
-#include "../../utils/kernel_utils.c"
+#include "gdt.h"
+#include "../utils/kernel_utils.c"
 
 gdt_entry gdt_entries[7];
 
