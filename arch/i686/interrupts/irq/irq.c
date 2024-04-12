@@ -9,27 +9,7 @@
 
 IRQHandler g_IRQHandlers[16];
 void timer(Registers *regs) {}
-void keyboard(Registers *regs) {
-  unsigned char scancode = keyboard_read_scan_code();
-  unsigned char code = keyboard_scan_code_to_ascii(scancode);
-  if (code == '\n') {
-    terminal_row++;
-    terminal_column = 0;
-    setcursor(terminal_column, terminal_row);
-    return;
-  }
-  if (scancode == 0x0E) {
-    terminal_column--;
-    terminal_putentryat(' ', terminal_color, terminal_column, terminal_row);
-    setcursor(terminal_column, terminal_row);
-    return;
-  }
-  if (scancode == 0xE0) {
-    scrollback(1);
-    setcursor(terminal_column, terminal_row);
-  }
-  printf("%c", code);
-}
+
 void i686_IRQ_Handler(Registers *regs) {
   int irq = regs->interrupt - PIC_REMAP_OFFSET;
 
