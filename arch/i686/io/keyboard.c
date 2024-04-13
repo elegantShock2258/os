@@ -11,7 +11,7 @@
 int keyboard_irq_handled = 0;
 unsigned char keyboard_buffer[BUFFER_MAX];
 int keyboard_buffer_pointer = 0;
-
+unsigned char lc;
 unsigned char keyboard_read_scan_code(void) { return inb(KEYBOARD_DATA_PORT); }
 
 unsigned char keyboard_scan_code_to_ascii(unsigned char scan_code) {
@@ -35,26 +35,28 @@ unsigned char keyboard_scan_code_to_ascii(unsigned char scan_code) {
 void keyboard(Registers *regs) {
   unsigned char scancode = keyboard_read_scan_code();
   unsigned char code = keyboard_scan_code_to_ascii(scancode);
+  
+  if(scancode >= 84) return; // 84 scan codes
 
   keyboard_buffer[keyboard_buffer_pointer] = code;
   keyboard_buffer_pointer = (keyboard_buffer_pointer + 1) % BUFFER_MAX;
-  keyboard_irq_handled = 1;
 
-  if (code == '\n') {
-    terminal_row++;
-    terminal_column = 0;
-    setcursor(terminal_column, terminal_row);
-    return;
-  }
-  if (scancode == 0x0E) {
-    terminal_column--;
-    terminal_putentryat(' ', terminal_color, terminal_column, terminal_row);
-    setcursor(terminal_column, terminal_row);
-    return;
-  }
-  if (scancode == 0xE0) {
-    scrollback(1);
-    setcursor(terminal_column, terminal_row);
-  }
+  keyboard_irq_handled = 1;
+  // if (code == '\n') {
+  //   terminal_row++;
+  //   terminal_column = 0;
+  //   setcursor(terminal_column, terminal_row);
+  //   return;
+  // }
+  // if (scancode == 0x0E) {
+  //   terminal_column--;
+  //   terminal_putentryat(' ', terminal_color, terminal_column, terminal_row);
+  //   setcursor(terminal_column, terminal_row);
+  //   return;
+  // }
+  // if (scancode == 0xE0) {
+  //   scrollback(1);
+  //   setcursor(terminal_column, terminal_row);
+  // }
   // printf("%c", code); // TODO: send code to outb.
 }
