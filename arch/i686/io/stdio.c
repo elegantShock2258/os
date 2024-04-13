@@ -20,7 +20,7 @@ unsigned int gets(char *buffer, unsigned int len) {
     char ip = getc();
     if (ip == '\r' || ip == '\n')
       break;
-    // printf("%c", ip);
+    // printf("%c", ip); print for visiblity
     buffer[i] = ip;
   }
 
