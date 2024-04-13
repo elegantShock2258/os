@@ -35,8 +35,9 @@ unsigned char keyboard_scan_code_to_ascii(unsigned char scan_code) {
 void keyboard(Registers *regs) {
   unsigned char scancode = keyboard_read_scan_code();
   unsigned char code = keyboard_scan_code_to_ascii(scancode);
-  
-  if(scancode >= 84) return; // 84 scan codes
+  printf("%c %d\n",code,scancode);  
+  if(scancode == )
+  if(scancode >= 0x80) return; // ignore above 0x80
 
   keyboard_buffer[keyboard_buffer_pointer] = code;
   keyboard_buffer_pointer = (keyboard_buffer_pointer + 1) % BUFFER_MAX;
