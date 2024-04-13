@@ -2,6 +2,10 @@
 #include "../utils/kernel_utils.c"
 
 u32 page_directory[1024] __attribute__((aligned(4096)));
+u32 page_dir_ptr_tab[4] __attribute__((aligned(0x20))); // must be aligned to (at least)0x20, ...
+
+extern void loadPageDirectory(unsigned int*);
+extern void enablePaging();
 
 void paging_init() {
   // initialising page directories
@@ -19,4 +23,6 @@ void paging_init() {
     }
     page_directory[i] = ((u32)page_table[i]) | 3;
   }
+  loadPageDirectory(page_directory);
+  enablePaging();
 }
