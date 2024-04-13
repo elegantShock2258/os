@@ -3,17 +3,9 @@
 
 void main(void) {
   terminal_color = vga_entry_color(WHITE, BLACK);
-  char name[21000];
-  
-  char t = getc();
-
-  printf("%c %u\n", (t),t);
-  t = getc();
-  printf("%c %u\n", (t),t);
-  t = getc();
-  printf("%c %u\n", (t),t);
-  t = getc();
-  printf("%c %u\n", (t),t);
+  char buffer[100];
+  gets(buffer, 10);
+  printf("%s", buffer);
 
   for (;;)
     asm("hlt");
