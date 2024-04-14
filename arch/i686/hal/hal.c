@@ -2,12 +2,12 @@
 
 #include "hal.h"
 
-#include "../io/printf.c"
-#include "../gdt/gdt.c"
-#include "../interrupts/idt/idt.c"
-#include "../interrupts/isr/isr.c"
-#include "../interrupts/irq/irq.c" 
-#include "../paging/paging.c"
+#include "io/printf.c"
+#include "gdt/gdt.c"
+#include "interrupts/idt/idt.c"
+#include "interrupts/isr/isr.c"
+#include "interrupts/irq/irq.c" 
+#include "paging/paging.c"
 
 void hal_init(){
   TermInit(); // for term init
