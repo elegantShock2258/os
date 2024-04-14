@@ -13,7 +13,7 @@ enablePaging:
 push %ebp
 mov %esp, %ebp
 mov %cr0, %eax
-orl $800000000, %eax # should be divisile by 4096
+orl $80000000, %eax # should be divisile by 4096
 mov %eax, %cr0
 mov %ebp, %esp
 pop %ebp
