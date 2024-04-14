@@ -1,5 +1,5 @@
 #pragma once
-#include "../io/printf.h"
+#include "../hal/io/printf.h"
 #include "./kernel_utils.h"
 
 int kernel_log(const char *fmt, ...) {
