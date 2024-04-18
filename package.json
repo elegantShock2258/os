@@ -1,0 +1,21 @@
+{
+  "name": "os",
+  "version": "1.0.0",
+  "main": "none",
+  "repository": "https://github.com/elegantShock2258/os.git",
+  "author": "Elegant Shock <elegantShock3307@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "husky": "^9.0.11",
+    "prettier": "^3.2.5"
+  },
+  "scripts":{
+    "lint": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write . && ./scripts/build.sh && git add -A ."
+    }
+  }
+}

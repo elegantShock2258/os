@@ -12,14 +12,14 @@ void IDT_DisableGate(int interrupt) {
 static idtr_t idtr;
 
 void idt_set_descriptor(u8 interrupt, void (*base)(), u8 flags) {
-  idt[interrupt].BaseLow = (u16) (((u32)base) & 0xFFFF);
+  idt[interrupt].BaseLow = (u16)(((u32)base) & 0xFFFF);
   idt[interrupt].SegmentSelector = 0x08;
   idt[interrupt].Reserved = 0;
   idt[interrupt].Flags = flags;
-  idt[interrupt].BaseHigh = (u16) (((u32)base >> 16) & 0xFFFF);
+  idt[interrupt].BaseHigh = (u16)(((u32)base >> 16) & 0xFFFF);
 
-  // void (*s)() = (void(*)()) (idt[interrupt].BaseLow + ((idt[interrupt].BaseHigh) << 16));
-  // s();
+  // void (*s)() = (void(*)()) (idt[interrupt].BaseLow +
+  // ((idt[interrupt].BaseHigh) << 16)); s();
 }
 
 void idt_init() {
@@ -29,3 +29,6 @@ void idt_init() {
   __asm__ volatile("lidt %0" : : "m"(idtr)); // load the new IDT
   // kernel_log("IDT: done\n");
 }
+
+void enableInterrupts() { asm("sti"); }
+void disableInterrupts() { asm("cli"); }

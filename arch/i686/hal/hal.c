@@ -7,7 +7,7 @@
 #include "interrupts/idt/idt.c"
 #include "interrupts/isr/isr.c"
 #include "interrupts/irq/irq.c" 
-#include "paging/paging.c"
+#include "memory/paging/paging.c"
 
 void hal_init(){
   TermInit(); // for term init

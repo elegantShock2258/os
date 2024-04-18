@@ -36,7 +36,6 @@ void keyboard(Registers *regs) {
   unsigned char scancode = keyboard_read_scan_code();
   unsigned char code = keyboard_scan_code_to_ascii(scancode);
   printf("%c %d\n",code,scancode);  
-  if(scancode == )
   if(scancode >= 0x80) return; // ignore above 0x80
 
   keyboard_buffer[keyboard_buffer_pointer] = code;
