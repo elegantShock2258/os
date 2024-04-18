@@ -12,7 +12,7 @@
   "scripts":{
     "lint": "prettier --check .",
     "format": "prettier --write ."
-  },
+  }, 
   "husky": {
     "hooks": {
       "pre-commit": "prettier --write . && ./scripts/build.sh && git add -A ."
