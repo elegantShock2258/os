@@ -1,6 +1,8 @@
 #pragma once
 #include "../hal/io/printf.h"
 #include "./kernel_utils.h"
+#include <stddef.h>
+#include <stdint.h>
 
 int kernel_log(const char *fmt, ...) {
   int res = -1;

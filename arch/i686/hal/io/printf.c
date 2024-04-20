@@ -110,7 +110,14 @@ static inline uint8_t vga_entry_color(enum color fg, enum color bg) {
 static inline uint16_t vga_entry(unsigned char uc, uint8_t color) {
   return (uint16_t)uc | (uint16_t)color << 8;
 }
-
+int strcmp(const char *s1, const char *s2){
+  // compare two strings 
+  while (*s1 && (*s1 == *s2)) {
+    s1++;
+    s2++;
+  }
+  return *(const unsigned char*)s1 - *(const unsigned char*)s2;
+}
 size_t strlen(const char *str) {
   size_t len = 0;
   while (str[len])
