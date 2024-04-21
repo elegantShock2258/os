@@ -5,6 +5,9 @@
 #include "../hal.h"
 #include "../io/printf.c"
 #include <stdint.h>
+
+#define COLOR(r,g,b) ((b) | (g<<8) | (r<<16))
+
 typedef struct {
   char VbeSignature[4];     // == "VESA"
   uint16_t VbeVersion;      // == 0x0300 for VBE 3.0
@@ -68,14 +71,23 @@ uint32_t *fb;
 int vbe_h;
 int vbe_w;
 int bpp;
-
-void drawShit(vbe_mode_info_structure* info, uint32_t *fb) {
+static void putpixel(int x, int y, int color) {
+  unsigned where = x + y * vbe_info_block->pitch;
+  fb[where] = color & 255;             // BLUE
+  fb[where + 1] = (color >> 8) & 255;  // GREEN
+  fb[where + 2] = (color >> 16) & 255; // RED
+}
+void drawShit(vbe_mode_info_structure *info, uint32_t *fb) {
   for (int y = 0; y < info->width; y++) {
     for (int x = 0; x < info->height; x++) {
-      fb[y * info->pitch + x] = x+y;
+      fb[((y * info->pitch) + x*(bpp/8))] = COLOR(225, 0, 0);
+      // putpixel(x,y,0xffffff);
     }
   }
 }
+
+
+
 void vbe_info(multiboot_info_t *multiboot_grub_info) {
   vbe_control_block = (VbeInfoBlock *)multiboot_grub_info->vbe_control_info;
   vbe_info_block =
@@ -85,6 +97,6 @@ void vbe_info(multiboot_info_t *multiboot_grub_info) {
   vbe_w = vbe_info_block->width;
   bpp = vbe_info_block->bpp;
   fb = (uint32_t *)multiboot_grub_info->framebuffer_addr;
-
+  printf("%dx%d\n",vbe_info_block->width,vbe_info_block->height);
   drawShit(vbe_info_block, fb);
 }
