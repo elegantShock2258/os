@@ -1,3 +1,4 @@
+#pragma once
 #include "../../utils/kernel_utils.c"
 typedef struct svga_mode_info {
 	uint16_t attributes;
