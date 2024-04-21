@@ -8,6 +8,7 @@
 #include "interrupts/isr/isr.c"
 #include "io/printf.c"
 #include "io/serial.c"
+#include "paging/paging.c"
 
 
 void hal_init() {
@@ -17,7 +18,6 @@ void hal_init() {
   isr_init();             // for isr init
   irq_init();
 
-  // paging_init(); // for paging init
 
   for (size_t i = 0; i < VGA_WIDTH; i++)
     printf("-");
