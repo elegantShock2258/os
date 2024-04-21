@@ -18,6 +18,7 @@ forced to be within the first 8 KiB of the kernel file.
 .long MAGIC
 .long FLAGS
 .long CHECKSUM
+
 .long 0, 0, 0, 0, 0
 .long 0 # 0 = set graphics mode
 .long 1920

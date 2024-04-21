@@ -10,7 +10,6 @@
 #endif
 
 multiboot_info_t *multiboot_grub_info;
-
 void init(void) {
   hal_init();
   // apparently ur using multiboot 2
