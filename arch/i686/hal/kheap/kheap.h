@@ -5,6 +5,6 @@
 #include "../../../../utils/kernel_utils.c"
 
 void* kmalloc(u32 size);
-u32 kmalloc_page();
+void* kmalloc_page();
 
 #endif

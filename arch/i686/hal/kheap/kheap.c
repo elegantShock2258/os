@@ -10,7 +10,7 @@ void* kmalloc(u32 size) {
   return (void*)mem;
 }
 
-u32 kmalloc_page() {
+void* kmalloc_page() {
   if (placement_address & 0xFFFFF000) { // not alligned
                                         // Align the placement address;
     placement_address &= 0xFFFFF000;
