@@ -1,5 +1,7 @@
 #pragma once
-#include "../../utils/kernel_utils.c"
+#include "../../../../utils/kernel_utils.c"
+
+// TODO: dynamic page allocation and deletion
 
 static uint32_t *last_page = 0;
 

@@ -1,11 +1,11 @@
 #pragma once
 #include "vbe.h"
-#include "../../../../multiboot.h"
+#include "../../multiboot.h"
 #include "../../utils/kernel_utils.c"
-#include "../hal.h"
-#include "../io/printf.c"
-#include <stdint.h>
-#include "../paging/paging.c"
+#include "../../arch/i686/hal/hal.h"
+#include "../../arch/i686/hal/io/printf.c"
+#include "../../arch/i686/hal/paging/paging.c"
+
 #define COLOR(r,g,b) ((b) | (g<<8) | (r<<16))
 
 typedef struct {

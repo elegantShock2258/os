@@ -1,7 +1,7 @@
 #pragma once
 #include "irq.h"
 #include "../..//io/printf.c"
-#include "../../io/keyboard.c"
+#include "../../../../../drivers/keyboard/keyboard.c"
 #include "../pic/pic.c"
 #include "../isr/isr.c"
 

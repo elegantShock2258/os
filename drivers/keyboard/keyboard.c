@@ -1,8 +1,9 @@
+// TODO: write a full-fleged keyboard driver
 #pragma once
 
-#include "../interrupts/isr/isr.h"
-#include "./serial.c"
-#include "printf.c"
+#include "../../arch/i686/hal/interrupts/isr/isr.h"
+#include "../../arch/i686/hal/io/serial.c"
+#include "../../arch/i686/hal/io/printf.c"
 
 #define KEYBOARD_DATA_PORT 0x60
 

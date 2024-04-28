@@ -1,6 +1,6 @@
 #include "./multiboot.h"
 #include "arch/i686/hal/hal.c"
-#include "arch/i686/hal/vbe/vbe.c"
+#include "drivers/vbe/vbe.c"
 #include "arch/i686/hal/paging/paging.c"
 #include "main.c"
 

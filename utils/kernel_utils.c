@@ -1,5 +1,5 @@
 #pragma once
-#include "../hal/io/printf.h"
+#include "../arch/i686/hal/io/printf.h"
 #include "./kernel_utils.h"
 #include <stddef.h>
 #include <stdint.h>
