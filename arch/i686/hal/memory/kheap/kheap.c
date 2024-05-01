@@ -1,3 +1,4 @@
+#pragma once
 #include "kheap.h"
 
 // kernel_end is defined in the linker script.
