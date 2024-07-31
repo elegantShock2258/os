@@ -79,11 +79,11 @@ static void putpixel(int x, int y, int color) {
   fb[where + 1] = (color >> 8) & 255;  // GREEN
   fb[where + 2] = (color >> 16) & 255; // RED
 }
-void drawShit(vbe_mode_info_structure *info, uint32_t *fb) {
+void drawShit(vbe_mode_info_structure *info, uint32_t *fb,int color) {
   for (int y = 0; y < vbe_h*4; y++) {
     for (int x = 0; x < vbe_w; x++) {
-      fb[(y * pitch)/4 + x] = COLOR(225, 255, 255);
-      // putpixel(x,y,0xffffff);
+      // fb[(y * pitch)/4 + x] = color;
+      putpixel(x,y,color);
     }
   }
 }
@@ -100,6 +100,6 @@ vbe_mode_info_structure* vbe_info(multiboot_info_t *multiboot_grub_info) {
   vbe_h = vbe_info_block->height;
   bpp = vbe_info_block->bpp;
   fb = (uint32_t *)vbe_info_block->framebuffer;
-  drawShit(vbe_info_block, fb);
+  drawShit(vbe_info_block, fb,COLOR(246,166,187));
   return vbe_info_block;
 }
