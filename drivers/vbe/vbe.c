@@ -1,12 +1,14 @@
 #pragma once
 #include "vbe.h"
-#include "../../multiboot.h"
-#include "../../utils/kernel_utils.c"
 #include "../../arch/i686/hal/hal.h"
 #include "../../arch/i686/hal/io/printf.c"
+#include "../../arch/i686/hal/memory/kheap/kheap.c"
+#include "../../arch/i686/hal/memory/memory.c"
 #include "../../arch/i686/hal/paging/paging.c"
+#include "../../multiboot.h"
+#include "../../utils/kernel_utils.c"
 
-#define COLOR(r,g,b) ((b) | (g<<8) | (r<<16))
+#define COLOR(r, g, b) ((b) | (g << 8) | (r << 16))
 
 typedef struct {
   char VbeSignature[4];     // == "VESA"
@@ -54,8 +56,8 @@ typedef struct {
   uint8_t reserved_position;
   uint8_t direct_color_attributes;
 
-  uint32_t* framebuffer; // physical address of the linear frame buffer; write
-                        // here to draw to the screen
+  uint32_t *framebuffer; // physical address of the linear frame buffer; write
+                         // here to draw to the screen
   uint32_t off_screen_mem_off;
   uint16_t off_screen_mem_size; // size of memory in the framebuffer but not
                                 // being displayed on the screen
@@ -72,25 +74,29 @@ int vbe_h;
 int vbe_w;
 int bpp;
 int pitch;
+int colorDepth = 4;
+uint32_t buffer[1080*4*1920];
 
-static void putpixel(int x, int y, int color) {
-  unsigned where = x + y * vbe_info_block->pitch;
-  fb[where] = color & 255;             // BLUE
-  fb[where + 1] = (color >> 8) & 255;  // GREEN
-  fb[where + 2] = (color >> 16) & 255; // RED
+static inline void putpixel(int x, int y, int color) {
+  buffer[(y * pitch) / colorDepth + x] = color;
 }
-void drawShit(vbe_mode_info_structure *info, uint32_t *fb,int color) {
-  for (int y = 0; y < vbe_h*4; y++) {
+void fillScreen(int color) {
+  for (int y = 0; y < vbe_h * colorDepth; y++) {
     for (int x = 0; x < vbe_w; x++) {
-      // fb[(y * pitch)/4 + x] = color;
-      putpixel(x,y,color);
+      putpixel(x, y, color);
     }
   }
 }
 
+void drawRect(int x0, int y0, int color) {
+  for (int y = y0; y < 100 * 4; y++) {
+    for (int x = x0; x < 100; x++) {
+      putpixel(x, y, color);
+    }
+  }
+}
 
-
-vbe_mode_info_structure* vbe_info(multiboot_info_t *multiboot_grub_info) {
+vbe_mode_info_structure *vbe_info(multiboot_info_t *multiboot_grub_info) {
   vbe_control_block = (VbeInfoBlock *)multiboot_grub_info->vbe_control_info;
   vbe_info_block =
       (vbe_mode_info_structure *)multiboot_grub_info->vbe_mode_info;
@@ -100,6 +106,17 @@ vbe_mode_info_structure* vbe_info(multiboot_info_t *multiboot_grub_info) {
   vbe_h = vbe_info_block->height;
   bpp = vbe_info_block->bpp;
   fb = (uint32_t *)vbe_info_block->framebuffer;
-  drawShit(vbe_info_block, fb,COLOR(246,166,187));
+
   return vbe_info_block;
+}
+void render(){
+
+  fillScreen(COLOR(255, 0, 0));
+  drawRect(0,0,COLOR(246, 166, 187));
+}
+void renderLoop(){
+  while(true){
+    render();
+    memcpy(fb,buffer,1920*1080*4);
+  }
 }
