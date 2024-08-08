@@ -16,7 +16,16 @@ typedef struct {
   int8_t y_difference;
   mouse_click_t buttons;
 } mouse_device_packet_t;
-
+typedef struct {
+  int yOverflow : 1;
+  int xOverflow : 1;
+  int ySign : 1;
+  int xSign : 1;
+  int always1 : 1;
+  int middle : 1;
+  int right : 1;
+  int left : 1;
+} mouse_byte_state_data;
 #define MOUSE_MAGIC 0xFEED1234
 #define PACKETS_IN_PIPE 1024
 #define DISCARD_POINT 32
@@ -34,7 +43,7 @@ typedef struct {
 mouse_device_packet_t packet;
 int8_t mouse_byte[3];
 int mouse_x = 0, mouse_y = 0;
-;
+mouse_byte_state_data mb;
 
 void mouse_wait(u8 a_type) {
   uint32_t timeout = 100000;
@@ -94,9 +103,25 @@ void mouse(Registers *r) {
         packet.magic = MOUSE_MAGIC;
         packet.x_difference = mouse_byte[1];
         packet.y_difference = mouse_byte[2];
-        mouse_x += mouse_byte[1];
-        mouse_y += mouse_byte[2];
         packet.buttons = 0;
+        mb = *(mouse_byte_state_data *)&mouse_byte[0];
+
+        mouse_x += (mb.xSign ? 1 : -1) * mouse_byte[1];
+        mouse_y += (mb.ySign ? 1 : -1) * mouse_byte[2];
+        // checking coords
+        // Clamp mouse_x to screen width
+        if (mouse_x < 0) {
+          mouse_x = 0;
+        } else if (mouse_x >= 1920) {
+          mouse_x = 1920 - 1; // Keep it within bounds
+        }
+
+        // Clamp mouse_y to screen height
+        if (mouse_y < 0) {
+          mouse_y = 0;
+        } else if (mouse_y >= 1080) {
+          mouse_y = 1080 - 1; // Keep it within bounds
+        }
         if (mouse_byte[0] & 0x01) {
           packet.buttons |= LEFT_CLICK;
         }

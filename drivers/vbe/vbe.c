@@ -83,7 +83,7 @@ void putcursor(int x, int y) {
   // Draw a rectangular cursor at position (x, y)
   for (int dy = 0; dy < CURSOR_HEIGHT; dy++) {
     for (int dx = 0; dx < CURSOR_WIDTH; dx++) {
-      putpixel(x + dx, y + dy, CURSOR_COLOR);
+      putpixel(x + dx, y + dy, COLOR(x%255, y%255, (dy + dx)%255));
     }
   }
 }
@@ -121,7 +121,7 @@ void wait(int milliseconds) {
   for (volatile int i = 0; i < milliseconds * 100000; i++)
     ;
 }
-int x = 0,y=0;
+int x = 0, y = 0;
 void render() {
   // if (keyboard_irq_handled) {
   //   fillScreen(COLOR(255, 0, 0)); // Red
@@ -130,9 +130,9 @@ void render() {
   //   fillScreen(COLOR(0, 0, 255)); // Blue
   //   printf("Rendering blue screen\n");
   // }
-  x+=mouse_byte[1];
-  y+=mouse_byte[2];
-  putcursor(x, y);
+  x += mb.xSign * mouse_byte[1];
+  y += mb.ySign * mouse_byte[2];
+  putcursor(mouse_x, mouse_y);
 }
 void renderLoop() {
   while (1) {
