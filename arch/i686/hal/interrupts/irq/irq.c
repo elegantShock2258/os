@@ -1,6 +1,7 @@
 #pragma once
 #include "irq.h"
 #include "../../../../../drivers/keyboard/keyboard.c"
+#include "../../../../../drivers/mouse/mouse.c"
 #include "../../../../../drivers/vbe/vbe.c"
 #include "../..//io/printf.c"
 #include "../isr/isr.c"
@@ -42,4 +43,6 @@ void irq_init() {
   pit_init(1000); // 1000hz for pit
   IRQ_RegisterHandler(0,timer);
   IRQ_RegisterHandler(1, keyboard);
+  mouse_install();
+  IRQ_RegisterHandler(12, mouse);
 }

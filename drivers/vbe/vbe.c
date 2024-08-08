@@ -9,6 +9,7 @@
 #include "../../multiboot.h"
 #include "../../utils/kernel_utils.c"
 #include "../keyboard/keyboard.c"
+#include "../mouse/mouse.c"
 
 int renderGUI = 1;
 #define COLOR(r, g, b) ((b) | (g << 8) | (r << 16))
@@ -74,6 +75,18 @@ static inline void putpixel(int x, int y, int color) {
     fb[(y * pitch) / colorDepth + x] = color;
   }
 }
+#define CURSOR_WIDTH 30
+#define CURSOR_HEIGHT 30
+#define CURSOR_COLOR COLOR(255, 255, 255)
+
+void putcursor(int x, int y) {
+  // Draw a rectangular cursor at position (x, y)
+  for (int dy = 0; dy < CURSOR_HEIGHT; dy++) {
+    for (int dx = 0; dx < CURSOR_WIDTH; dx++) {
+      putpixel(x + dx, y + dy, CURSOR_COLOR);
+    }
+  }
+}
 
 void fillScreen(int color) {
   for (int y = 0; y < vbe_h; y++) {
@@ -94,7 +107,7 @@ vbe_mode_info_structure *vbe_info(multiboot_info_t *multiboot_grub_info) {
   bpp = vbe_info_block->bpp;
   fb = (uint32_t *)vbe_info_block->framebuffer;
 
-  // Allocate backbuffer and ensure allocation was successful
+  // FIXME: BACKBUFFER ERROR ON EACH RENDER
   bf = (uint32_t *)kmalloc(sizeof(uint32_t) * vbe_h * vbe_w);
   if (!bf) {
     printf("Failed to allocate backbuffer.\n");
@@ -108,18 +121,18 @@ void wait(int milliseconds) {
   for (volatile int i = 0; i < milliseconds * 100000; i++)
     ;
 }
-
-int toggle = 0; 
+int x = 0,y=0;
 void render() {
-  if (toggle) {
-    fillScreen(COLOR(255, 0, 0)); // Red
-    printf("Rendering red screen\n");
-  } else {
-    fillScreen(COLOR(0, 0, 255)); // Blue
-    printf("Rendering blue screen\n");
-  }
-
-  toggle = !toggle; // Toggle the color
+  // if (keyboard_irq_handled) {
+  //   fillScreen(COLOR(255, 0, 0)); // Red
+  //   printf("Rendering red screen\n");
+  // } else {
+  //   fillScreen(COLOR(0, 0, 255)); // Blue
+  //   printf("Rendering blue screen\n");
+  // }
+  x+=mouse_byte[1];
+  y+=mouse_byte[2];
+  putcursor(x, y);
 }
 void renderLoop() {
   while (1) {
