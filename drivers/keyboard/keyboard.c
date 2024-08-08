@@ -1,9 +1,9 @@
+// TODO: write a full-fleged keyboard driver
 #pragma once
 
-#include "../interrupts/isr/isr.h"
-#include "./serial.c"
-#include "printf.c"
-
+#include "../../arch/i686/hal/interrupts/isr/isr.h"
+#include "../../arch/i686/hal/io/serial.c"
+#include "../../arch/i686/hal/io/printf.c"
 #define KEYBOARD_DATA_PORT 0x60
 
 #define BUFFER_MAX 100000
@@ -41,7 +41,8 @@ void keyboard(Registers *regs) {
   keyboard_buffer[keyboard_buffer_pointer] = code;
   keyboard_buffer_pointer = (keyboard_buffer_pointer + 1) % BUFFER_MAX;
 
-  keyboard_irq_handled = 1;
+  keyboard_irq_handled = !keyboard_irq_handled;
+  // asm("mov $0x42, %edx");
   // if (code == '\n') {
   //   terminal_row++;
   //   terminal_column = 0;

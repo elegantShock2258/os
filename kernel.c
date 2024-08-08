@@ -1,6 +1,6 @@
 #include "./multiboot.h"
 #include "arch/i686/hal/hal.c"
-#include "arch/i686/hal/vbe/vbe.c"
+#include "drivers/vbe/vbe.c"
 #include "arch/i686/hal/paging/paging.c"
 #include "main.c"
 
@@ -16,8 +16,6 @@ void init(unsigned long ebx) {
   paging_init(); // enable paging after getting multiboot info
 
   vbe_mode_info_structure * t = vbe_info(multiboot_grub_info);
-
-  printf("magic: %p %u\n", t->framebuffer,vbe_control_block->VbeVersion);
 }
 
 void kernel_main(unsigned long ebx) {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "keyboard.c"
+#include "../../../../drivers/keyboard/keyboard.c"
 #include "printf.c"
 
 unsigned char getc() {

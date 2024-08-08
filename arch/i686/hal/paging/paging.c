@@ -1,5 +1,7 @@
 #pragma once
-#include "../../utils/kernel_utils.c"
+#include "paging.h"
+#include "../../../../utils/kernel_utils.c"
+// TODO: dynamic page allocation and deletion
 
 static uint32_t *last_page = 0;
 
@@ -10,12 +12,12 @@ u64 page_dir[512]
 
 void paging_map_virtual_to_phys(uint32_t virt, uint32_t phys) {
   uint16_t id = virt >> 22;
-  for (int i = 0; i < 1024; i++) {
+  for (int i = 0; i < NUM_PAGES; i++) {
     last_page[i] = phys | 3;
-    phys += 4096;
+    phys += PAGE_FRAME_SIZE;
   }
   page_dir[id] = ((uint32_t)last_page) | 3;
-  last_page = (uint32_t *)(((uint32_t)last_page) + 4096);
+  last_page = (uint32_t *)(((uint32_t)last_page) + PAGE_FRAME_SIZE);
   printf("Mapping 0x%x (%d) to 0x%x\n", virt, id, phys);
 }
 void *get_physaddr(void *virtualaddr) {
@@ -45,4 +47,9 @@ void paging_init() {
 
   asm volatile("movl %%cr0, %%eax; orl $80000000, %%eax; movl %%eax, %%cr0;" ::
                    : "eax");
+}
+
+void page_fault() {
+  char msg[] = "Page Error";
+  printf("dwag u fucked up paging");
 }

@@ -1,14 +1,14 @@
 #pragma once
 #include "memory.h"
 
-#include "../../utils/kernel_utils.c"
-void* memcpy(void* dst, const void* src, uint16_t num)
+#include "../../../../utils/kernel_utils.c"
+void* memcpy(void* dst, const void* src, uint32_t num)
 {
-    uint8_t* u8Dst = (uint8_t *)dst;
-    const uint8_t* u8Src = (const uint8_t *)src;
+    uint32_t* u32Dst = (uint32_t *)dst;
+    const uint32_t* u32Src = (const uint32_t *)src;
 
-    for (uint16_t i = 0; i < num; i++)
-        u8Dst[i] = u8Src[i];
+    for (uint32_t i = 0; i < num; i++)
+        u32Dst[i] = u32Src[i];
 
     return dst;
 }
