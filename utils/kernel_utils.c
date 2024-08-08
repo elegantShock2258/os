@@ -4,6 +4,11 @@
 #include <stddef.h>
 #include <stdint.h>
 
+int abs(int y){
+  if(y>=0) return y;
+  else return -y;
+}
+
 int kernel_log(const char *fmt, ...) {
   int res = -1;
   va_list va;
