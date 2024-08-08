@@ -80,7 +80,6 @@ static inline void putpixel(int x, int y, int color) {
 #define CURSOR_COLOR COLOR(255, 255, 255)
 
 void putcursor(int x, int y) {
-  // Draw a rectangular cursor at position (x, y)
   for (int dy = 0; dy < CURSOR_HEIGHT; dy++) {
     for (int dx = 0; dx < CURSOR_WIDTH; dx++) {
       putpixel(x + dx, y + dy, COLOR(x%255, y%255, (dy + dx)%255));
@@ -107,7 +106,7 @@ vbe_mode_info_structure *vbe_info(multiboot_info_t *multiboot_grub_info) {
   bpp = vbe_info_block->bpp;
   fb = (uint32_t *)vbe_info_block->framebuffer;
 
-  // FIXME: BACKBUFFER ERROR ON EACH RENDER
+  //FIXME: BACKBUFFER ERROR ON EACH RENDER
   bf = (uint32_t *)kmalloc(sizeof(uint32_t) * vbe_h * vbe_w);
   if (!bf) {
     printf("Failed to allocate backbuffer.\n");
@@ -123,13 +122,13 @@ void wait(int milliseconds) {
 }
 int x = 0, y = 0;
 void render() {
-  // if (keyboard_irq_handled) {
-  //   fillScreen(COLOR(255, 0, 0)); // Red
-  //   printf("Rendering red screen\n");
-  // } else {
-  //   fillScreen(COLOR(0, 0, 255)); // Blue
-  //   printf("Rendering blue screen\n");
-  // }
+  if (keyboard_irq_handled) {
+    fillScreen(COLOR(255, 0, 0)); // Red
+    printf("Rendering red screen\n");
+  } else {
+    fillScreen(COLOR(0, 0, 255)); // Blue
+    printf("Rendering blue screen\n");
+  }
   x += mb.xSign * mouse_byte[1];
   y += mb.ySign * mouse_byte[2];
   putcursor(mouse_x, mouse_y);
@@ -137,5 +136,6 @@ void render() {
 void renderLoop() {
   while (1) {
     render();
+    wait(60);
   }
 }
