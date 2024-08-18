@@ -8,12 +8,11 @@ unsigned char getc() {
     asm("nop");
   KeyboardDriver.keyboard_irq_handled = 0;
 
-  return KeyboardDriver.keyboard_buffer[(BUFFER_MAX + KeyboardDriver.keyboard_buffer_pointer - 1) %
-                         BUFFER_MAX];
+  return KeyboardDriver.keyboard_buffer
+      [(BUFFER_MAX + KeyboardDriver.keyboard_buffer_pointer - 1) % BUFFER_MAX];
 }
 
 unsigned int gets(char *buffer, unsigned int len) {
-
   unsigned int i = 0;
   char c;
   for (i = 0; i < len - 1; i++) {

@@ -11,8 +11,7 @@
 multiboot_info_t *multiboot_grub_info;
 void init(unsigned long ebx) {
   hal_init();
-  drivers_init(ebx);
-  
+  drivers_init(ebx); // initialize drivers 
   paging_init(); // enable paging after getting multiboot info
 }
 
