@@ -1,20 +1,16 @@
 // TODO: write a full-fleged keyboard driver
 #pragma once
 
-#include "../../arch/i686/hal/interrupts/isr/isr.h"
-#include "../../arch/i686/hal/io/serial.c"
-#include "../../arch/i686/hal/io/printf.c"
-#define KEYBOARD_DATA_PORT 0x60
+#include "./keyboard.h"
 
-#define BUFFER_MAX 100000
+KeyboardDriver *KeyboardDriverState;
 
-int keyboard_irq_handled = 0;
-unsigned char keyboard_buffer[BUFFER_MAX];
-int keyboard_buffer_pointer = 0;
-unsigned char lc;
-unsigned char keyboard_read_scan_code(void) { return inb(KEYBOARD_DATA_PORT); }
+unsigned char _Keyboard_t[BUFFER_MAX];
+SpecialKeys _Keyboard_specialKeys;
 
-unsigned char keyboard_scan_code_to_ascii(unsigned char scan_code) {
+unsigned char _Keyboard_read_scan_code(void) { return inb(KEYBOARD_DATA_PORT); }
+
+unsigned char _Keyboard_scan_code_to_ascii(unsigned char scan_code) {
   unsigned char ascii[256] = {
       0x0,  0x0, '1', '2',  '3',  '4', '5', '6', // 0 - 7
       '7',  '8', '9', '0',  '-',  '=', 0x0, 0x0, // 8 - 15
@@ -32,16 +28,18 @@ unsigned char keyboard_scan_code_to_ascii(unsigned char scan_code) {
   return ascii[scan_code];
 }
 
-void keyboard(Registers *regs) {
-  unsigned char scancode = keyboard_read_scan_code();
-  unsigned char code = keyboard_scan_code_to_ascii(scancode);
-  printf("%c %d\n",code,scancode);  
-  if(scancode >= 0x80) return; // ignore above 0x80
+void _Keyboard(Registers *regs) {
+  unsigned char scancode = _Keyboard_read_scan_code();
+  unsigned char code = _Keyboard_scan_code_to_ascii(scancode);
+  printf("%c %d\n", code, scancode);
+  if (scancode >= 0x80)
+    return; // ignore above 0x80
+  // TODO: update special keys whenever the keys are pressed.
 
-  keyboard_buffer[keyboard_buffer_pointer] = code;
-  keyboard_buffer_pointer = (keyboard_buffer_pointer + 1) % BUFFER_MAX;
+  KeyboardDriverState->keyboard_buffer[KeyboardDriverState->keyboard_buffer_pointer] = code;
+  KeyboardDriverState->keyboard_buffer_pointer = (KeyboardDriverState->keyboard_buffer_pointer + 1) % BUFFER_MAX;
 
-  keyboard_irq_handled = !keyboard_irq_handled;
+  KeyboardDriverState->keyboard_irq_handled = !KeyboardDriverState->keyboard_irq_handled;
   // asm("mov $0x42, %edx");
   // if (code == '\n') {
   //   terminal_row++;
@@ -60,4 +58,27 @@ void keyboard(Registers *regs) {
   //   setcursor(terminal_column, terminal_row);
   // }
   // printf("%c", code); // TODO: send code to outb.
+}
+
+
+void Constructor() {
+
+  KeyboardDriverState->keyboard_irq_handled = 0;
+  KeyboardDriverState->keyboard_buffer_pointer = 0;
+  KeyboardDriverState->keyboard_buffer = _Keyboard_t;
+  KeyboardDriverState->lc = ' ';
+  KeyboardDriverState->scancode = 0;
+  KeyboardDriverState->code = 0;
+  KeyboardDriverState->keyboard_buffer_pointer = 0;
+  KeyboardDriverState->keyboard_irq_handled = 0;
+  KeyboardDriverState->specialKeys = &_Keyboard_specialKeys;
+
+
+  KeyboardDriverState->keyboard_read_scan_code = _Keyboard_read_scan_code;
+  KeyboardDriverState->keyboard_scan_code_to_ascii = _Keyboard_scan_code_to_ascii;
+  KeyboardDriverState->keyboard = _Keyboard;
+
+  KeyboardDriverState->Constructor = Constructor;
+
+  IRQ_RegisterHandler(1,KeyboardDriverState->keyboard);
 }
