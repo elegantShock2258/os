@@ -40,7 +40,7 @@ void irq_init() {
 
   // enable interrupts
   asm("sti");
-  Constructor();
+  KeyboardConstructor();
   pit_init(1000); // 1000hz for pit
   IRQ_RegisterHandler(0,timer);
   mouse_install();
