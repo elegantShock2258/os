@@ -4,16 +4,15 @@
 #include "printf.c"
 
 unsigned char getc() {
-  while (!KeyboardDriverState->keyboard_irq_handled)
+  while (!KeyboardDriver.keyboard_irq_handled)
     asm("nop");
-  KeyboardDriverState->keyboard_irq_handled = 0;
+  KeyboardDriver.keyboard_irq_handled = 0;
 
-  return KeyboardDriverState->keyboard_buffer[(BUFFER_MAX + KeyboardDriverState->keyboard_buffer_pointer - 1) %
-                         BUFFER_MAX];
+  return KeyboardDriver.keyboard_buffer
+      [(BUFFER_MAX + KeyboardDriver.keyboard_buffer_pointer - 1) % BUFFER_MAX];
 }
 
 unsigned int gets(char *buffer, unsigned int len) {
-
   unsigned int i = 0;
   char c;
   for (i = 0; i < len - 1; i++) {

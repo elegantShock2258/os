@@ -30,7 +30,7 @@ typedef struct {
   void (*keyboard)(Registers *regs);
   void (*Constructor)();
 
-} KeyboardDriver;
+} KeyboardDriverState;
 
 #define KEYBOARD_DATA_PORT 0x60
 #define BUFFER_MAX 100000

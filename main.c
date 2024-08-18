@@ -15,7 +15,7 @@ void main(void) {
   for (int i = 0; i < 10; i++)
     printf("%d", y[i]);
 
-  renderLoop();
+  VbeDriver.renderLoop();
   for (;;)
     asm("hlt");
 }

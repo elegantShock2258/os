@@ -3,7 +3,7 @@
 
 #include "./keyboard.h"
 
-KeyboardDriver *KeyboardDriverState;
+KeyboardDriverState  KeyboardDriver;
 
 unsigned char _Keyboard_t[BUFFER_MAX];
 SpecialKeys _Keyboard_specialKeys;
@@ -36,10 +36,10 @@ void _Keyboard(Registers *regs) {
     return; // ignore above 0x80
   // TODO: update special keys whenever the keys are pressed.
 
-  KeyboardDriverState->keyboard_buffer[KeyboardDriverState->keyboard_buffer_pointer] = code;
-  KeyboardDriverState->keyboard_buffer_pointer = (KeyboardDriverState->keyboard_buffer_pointer + 1) % BUFFER_MAX;
+  KeyboardDriver.keyboard_buffer[KeyboardDriver.keyboard_buffer_pointer] = code;
+  KeyboardDriver.keyboard_buffer_pointer = (KeyboardDriver.keyboard_buffer_pointer + 1) % BUFFER_MAX;
 
-  KeyboardDriverState->keyboard_irq_handled = !KeyboardDriverState->keyboard_irq_handled;
+  KeyboardDriver.keyboard_irq_handled = !KeyboardDriver.keyboard_irq_handled;
   // asm("mov $0x42, %edx");
   // if (code == '\n') {
   //   terminal_row++;
@@ -63,22 +63,22 @@ void _Keyboard(Registers *regs) {
 
 void KeyboardConstructor() {
 
-  KeyboardDriverState->keyboard_irq_handled = 0;
-  KeyboardDriverState->keyboard_buffer_pointer = 0;
-  KeyboardDriverState->keyboard_buffer = _Keyboard_t;
-  KeyboardDriverState->lc = ' ';
-  KeyboardDriverState->scancode = 0;
-  KeyboardDriverState->code = 0;
-  KeyboardDriverState->keyboard_buffer_pointer = 0;
-  KeyboardDriverState->keyboard_irq_handled = 0;
-  KeyboardDriverState->specialKeys = &_Keyboard_specialKeys;
+  KeyboardDriver.keyboard_irq_handled = 0;
+  KeyboardDriver.keyboard_buffer_pointer = 0;
+  KeyboardDriver.keyboard_buffer = _Keyboard_t;
+  KeyboardDriver.lc = ' ';
+  KeyboardDriver.scancode = 0;
+  KeyboardDriver.code = 0;
+  KeyboardDriver.keyboard_buffer_pointer = 0;
+  KeyboardDriver.keyboard_irq_handled = 0;
+  KeyboardDriver.specialKeys = &_Keyboard_specialKeys;
 
 
-  KeyboardDriverState->keyboard_read_scan_code = _Keyboard_read_scan_code;
-  KeyboardDriverState->keyboard_scan_code_to_ascii = _Keyboard_scan_code_to_ascii;
-  KeyboardDriverState->keyboard = _Keyboard;
+  KeyboardDriver.keyboard_read_scan_code = _Keyboard_read_scan_code;
+  KeyboardDriver.keyboard_scan_code_to_ascii = _Keyboard_scan_code_to_ascii;
+  KeyboardDriver.keyboard = _Keyboard;
 
-  KeyboardDriverState->Constructor = KeyboardConstructor;
+  KeyboardDriver.Constructor = KeyboardConstructor;
 
-  IRQ_RegisterHandler(1,KeyboardDriverState->keyboard);
+  IRQ_RegisterHandler(1,KeyboardDriver.keyboard);
 }
