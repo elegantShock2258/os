@@ -61,7 +61,7 @@ void _Keyboard(Registers *regs) {
 }
 
 
-void Constructor() {
+void KeyboardConstructor() {
 
   KeyboardDriverState->keyboard_irq_handled = 0;
   KeyboardDriverState->keyboard_buffer_pointer = 0;
@@ -78,7 +78,7 @@ void Constructor() {
   KeyboardDriverState->keyboard_scan_code_to_ascii = _Keyboard_scan_code_to_ascii;
   KeyboardDriverState->keyboard = _Keyboard;
 
-  KeyboardDriverState->Constructor = Constructor;
+  KeyboardDriverState->Constructor = KeyboardConstructor;
 
   IRQ_RegisterHandler(1,KeyboardDriverState->keyboard);
 }
