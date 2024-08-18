@@ -10,7 +10,7 @@ mouse_byte_state_data _Mouse_mb;
 
 MouseDriverState  MouseDriver;
 
-void mouse_wait(u8 a_type) {
+void _Mouse_wait(u8 a_type) {
   uint32_t timeout = 100000;
   if (!a_type) {
     while (--timeout) {
@@ -29,20 +29,20 @@ void mouse_wait(u8 a_type) {
   }
 }
 
-void mouse_write(u8 write) {
-  mouse_wait(1);
+void _Mouse_write(u8 write) {
+  _Mouse_wait(1);
   outb(MOUSE_STATUS, MOUSE_WRITE);
-  mouse_wait(1);
+  _Mouse_wait(1);
   outb(MOUSE_PORT, write);
 }
 
-u8 mouse_read() {
-  mouse_wait(0);
+u8 _Mouse_read() {
+  _Mouse_wait(0);
   char t = inb(MOUSE_PORT);
   return t;
 }
 
-void mouse(Registers *r) {
+void _Mouse(Registers *r) {
   u8 status = inb(MOUSE_STATUS);
   while (status & MOUSE_BBIT) {
     int8_t mouse_in = inb(MOUSE_PORT);
@@ -104,22 +104,22 @@ void mouse(Registers *r) {
   }
 }
 
-void mouse_install() {
+void _Mouse_install() {
   u8 status;
-  mouse_wait(1);
+  _Mouse_wait(1);
   outb(MOUSE_STATUS, 0xA8);
-  mouse_wait(1);
+  _Mouse_wait(1);
   outb(MOUSE_STATUS, 0x20);
-  mouse_wait(0);
+  _Mouse_wait(0);
   status = inb(0x60) | 2;
-  mouse_wait(1);
+  _Mouse_wait(1);
   outb(MOUSE_STATUS, 0x60);
-  mouse_wait(1);
+  _Mouse_wait(1);
   outb(MOUSE_PORT, status);
-  mouse_write(0xF6);
-  mouse_read();
-  mouse_write(0xF4);
-  mouse_read();
+  _Mouse_write(0xF6);
+  _Mouse_read();
+  _Mouse_write(0xF4);
+  _Mouse_read();
 }
 
 void MouseConstructor() {
@@ -131,13 +131,13 @@ void MouseConstructor() {
   MouseDriver.mouse_byte = _Mouse_byte;
   MouseDriver.mb = _Mouse_mb;
 
-  MouseDriver.mouse_wait = mouse_wait;
-  MouseDriver.mouse_write = mouse_write;
-  MouseDriver.mouse_read = mouse_read;
-  MouseDriver.mouse = mouse;
-  MouseDriver.mouse_install = mouse_install;
+  MouseDriver.mouse_wait = _Mouse_wait;
+  MouseDriver.mouse_write = _Mouse_write;
+  MouseDriver.mouse_read = _Mouse_read;
+  MouseDriver.mouse = _Mouse;
+  MouseDriver.mouse_install = _Mouse_install;
   MouseDriver.Constructor = MouseConstructor;
 
-  mouse_install();
-  IRQ_RegisterHandler(12, mouse);
+  _Mouse_install();
+  IRQ_RegisterHandler(12, _Mouse);
 }

@@ -11,6 +11,13 @@
 #include "../../utils/kernel_utils.c"
 #include "../keyboard/keyboard.c"
 #include "../mouse/mouse.c"
+#include "../../multiboot.h"
+
+#define COLOR(r, g, b) ((b) | (g << 8) | (r << 16))
+
+#define CURSOR_WIDTH 30
+#define CURSOR_HEIGHT 30
+#define CURSOR_COLOR COLOR(255, 255, 255)
 
 
 typedef struct {
@@ -87,4 +94,27 @@ typedef struct svga_mode_info {
 	uint16_t offScreenMemSize;
 	uint8_t reserved1[206];
 } __attribute__((packed)) svga_mode_info_t;
+
+typedef struct {
+  int renderGUI;
+  vbe_mode_info_structure *vbe_info_block;
+  VbeInfoBlock *vbe_control_block;
+  int vbe_h;
+  int vbe_w;
+  int bpp;
+  int pitch;
+  int colorDepth;
+  multiboot_info_t *multiboot_grub_info;
+  uint32_t *fb;
+  uint32_t *bf;
+
+  void (*putpixel)(int x, int y, int color);
+  void (*putcursor)(int x, int y);
+  void (*fillScreen)(int color);
+  void (*wait)(int milliseconds);
+  void (*render)();
+  void (*init)(int ebx);
+  void (*renderLoop)();
+  void (*Constructor)(int ebx);
+} VbeDriverState;
 
