@@ -40,7 +40,7 @@ void fillScreen(int color) {
   }
 }
 
-vbe_mode_info_structure *vbe_info(multiboot_info_t *multiboot_grub_info) {
+void *vbe_init(multiboot_info_t *multiboot_grub_info) {
   vbe_control_block = (VbeInfoBlock *)multiboot_grub_info->vbe_control_info;
   vbe_info_block =
       (vbe_mode_info_structure *)multiboot_grub_info->vbe_mode_info;
@@ -65,18 +65,17 @@ void wait(int milliseconds) {
   for (volatile int i = 0; i < milliseconds * 100000; i++)
     ;
 }
-int x = 0, y = 0;
+
 void render() {
-  if (KeyboardDriverState->keyboard_irq_handled) {
+  if (KeyboardDriver->keyboard_irq_handled) {
     fillScreen(COLOR(255, 0, 0)); // Red
     printf("Rendering red screen\n");
   } else {
     fillScreen(COLOR(0, 0, 255)); // Blue
     printf("Rendering blue screen\n");
   }
-  x += mb.xSign * mouse_byte[1];
-  y += mb.ySign * mouse_byte[2];
-  putcursor(mouse_x, mouse_y);
+
+  putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
 }
 void renderLoop() {
   while (1) {
