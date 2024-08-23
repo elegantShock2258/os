@@ -9,13 +9,10 @@
 void main(void) {
 
   terminal_color = vga_entry_color(WHITE, BLACK);
-  int *y = (int *)kmalloc(10 * sizeof(int));
-  for (int i = 0; i < 10; i++)
-    y[i] = i;
-  for (int i = 0; i < 10; i++)
-    printf("%d", y[i]);
+  char y = getc();
+  printf("%c", y);
 
-  VbeDriver.renderLoop();
+  // VbeDriver.renderLoop();
   for (;;)
     asm("hlt");
 }

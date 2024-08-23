@@ -3,6 +3,9 @@
 #include "../../arch/i686/hal/io/printf.c"
 #include "../../arch/i686/hal/io/serial.c"
 #include "../../arch/i686/hal/interrupts/irq/irq.c"
+
+#include "../../utils/ds/buffer/buffer.c"
+
 typedef struct {
     struct {int control,alt,shift;} left;
     struct {int control,alt,shift;} right;
@@ -18,11 +21,8 @@ typedef struct {
 
 typedef struct {
   int keyboard_irq_handled;
-  unsigned char keyboard_buffer_pointer;
-  unsigned char * keyboard_buffer;
+  CircularBuffer keyboard_buffer;
   unsigned char lc;
-  unsigned char scancode;
-  unsigned char code;
   SpecialKeys *specialKeys;
 
   unsigned char (*keyboard_read_scan_code)(void);
@@ -33,5 +33,5 @@ typedef struct {
 } KeyboardDriverState;
 
 #define KEYBOARD_DATA_PORT 0x60
-#define BUFFER_MAX 100000
+#define BUFFER_MAX 100
 

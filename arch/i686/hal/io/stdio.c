@@ -7,9 +7,9 @@ unsigned char getc() {
   while (!KeyboardDriver.keyboard_irq_handled)
     asm("nop");
   KeyboardDriver.keyboard_irq_handled = 0;
-
-  return KeyboardDriver.keyboard_buffer
-      [(BUFFER_MAX + KeyboardDriver.keyboard_buffer_pointer - 1) % BUFFER_MAX];
+  char t = KeyboardDriver.keyboard_buffer.top(&KeyboardDriver.keyboard_buffer);
+  printf("GETC: %c\n", t);
+  return t;
 }
 
 unsigned int gets(char *buffer, unsigned int len) {

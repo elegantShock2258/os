@@ -4,9 +4,8 @@
 #include "./keyboard.h"
 
 KeyboardDriverState  KeyboardDriver;
-
-unsigned char _Keyboard_t[BUFFER_MAX];
-SpecialKeys _Keyboard_specialKeys;
+CircularBuffer _Keyoard_CircularBuffer;
+static SpecialKeys _Keyboard_specialKeys;
 
 unsigned char _Keyboard_read_scan_code(void) { return inb(KEYBOARD_DATA_PORT); }
 
@@ -31,15 +30,13 @@ unsigned char _Keyboard_scan_code_to_ascii(unsigned char scan_code) {
 void _Keyboard(Registers *regs) {
   unsigned char scancode = _Keyboard_read_scan_code();
   unsigned char code = _Keyboard_scan_code_to_ascii(scancode);
-  printf("%c %d\n", code, scancode);
+  printf("KEYBOARD: %c %d\n", code, scancode);
   if (scancode >= 0x80)
     return; // ignore above 0x80
   // TODO: update special keys whenever the keys are pressed.
 
-  KeyboardDriver.keyboard_buffer[KeyboardDriver.keyboard_buffer_pointer] = code;
-  KeyboardDriver.keyboard_buffer_pointer = (KeyboardDriver.keyboard_buffer_pointer + 1) % BUFFER_MAX;
-
-  KeyboardDriver.keyboard_irq_handled = !KeyboardDriver.keyboard_irq_handled;
+  KeyboardDriver.keyboard_buffer.enqueue(&KeyboardDriver.keyboard_buffer,code);
+  KeyboardDriver.keyboard_irq_handled = 1;
   // asm("mov $0x42, %edx");
   // if (code == '\n') {
   //   terminal_row++;
@@ -57,20 +54,15 @@ void _Keyboard(Registers *regs) {
   //   scrollback(1);
   //   setcursor(terminal_column, terminal_row);
   // }
-  // printf("%c", code); // TODO: send code to outb.
+  // printf("%c", code); // TODO: send code to outb?.
 }
 
 
 void KeyboardConstructor() {
 
   KeyboardDriver.keyboard_irq_handled = 0;
-  KeyboardDriver.keyboard_buffer_pointer = 0;
-  KeyboardDriver.keyboard_buffer = _Keyboard_t;
   KeyboardDriver.lc = ' ';
-  KeyboardDriver.scancode = 0;
-  KeyboardDriver.code = 0;
-  KeyboardDriver.keyboard_buffer_pointer = 0;
-  KeyboardDriver.keyboard_irq_handled = 0;
+  KeyboardDriver.keyboard_buffer = _Keyoard_CircularBuffer;
   KeyboardDriver.specialKeys = &_Keyboard_specialKeys;
 
 
@@ -80,5 +72,6 @@ void KeyboardConstructor() {
 
   KeyboardDriver.Constructor = KeyboardConstructor;
 
+  _CB_Constructor(&KeyboardDriver.keyboard_buffer,BUFFER_MAX);
   IRQ_RegisterHandler(1,KeyboardDriver.keyboard);
 }

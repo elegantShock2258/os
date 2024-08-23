@@ -2,6 +2,7 @@
 #include "../arch/i686/hal/io/printf.h"
 #include "./kernel_utils.h"
 #include <stddef.h>
+#include<stdbool.h>
 #include <stdint.h>
 
 int abs(int y){

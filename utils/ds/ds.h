@@ -1,2 +1,2 @@
 #pragma once
-#include "stack.c"
+#include "stack/stack.c"
