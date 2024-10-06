@@ -12,6 +12,7 @@ void main(void) {
   char y = getc();
   printf("%c", y);
 
+
   // VbeDriver.renderLoop();
   for (;;)
     asm("hlt");

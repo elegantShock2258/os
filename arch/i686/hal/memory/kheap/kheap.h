@@ -1,10 +1,14 @@
+#pragma once
 
-#ifndef KHEAP_H
-#define KHEAP_H
-
+#define BLOCKSIZE sizeof(char) // bytes per block
 #include "../../../../../utils/kernel_utils.c"
 
-void* kmalloc(u32 size);
-void* kmalloc_page();
+void *kmalloc(u32 size);
+void *kmalloc_page();
 
-#endif
+typedef u32 bitColumn;
+typedef struct {
+  bitColumn *column;
+  u32 *baseAddress;
+  u32 *endAddress;
+} BitMapColumn;
