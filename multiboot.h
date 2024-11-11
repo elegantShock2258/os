@@ -1,5 +1,4 @@
 #pragma once
-#include <stdint.h>
 /* multiboot.h - the header for Multiboot */
 /* Copyright (C) 1999, 2001  Free Software Foundation, Inc.
 

@@ -2,7 +2,6 @@
 #include "arch/i686/hal/hal.c"
 #include "drivers/drivers.c"
 #include "arch/i686/hal/paging/paging.c"
-#include "arch/i686/hal/memory/kheap/kheap.c"
 #include "main.c"
 
 #if defined(__linux__)
@@ -14,7 +13,6 @@ void init(unsigned long ebx) {
   hal_init();
   drivers_init(ebx); // initialize drivers 
   paging_init(); // enable paging after getting multiboot info
-  init_bitmap(ebx);
 }
 
 void kernel_main(unsigned long ebx) {

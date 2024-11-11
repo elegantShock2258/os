@@ -6,48 +6,13 @@
 extern u32 kernel_end;
 u32 heap_start = (u32)&kernel_end;
 
-BitMapColumn
-    BitMap[BitMapSize]; // 1 column * 32 blocks / column * 1024 bytes per block
+BitMapColumn BitMap[BitMapSize]; // 1 column * 32 bytes / column
 
 // 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-void init_bitmap(u32 ebx) {
-  multiboot_info_t *mbd = (multiboot_info_t *)ebx;
-  // start is heap_start
-  // get end from multiboot
-  u32 end_addr = -1;
-  u32 mem_size = -1;
-  if (!(mbd->flags >> 6 & 0x1)) {
-    printf("invalid memory map given by GRUB bootloader\n");
-  }
-  for (int i = 0; i < mbd->mmap_length; i += sizeof(memory_map_t)) {
-    memory_map_t *mmmt = (memory_map_t *)(mbd->mmap_addr + i);
-    if (mmmt->type == 1) {
-      end_addr = mmmt->base_addr_high;
-      mem_size = mmmt->base_addr_high - mmmt->base_addr_low;
-    }
-  }
-  // calculate number of columns in bitmap
-  u32 numColumns = (mem_size / (BLOCKSIZE * 32)) + 1;
-  // calculate the blockend for the last column in the bitmap
-
-  // for all n-1 columns, jus do the following:
+void init_bitmap() {
   BitMap[0].column = 0x00000000; // all blocks are free
   BitMap[0].baseAddress = (u32 *)heap_start;
-  BitMap[0].endAddress = (u32 *)(heap_start + BLOCKSIZE * 32);
-  for (int i = 1; i <= numColumns; i++) {
-    BitMap[i].column = 0x00000000; // all blocks are free
-    BitMap[i].baseAddress = (u32 *)BitMap[i - 1].endAddress;
-    BitMap[i].endAddress = (u32 *)(BitMap[i].baseAddress + BLOCKSIZE * 32);
-  }
-  int n = 0;
-  for (u32 *m0 = BitMap[numColumns].baseAddress; m0 < (u32 *)end_addr;
-       m0 += BLOCKSIZE) {
-    ++n;
-  }
-  // for the last one make sure to put the endAddress till the blockend, and
-  // make everybit as busy
-  for (int i = n; i < 32; i++)
-    setNthBit(&BitMap[numColumns].column, i, true);
+  BitMap[0].endAddress = (u32 *)(heap_start + sizeof(char) * 32);
 }
 
 // 0 -> free
