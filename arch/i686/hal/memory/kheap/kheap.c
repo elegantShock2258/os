@@ -10,6 +10,7 @@ BitMapColumn BitMap[BitMapSize]; // 1 column * 32 bytes / column
 
 // 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 void init_bitmap() {
+  // TODO: fill bitmap till mem end
   BitMap[0].column = 0x00000000; // all blocks are free
   BitMap[0].baseAddress = (u32 *)heap_start;
   BitMap[0].endAddress = (u32 *)(heap_start + sizeof(char) * 32);
