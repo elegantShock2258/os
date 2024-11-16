@@ -42,9 +42,6 @@ void *kmalloc(u32 size) {
       break;
     }
   }
-  // if ALL memory is filled, jus return a full address of all ones for now
-  if (column == -1)
-    return (void *)0xffffffff;
   // assign as busy in the bitmap
   setNthBit(&BitMap[column].column, blockPosition, true);
   // return the address
@@ -66,7 +63,6 @@ void *kfree(void *pointer) {
   setNthBit(&BitMap[column].column, blockPosition, false);
   // memset as clear???
   memset(pointer, 0, BLOCKSIZE);
-  return NULL;
 }
 
 void *kmalloc_page() {

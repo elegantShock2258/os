@@ -13,16 +13,16 @@ void main(void) {
   printf("%c", y);
 
   int *arr = kmalloc(sizeof(int) * 10);
-   for (int i = 0; i < 10; i++) {
-    arr[i] = i;
-  }
-  for (int i = 0; i < 10; i++) {
-    printf("Element at index %d: %d\n", i, arr[i]);
-  }
+  // for (int i = 0; i < 10; i++) {
+  //   arr[i] = i;
+  // }
+  // for (int i = 0; i < 10; i++) {
+  //   printf("Element at index %d: %d\n", i, arr[i]);
+  // }
   kfree(arr);
-  for (int i = 0; i < 10; i++) {
-    printf("Element at index %d: %d\n", i, arr[i]);
-  }
+  // for (int i = 0; i < 10; i++) {
+  //   printf("Element at index %d: %d\n", i, arr[i]);
+  // }
 
   // VbeDriver.renderLoop();
   for (;;)
