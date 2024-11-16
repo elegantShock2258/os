@@ -1,0 +1,10 @@
+each tests will have <cat>/<testname>/testname.c
+and <cat>/<testname>/testnameKernel.c
+
+subsituting main and kernel c files
+each compilation will build a .bin file 
+
+you can place multiple bin files in /boot/cat/testname/testname.bin
+add similar stuff for the grub.cfg file
+
+expose a com port and make every test return 1 if success or 0 if some error
