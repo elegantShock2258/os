@@ -5,4 +5,3 @@
 
 int kernel_log(const char *fmt, ...);
 
-
