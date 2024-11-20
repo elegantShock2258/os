@@ -5,7 +5,6 @@
 #include "arch/i686/hal/memory/kheap/kheap.c"
 #include "drivers/vbe/vbe.c"
 #include "utils/kernel_utils.c"
-#include "./tests/testing.c" 
 
 void main(void) {
 
@@ -16,15 +15,14 @@ void main(void) {
     arr[i] = i;
   }
   for (int i = 0; i < 10; i++) {
-    printf("Element at index %d: %d\n", i, arr[i]);
+    printf(" %d: %d ", i, arr[i]);
   }
+  printf("\n");
   kfree(arr);
   for (int i = 0; i < 10; i++) {
-    printf("Element at index %d: %d\n", i, arr[i]);
+    printf(" %d: %d ", i, arr[i]);
   }
 
-  assert(1==1,"one is equal to one");
-  asm("hlt");
   // VbeDriver.renderLoop();
   for (;;)
     asm("hlt");

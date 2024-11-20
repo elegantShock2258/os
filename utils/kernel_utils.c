@@ -50,3 +50,10 @@ int findFirstUnSetBit(unsigned int n) {
     ;
   return position;
 }
+
+void printBinary(u32 n){
+  for(int i=31; i>=0; i--){
+    printf("%d", getNthBit(n, i));
+  }
+  printf("\n");
+}

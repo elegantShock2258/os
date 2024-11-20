@@ -27,9 +27,10 @@ void _VBE_fillScreen(int color) {
   }
 }
 
-void  _VBE_init(int ebx) {
+void _VBE_init(int ebx) {
   multiboot_info_t *multiboot_grub_info = (multiboot_info_t *)ebx;
-  VbeDriver.vbe_control_block = (VbeInfoBlock *)multiboot_grub_info->vbe_control_info;
+  VbeDriver.vbe_control_block =
+      (VbeInfoBlock *)multiboot_grub_info->vbe_control_info;
   VbeDriver.vbe_info_block =
       (vbe_mode_info_structure *)multiboot_grub_info->vbe_mode_info;
 
@@ -40,10 +41,10 @@ void  _VBE_init(int ebx) {
   VbeDriver.fb = (uint32_t *)VbeDriver.vbe_info_block->framebuffer;
 
   // FIXME: BACKBUFFER ERROR ON EACH RENDER
-  VbeDriver.bf = (uint32_t *)kmalloc(sizeof(uint32_t) * VbeDriver.vbe_h * VbeDriver.vbe_w);
-  if (!VbeDriver.bf) {
-    printf("Failed to allocate backbuffer.\n");
-  }
+  // VbeDriver.bf = (uint32_t *)kmalloc(sizeof(uint32_t) * VbeDriver.vbe_h * VbeDriver.vbe_w);
+  // if (!VbeDriver.bf) {
+  //   printf("Failed to allocate backbuffer.\n");
+  // }
 }
 
 void _VBE_wait(int milliseconds) {
@@ -52,20 +53,17 @@ void _VBE_wait(int milliseconds) {
 }
 
 void _VBE_render() {
-  if (KeyboardDriver.keyboard_irq_handled) {
-    _VBE_fillScreen(COLOR(255, 0, 0)); // Red
-    printf("Rendering red screen\n");
-  } else {
-    _VBE_fillScreen(COLOR(0, 0, 255)); // Blue
-    printf("Rendering blue screen\n");
-  }
+  _VBE_fillScreen(COLOR(255, 0, 0)); // Red
+  printf("Rendering red screen\n");
 
   _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
 }
 void _VBE_renderLoop() {
+  // DONT re-render every loop?
+  // only update dirty pixels
+  //
   while (1) {
     _VBE_render();
-    _VBE_wait(60);
   }
 }
 

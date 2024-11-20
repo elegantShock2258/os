@@ -9,11 +9,13 @@ u32 heap_start = (u32)&kernel_end;
 BitMapColumn BitMap[BitMapSize]; // 1 column * 32 bytes / column
 
 // 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-void init_bitmap() {
+void bitmap_init() {
   // TODO: fill bitmap till mem end
   BitMap[0].column = 0x00000000; // all blocks are free
   BitMap[0].baseAddress = (u32 *)heap_start;
   BitMap[0].endAddress = (u32 *)(heap_start + sizeof(char) * 32);
+  printf("INITAL COLUMN: ");
+  printBinary(BitMap[0].column);
 }
 
 // 0 -> free
@@ -31,39 +33,92 @@ void init_bitmap() {
 // the allocated/deallocated block is before mem_end. MAP all blocks available
 // in the memory pool if cant fit within a row, allocate 1s
 
+int getContigousBlocks(u32 block, int blocksRequired) {
+  int count = 0;
+  for (int i = 31; i >= 0; i--) {
+    if ((block & (1 << i)) == 0) {
+      count++;
+    } else {
+      count = 0;
+    }
+    if (count == blocksRequired) {
+      return (31 - i);
+    }
+  }
+  return -1;
+}
+
 void *kmalloc(u32 size) {
-  // get a free block
+  // we can have two cases here
+  // 1) size can fit in one block -> assign the block
+  // 2) size cant fit in one block -> assign blocks (contiguous blocks) in a
+  // column, if cant find goto next column get a free block
+  // for now for simplicity ill only assume the first case to take place
+
+  // for the second one, well return a address which will be as follows:
+  // start address of the block will just contain the address of the next block
+  // if required, otherwise only one block is required, use 0xffffffff for the
+  // next ptr
+
+  // so in the code caluculate the address as follows
+  // addr = BitMap[initialColumn].baseAddress + BLOCKSIZE * blockPosition
+  // but, just set the value of the addr as the int for how many blocks are
+  // associated, 
+  // *addr = blocks
+
+  // so add some metadata for the next block so kfree knows about it
+  // for now aim of the allocator is to allocate memory segments for pointers
+  // despite the size, and de allocate them as necessary.
+
   int blockPosition;
-  int column = -1;
-  for (int i = 0; i < BitMapSize; i++) {
-    bitColumn blocks = BitMap[i].column;
-    blockPosition = findFirstUnSetBit(blocks);
-    if (blockPosition == -1) {
-      column = i;
+  int initialColumn = -1;
+
+  int blocksRequired = ((size + sizeof(int *)) / BLOCKSIZE) + 1;
+
+  for (int i = 0; i < BitMapSize &&
+                  BitMap[i].column !=
+                      0xffffffff /* only go through blocks which are not full*/;
+       i++) {
+    bitColumn block = BitMap[i].column;
+
+    blockPosition = getContigousBlocks(block, blocksRequired);
+    if (blockPosition != -1) {
+      initialColumn = i;
       break;
     }
   }
+  if(initialColumn == -1)
+    // kernel panic because memory cannot be allocated for the requested size
+   return NULL;
+
   // assign as busy in the bitmap
-  setNthBit(&BitMap[column].column, blockPosition, true);
-  // return the address
-  return (void *)(BitMap[column].baseAddress + BLOCKSIZE * blockPosition);
+  for (int i = blockPosition; i < blockPosition + blocksRequired; i++)
+    setNthBit(&BitMap[initialColumn].column, i, true);
+
+  void *address =
+      (void *)(BitMap[initialColumn].baseAddress + BLOCKSIZE * blockPosition);
+
+  // add a integer to denote how many consecutive blocks are present for the ptr
+  *(int *)address = blocksRequired;
+  return (address + sizeof(int));
 }
 void *kfree(void *pointer) {
-  // get the block position
-  // address = start_address + (BLOCKSIZE * blockPosition) +
-  // 32*BLOCKSIZE*(column-1);
+  //  get the block position
+  //  address = start_address + (BLOCKSIZE * blockPosition) +
+  //  32*BLOCKSIZE*(column-1);
+  int blocks = *(int *)(pointer - sizeof(int));
   u32 pointerAddressOffset = (u32)pointer - heap_start;
   // pointerAddressOffset =  (BLOCKSIZE * blockPosition) +
   // 32*BLOCKSIZE*(column-1);
   u32 positions = pointerAddressOffset / BLOCKSIZE;
   // pointerAddressOffset =  (blockPosition) + 32*(column-1);
-  u32 blockPosition = positions % 32;
-  u32 column = ((positions - blockPosition) / 32) + 1;
-
+  u32 initialBlockPosition = positions % 32;
+  u32 column = ((positions - initialBlockPosition) / 32) + 1;
   // mark as free
-  setNthBit(&BitMap[column].column, blockPosition, false);
+  for (int i = initialBlockPosition; i < initialBlockPosition + blocks; i++)
+    setNthBit(&BitMap[column].column, i, false);
   // memset as clear???
-  memset(pointer, 0, BLOCKSIZE);
+  memset(pointer, 0, BLOCKSIZE * blocks);
 }
 
 void *kmalloc_page() {
