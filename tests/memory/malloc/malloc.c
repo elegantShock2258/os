@@ -13,7 +13,6 @@ void main(void) {
   int *arr = kmalloc(sizeof(int) * 10);
   bool res = true;
   for (int i = 0; i < 10; i++) {
-  printf("SSSSSSSSSSSSSsss\n");
     arr[i] = i;
     res &= arr[i] == i;
   }
@@ -28,7 +27,7 @@ void main(void) {
   }
   assert(res, "kfree and kmalloc are working properly");
   // VbeDriver.renderLoop();
-
+  killQemu();
   for (;;)
     asm("hlt");
 }
