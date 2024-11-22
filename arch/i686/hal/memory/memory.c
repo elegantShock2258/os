@@ -15,7 +15,7 @@ void* memcpy(void* dst, const void* src, uint32_t num)
 
 void * memset(void * ptr, int value, uint16_t num)
 {
-    uint8_t* u8Ptr = (uint8_t *)ptr;
+    u32* u8Ptr = (u32 *)ptr;
 
     for (uint16_t i = 0; i < num; i++)
         u8Ptr[i] = (uint8_t)value;
@@ -25,8 +25,8 @@ void * memset(void * ptr, int value, uint16_t num)
 
 int memcmp(const void* ptr1, const void* ptr2, uint16_t num)
 {
-    const uint8_t* u8Ptr1 = (const uint8_t *)ptr1;
-    const uint8_t* u8Ptr2 = (const uint8_t *)ptr2;
+    const u32* u8Ptr1 = (const u32 *)ptr1;
+    const u32* u8Ptr2 = (const u32 *)ptr2;
 
     for (uint16_t i = 0; i < num; i++)
         if (u8Ptr1[i] != u8Ptr2[i])

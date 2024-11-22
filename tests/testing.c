@@ -17,7 +17,7 @@ void assert(bool condition, char *message) {
     outputQemuSerial('N');
     outputQemuSerial('O');
     outputQemuSerial('T');
-    outputQemuSerial('\n');
+    outputQemuSerial(' ');
     for (u32 i = 0; message[i]; i++)
       outputQemuSerial(message[i]);
   }
