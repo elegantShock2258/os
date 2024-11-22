@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import subprocess
 from termcolor import colored
+import sys  # Import to manage exit codes
 
 # Paths and configuration
 GRUB_CFG = "grub.cfg"
@@ -82,13 +83,16 @@ def add_test_and_compile(category, testname, entry_index):
     result_code, message = read_test_result()
     if result_code:
         pretty_print_result(result_code, message)
+        return result_code == "1"
     else:
         print(colored("⚠️ WARNING: No result found.", "yellow") + f" Message: {message}")
-    return True
+        return False
 
 
 def main():
     """Main entry point for the script."""
+    all_tests_successful = True
+
     with open(GRUB_CFG, "w") as grub_file:
         grub_file.write(
             """menuentry "myos" {
@@ -117,8 +121,16 @@ menuentry "vga text mode os" {
                     success = add_test_and_compile(category, testname, test_index)
                     test_index += 1
                     if not success:
-                        print(colored(f"Skipping test {category}/{testname} due to compilation errors.", "yellow"))
+                        all_tests_successful = False
+                        print(colored(f"Skipping test {category}/{testname} due to errors.", "yellow"))
 
+    print("GRUB configuration and compilation completed successfully!")
+
+    # Set the return code
+    if all_tests_successful:
+        sys.exit(0)  # All tests successful
+    else:
+        sys.exit(-1)  # At least one test failed
 
 
 if __name__ == "__main__":
