@@ -14,7 +14,7 @@ static inline void _VBE_putpixel(int x, int y, int color) {
 void _VBE_putcursor(int x, int y) {
   for (int dy = 0; dy < CURSOR_HEIGHT; dy++) {
     for (int dx = 0; dx < CURSOR_WIDTH; dx++) {
-      _VBE_putpixel(x + dx, y + dy, COLOR(x % 255, y % 255, (dy + dx) % 255));
+      _VBE_putpixel(x + dx, y + dy, COLOR(0, 0, 0));
     }
   }
 }
@@ -26,7 +26,14 @@ void _VBE_fillScreen(int color) {
     }
   }
 }
-
+void _VBE_drawRect(int x, int y, int w, int h, int color){
+  // draw a rectangle!
+  for (int dy = y; dy < y + h; dy++) {
+    for (int dx = x; dx < x + w; dx++) {
+      _VBE_putpixel(dx, dy, color);
+    }
+  }
+}
 void _VBE_init(int ebx) {
   multiboot_info_t *multiboot_grub_info = (multiboot_info_t *)ebx;
   VbeDriver.vbe_control_block =
@@ -54,9 +61,8 @@ void _VBE_wait(int milliseconds) {
 
 void _VBE_render() {
   _VBE_fillScreen(COLOR(255, 0, 0)); // Red
-  printf("Rendering red screen\n");
-
   _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
+  // _VBE_drawRect(10,10,100,100,COLOR(0,255,0));
 }
 void _VBE_renderLoop() {
   // DONT re-render every loop?
@@ -64,6 +70,7 @@ void _VBE_renderLoop() {
   //
   while (1) {
     _VBE_render();
+    sleep(1000);
   }
 }
 

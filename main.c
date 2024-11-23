@@ -9,21 +9,7 @@
 void main(void) {
 
   terminal_color = vga_entry_color(WHITE, BLACK);
-
-  int *arr = kmalloc(sizeof(int) * 10);
-  for (int i = 0; i < 10; i++) {
-    arr[i] = i;
-  }
-  for (int i = 0; i < 10; i++) {
-    printf(" %d: %d ", i, arr[i]);
-  }
-  printf("\n");
-  kfree(arr);
-  for (int i = 0; i < 10; i++) {
-    printf(" %d: %d ", i, arr[i]);
-  }
-
-  // VbeDriver.renderLoop();
+  VbeDriver.renderLoop();
   for (;;)
     asm("hlt");
 }

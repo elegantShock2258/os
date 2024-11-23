@@ -26,6 +26,26 @@ void i686_IRQ_Handler(Registers *regs) {
 void IRQ_RegisterHandler(int irq, IRQHandler handler) {
   g_IRQHandlers[irq] = handler;
 }
+u32 ticks = 0;
+void timer(Registers *regs) {
+  ticks++;
+  // 1s = 20 ticks. jus like mc lol
+  // 1000ms = 20 ticks
+  // 1ms = 2/100 ticks
+  // 1ms = 0.02 ticks
+  // 100ms = 2 ticks
+  // 50ms = 1 tick
+  if (ticks == 0xffffffff)
+    ticks = 0;
+}
+
+void sleep(int milliseconds) {
+  u32 initTicks = ticks;
+  u32 ticksToWait = ticks + (0.02 * milliseconds);
+  for (; ticks < ticksToWait;) {
+    asm("hlt");
+  }
+}
 
 void irq_init() {
   PIC_Configure(PIC_REMAP_OFFSET, PIC_REMAP_OFFSET + 8);
@@ -38,6 +58,5 @@ void irq_init() {
 
   // enable interrupts
   asm("sti");
-  pit_init(1000); // 1000hz for pit
-  IRQ_RegisterHandler(0,timer);
+  IRQ_RegisterHandler(0, timer);
 }
