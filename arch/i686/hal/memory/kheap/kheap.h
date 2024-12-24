@@ -1,6 +1,6 @@
 #pragma once
 
-#define BLOCKSIZE sizeof(int) // bytes per block
+#define BLOCKSIZE 2048 * sizeof(u32) // bytes per block
 #include "../../../../../utils/kernel_utils.c"
 #include "../memory.c"
 void *kmalloc(u32 size);

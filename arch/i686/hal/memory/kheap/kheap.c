@@ -7,7 +7,12 @@ extern u32 kernel_end;
 u32 heap_start = (u32)&kernel_end;
 
 BitMapColumn BitMap[BitMapSize]; // 1 column * 32 bytes / column
-
+void *kmalloc_primitive(u32 size) {
+  // only for backbuffer in vbe driver
+  u32 addr = heap_start;
+  heap_start += size;
+  return (void *)addr;
+}
 // 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 void bitmap_init() {
   // TODO: fill bitmap till mem end
@@ -63,7 +68,7 @@ void *kmalloc(u32 size) {
   // so in the code caluculate the address as follows
   // addr = BitMap[initialColumn].baseAddress + BLOCKSIZE * blockPosition
   // but, just set the value of the addr as the int for how many blocks are
-  // associated, 
+  // associated,
   // *addr = blocks
 
   // so add some metadata for the next block so kfree knows about it
@@ -87,9 +92,9 @@ void *kmalloc(u32 size) {
       break;
     }
   }
-  if(initialColumn == -1)
+  if (initialColumn == -1)
     // kernel panic because memory cannot be allocated for the requested size
-   return NULL;
+    return NULL;
 
   // assign as busy in the bitmap
   for (int i = blockPosition; i < blockPosition + blocksRequired; i++)

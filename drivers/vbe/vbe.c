@@ -88,13 +88,13 @@ char *vbeDriverStateToJson(VbeDriverState *state) {
 
 static inline void _VBE_putpixel(int x, int y, int color) {
   if (x >= 0 && x < VbeDriver.vbe_w && y >= 0 && y < VbeDriver.vbe_h) {
-    VbeDriver.fb[(y * VbeDriver.pitch) / VbeDriver.colorDepth + x] = color;
+    VbeDriver.bf[(y * VbeDriver.pitch) / VbeDriver.colorDepth + x] = color;
   }
 }
 
 void _VBE_drawRect(int x, int y, int width, int height, int color) {
   for (u32 row = y; row < y + height; row++) {
-    u32 *row_start = VbeDriver.fb + (row * VbeDriver.vbe_w) + x;
+    u32 *row_start = VbeDriver.bf + (row * VbeDriver.vbe_w) + x;
 
     __asm__(
         "movl %[width], %%ecx \n"     // Set ECX to the number of pixels per row
@@ -113,11 +113,7 @@ void _VBE_putcursor(int x, int y) {
 }
 
 void _VBE_fillScreen(int color) {
-  for (int y = 0; y < VbeDriver.vbe_h; y++) {
-    for (int x = 0; x < VbeDriver.vbe_w; x++) {
-      _VBE_putpixel(x, y, color);
-    }
-  }
+  _VBE_drawRect(0, 0, VbeDriver.vbe_w, VbeDriver.vbe_h, color);
 }
 void exportVBE() { vbeDriverStateToJson(&VbeDriver); }
 void _VBE_init(int ebx) {
@@ -134,31 +130,28 @@ void _VBE_init(int ebx) {
   VbeDriver.fb = (uint32_t *)VbeDriver.vbe_info_block->framebuffer;
 
   // FIXME: BACKBUFFER ERROR ON EACH RENDER
-  // VbeDriver.bf = (uint32_t *)kmalloc(sizeof(uint32_t) * VbeDriver.vbe_h *
-  // VbeDriver.vbe_w); if (!VbeDriver.bf) {
-  //   printf("Failed to allocate backbuffer.\n");
-  // }
+  VbeDriver.bf = (uint32_t *)kmalloc_primitive(
+      sizeof(uint32_t) * VbeDriver.vbe_h * VbeDriver.vbe_w);
+  if (!VbeDriver.bf) {
+    printf("Failed to allocate backbuffer.\n");
+  }
 
   exportVBE();
 }
 
-void _VBE_wait(int milliseconds) {
-  for (volatile int i = 0; i < milliseconds * 100000; i++)
-    ;
-}
-
 void _VBE_render() {
   _VBE_fillScreen(COLOR(255, 0, 0));
-  _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
   _VBE_drawRect(10, 10, 100, 100, COLOR(255, 255, 255));
 }
 void _VBE_renderLoop() {
   // DONT re-render every loop?
   // only update dirty pixels
-  //
   while (1) {
     _VBE_render();
-    sleep(100);
+    _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
+
+    memcpy(VbeDriver.fb, VbeDriver.bf, VbeDriver.vbe_h * VbeDriver.vbe_w);
+    sleep(100); // somehow gui doesnt update without this
   }
 }
 
@@ -169,7 +162,6 @@ void VbeConstructor(int ebx) {
   VbeDriver.putpixel = _VBE_putpixel;
   VbeDriver.putcursor = _VBE_putcursor;
   VbeDriver.fillScreen = _VBE_fillScreen;
-  VbeDriver.wait = _VBE_wait;
   VbeDriver.render = _VBE_render;
   VbeDriver.renderLoop = _VBE_renderLoop;
   VbeDriver.init = _VBE_init;
