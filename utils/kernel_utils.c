@@ -11,7 +11,7 @@ int abs(int y) {
   else
     return -y;
 }
-
+int max(int a, int b) { return a > b ? a : b; }
 int kernel_log(const char *fmt, ...) {
   int res = -1;
   va_list va;
@@ -32,7 +32,6 @@ void setNthBit(u32 *data, int n, bool value) {
   }
 }
 
-
 int popcount(u32 n) {
   int count = 0;
   while (n) {
@@ -51,8 +50,8 @@ int findFirstUnSetBit(unsigned int n) {
   return position;
 }
 
-void printBinary(u32 n){
-  for(int i=31; i>=0; i--){
+void printBinary(u32 n) {
+  for (int i = 31; i >= 0; i--) {
     printf("%d", getNthBit(n, i));
   }
   printf("\n");

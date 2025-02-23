@@ -13,6 +13,8 @@
 #include "../mouse/mouse.c"
 #include "../../multiboot.h"
 #include "./graphics/colors/colors.c"
+#include "./graphics/window/window.c"
+
 
 #define CURSOR_WIDTH 30
 #define CURSOR_HEIGHT 30

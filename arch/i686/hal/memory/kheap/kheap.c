@@ -8,7 +8,7 @@ u32 heap_start = (u32)&kernel_end;
 
 BitMapColumn BitMap[BitMapSize]; // 1 column * 32 bytes / column
 void *kmalloc_primitive(u32 size) {
-  // only for backbuffer in vbe driver
+  // use only for backbuffer in vbe driver or to assign memory which will never be needed to free
   u32 addr = heap_start;
   heap_start += size;
   return (void *)addr;
