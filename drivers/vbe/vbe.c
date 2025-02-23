@@ -111,10 +111,10 @@ void _VBE_drawRect(int x, int y, int width, int height, int color) {
 }
 
 void _VBE_putcursor(int x, int y) {
-  _VBE_drawRect(x, y, CURSOR_WIDTH, CURSOR_HEIGHT, COLOR(0, 0, 0));
+  _VBE_drawRect(x, y, CURSOR_WIDTH, CURSOR_HEIGHT, COLOR(255, 255, 255));
 }
-
 void _VBE_fillScreen(int color) {
+
   _VBE_drawRect(0, 0, VbeDriver.vbe_w, VbeDriver.vbe_h, color);
 }
 void exportVBE() { vbeDriverStateToJson(&VbeDriver); }
@@ -139,12 +139,6 @@ void _VBE_init(int ebx) {
   if (!VbeDriver.bf) {
     printf("Failed to allocate backbuffer.\n");
   }
-  w = kmalloc(sizeof(Window));
-  w->x = 20;
-  w->y = 20;
-  w->width = 100;
-  w->height = 100;
-  w->windowFb = kmalloc(sizeof(u32) * w->width * w->height);
 
   exportVBE();
 }
@@ -156,22 +150,16 @@ void _VBE_render() {
 void _VBE_renderLoop() {
   // DONT re-render every loop?
   // only update dirty pixels
-  while (1) {
+  
     // _VBE_render();
-    for (int i = 0; i < 1080; i++) {
-      for (int j = 0; j < 1920; j++)
-        VbeDriver.bf[i * 1920 + j] = COLOR(
-            image_data[i][j][0], image_data[i][j][1], image_data[i][j][2]);
-    }
+    // for (int i = 0; i < 1080; i++) {
+    //   for (int j = 0; j < 1920; j++)
+    //     VbeDriver.bf[i * 1920 + j] = COLOR(
+    //         image_data[i][j][0], image_data[i][j][1], image_data[i][j][2]);
+    // }
 
-    _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
-
-    // memset(w->windowFb, COLOR(0, 0, 0), sizeof(u32) * w->width * w->height);
-    // renderWindow(NULL, VbeDriver.bf, VbeDriver.vbe_w);
-
-    memcpy(VbeDriver.fb, VbeDriver.bf, VbeDriver.vbe_h * VbeDriver.vbe_w);
-    sleep(100); // somehow gui doesnt update without this
-  }
+    windowManagerInit(VbeDriver.fb, VbeDriver.bf, VbeDriver.vbe_w,
+                      VbeDriver.vbe_h);
 }
 
 void VbeConstructor(int ebx) {

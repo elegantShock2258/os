@@ -84,10 +84,3 @@ Node *insert(Node *node, void *key, u32 *height) {
   return node;
 }
 
-void inOrder(Node *root) {
-  if (root != NULL) {
-    inOrder(root->left);
-    printf("%d ", root->key);
-    inOrder(root->right);
-  }
-}
