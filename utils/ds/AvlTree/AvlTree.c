@@ -9,7 +9,7 @@ int getHeight(Node *n) {
 int _AVL_comparitor(void *a, void *b);
 
 Node *createNode(void *newNode, u32 *height) {
-  Node *node = (Node *)malloc(sizeof(Node));
+  Node *node = (Node *)kmalloc(sizeof(Node));
   node->key = newNode;
   node->left = NULL;
   node->right = NULL;

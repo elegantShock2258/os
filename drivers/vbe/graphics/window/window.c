@@ -2,34 +2,33 @@
 // #include "../../../../meta/framebuffer/images/a.c"
 
 void renderWindow(Window *window, u32 *bf, u32 w, u32 h) {
-    u32 *t = window->windowFb;
-    
-    for (u32 i = 0; i < window->height; i++) {
-        u32 fb_y = i + window->y;
-        if (fb_y >= h) break;  
+  u32 *t = window->windowFb;
 
-        u32 *start = bf + fb_y * w + window->x;
-        u32 copy_width = window->width;
+  for (u32 i = 0; i < window->height; i++) {
+    u32 fb_y = i + window->y;
+    if (fb_y >= h)
+      break;
 
-        if (window->x + copy_width > w)
-            copy_width = w - window->x;
+    u32 *start = bf + fb_y * w + window->x;
+    u32 copy_width = window->width;
 
-        if (window->x < 0) {
-            t -= window->x; 
-            copy_width += window->x; 
-            start = bf + fb_y * w; 
-        }
+    if (window->x + copy_width > w)
+      copy_width = w - window->x;
 
-        if (copy_width > 0) {
-            memcpy(start, t, copy_width * sizeof(u32));
-        }
-
-        t += window->width; 
+    if (window->x < 0) {
+      t -= window->x;
+      copy_width += window->x;
+      start = bf + fb_y * w;
     }
+
+    if (copy_width > 0) {
+      memcpy(start, t, copy_width * sizeof(u32));
+    }
+
+    t += window->width;
+  }
 }
 
-
-Node *WindowRoot;
 void inOrderOperation(Node *root, u32 *bf, u32 *w, u32 *h) {
   if (root != NULL) {
     inOrderOperation(root->left, bf, w, h);
@@ -45,6 +44,7 @@ int _AVL_comparitor(void *a, void *b) {
   return wa->height - wb->height;
 }
 
+Node WindowRoot; // idk why but using a Node* doesnt sit well with it
 void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   // create first window, ill put one window will w-full h-full and bg-red
 
@@ -57,17 +57,20 @@ void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
 
   memset(ws->windowFb, COLOR(0, 255, 0), ws->width * ws->height);
 
-  renderWindow(ws, bf, w, h);
- 
+  ws->zIndex = 1;
 
-  // WindowRoot = createNode(ws, &(ws->zIndex));
+  WindowRoot = *(Node *)kmalloc(sizeof(Node));
+  WindowRoot.key = (void *)ws;
+  WindowRoot.left = NULL;
+  WindowRoot.right = NULL;
+  WindowRoot.height = &(ws->zIndex);
   // im gonna count the mouse seperate from the windows
   while (1) {
+    outputInt('b');
     // traverse the window tree
     // _VBE_render();
-    // inOrderOperation(WindowRoot, bf, &w,&h);
+    inOrderOperation(&WindowRoot, bf, &w,&h);
     // _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
-    // renderWindow(ws, bf, w, h);
 
     memcpy(fb, bf, h * w);
     sleep(100); // somehow gui doesnt update without this
