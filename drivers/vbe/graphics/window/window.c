@@ -12,7 +12,7 @@ void renderWindow(Window *window, u32 *bf, u32 w, u32 h) {
     u32 *start = bf + fb_y * w + window->x;
     u32 copy_width = window->width;
 
-    if (window->x + copy_width > w)
+    if ((window->x + copy_width) > w)
       copy_width = w - window->x;
 
     if (window->x < 0) {
@@ -22,7 +22,7 @@ void renderWindow(Window *window, u32 *bf, u32 w, u32 h) {
     }
 
     if (copy_width > 0) {
-      memcpy(start, t, copy_width * sizeof(u32));
+      memcpy(start, t, copy_width);
     }
 
     t += window->width;
@@ -43,19 +43,30 @@ int _AVL_comparitor(void *a, void *b) {
 
   return wa->height - wb->height;
 }
-
+void printMemset(u32 *fb) {
+  for (int i = 0; fb[i]; i++) {
+    // u8 u8 u8 u8
+    outputInt((u32)fb[i] & 0x000000ff);
+    outputInt((u32)fb[i] & 0x0000ff00);
+    outputInt((u32)fb[i] & 0x00ff0000);
+    outputInt((u32)fb[i] & 0xff000000);
+  }
+}
 Node WindowRoot; // idk why but using a Node* doesnt sit well with it
 void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   // create first window, ill put one window will w-full h-full and bg-red
 
   Window *ws = kmalloc(sizeof(Window));
-  ws->x = 40;
-  ws->y = 40;
-  ws->width = 192;
-  ws->height = 108;
-  ws->windowFb = kmalloc(ws->width * ws->height * sizeof(u32));
+  ws->x = 0;
+  ws->y = 0;
+  ws->width = 640;
+  ws->height = 640;
+  ws->windowFb = kmalloc((ws->width + 1) * (ws->height + 1) * sizeof(u32));
+  for (u32 i = 0; i < ws->width * ws->height; i++) {
+    ws->windowFb[i] = COLOR(0, 255, 0); // Ensure all pixels are properly set
+  }
 
-  memset(ws->windowFb, COLOR(0, 255, 0), ws->width * ws->height);
+  printMemset(ws->windowFb);
 
   ws->zIndex = 1;
 
@@ -64,15 +75,14 @@ void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   WindowRoot.left = NULL;
   WindowRoot.right = NULL;
   WindowRoot.height = &(ws->zIndex);
-  // im gonna count the mouse seperate from the windows
-  while (1) {
-    outputInt('b');
-    // traverse the window tree
-    // _VBE_render();
-    inOrderOperation(&WindowRoot, bf, &w,&h);
-    // _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
+  // while (1) {
+  // traverse the window tree
 
-    memcpy(fb, bf, h * w);
-    sleep(100); // somehow gui doesnt update without this
-  }
+  // _VBE_fillScreen(COLOR(255, 0, 255));
+  inOrderOperation(&WindowRoot, bf, &w, &h);
+  // _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
+
+  memcpy(fb, bf, h * w);
+  sleep(100); // somehow gui doesnt update without this
+  // }
 }
