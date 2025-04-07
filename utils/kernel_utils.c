@@ -1,6 +1,6 @@
 #pragma once
 #include "./kernel_utils.h"
-#include "../arch/i686/hal/io/printf.h"
+#include "../arch/i686/hal/io/printf.c"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -51,7 +51,19 @@ int findFirstUnSetBit(unsigned int n) {
 }
 
 void printBinary(u32 n) {
-  for (int i = 31; i >= 0; i--) {
+  terminal_color = LIGHT_GREY;
+  terminal_color = WHITE;
+  bool one = 0;
+  for (int i = 30; i >= 0; i--) {
+    int bit = getNthBit(n, i);
+    if (bit && !one) {
+      terminal_color = LIGHT_GREY;
+      printf("%d", bit);
+      terminal_color = WHITE;
+      one = true;
+    } else if (!bit) {
+      one = false;
+    }
     printf("%d", getNthBit(n, i));
   }
   printf("\n");

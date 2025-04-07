@@ -43,15 +43,7 @@ int _AVL_comparitor(void *a, void *b) {
 
   return wa->height - wb->height;
 }
-void printMemset(u32 *fb) {
-  for (int i = 0; fb[i]; i++) {
-    // u8 u8 u8 u8
-    outputInt((u32)fb[i] & 0x000000ff);
-    outputInt((u32)fb[i] & 0x0000ff00);
-    outputInt((u32)fb[i] & 0x00ff0000);
-    outputInt((u32)fb[i] & 0xff000000);
-  }
-}
+
 Node WindowRoot; // idk why but using a Node* doesnt sit well with it
 void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   // create first window, ill put one window will w-full h-full and bg-red
@@ -61,12 +53,10 @@ void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   ws->y = 0;
   ws->width = 640;
   ws->height = 640;
-  ws->windowFb = kmalloc((ws->width + 1) * (ws->height + 1) * sizeof(u32));
+  ws->windowFb = kmalloc((ws->width) * (ws->height) * sizeof(u32));
   for (u32 i = 0; i < ws->width * ws->height; i++) {
     ws->windowFb[i] = COLOR(0, 255, 0); // Ensure all pixels are properly set
   }
-
-  printMemset(ws->windowFb);
 
   ws->zIndex = 1;
 

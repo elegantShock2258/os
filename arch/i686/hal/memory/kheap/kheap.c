@@ -1,6 +1,6 @@
 #pragma once
 #include "kheap.h"
-#define BitMapSize 1
+#define BitMapSize 20
 
 // kernel_end is defined in the linker script.
 extern u32 kernel_end;
@@ -8,7 +8,8 @@ u32 heap_start = (u32)&kernel_end;
 
 BitMapColumn BitMap[BitMapSize]; // 1 column * 32 bytes / column
 void *kmalloc_primitive(u32 size) {
-  // use only for backbuffer in vbe driver or to assign memory which will never be needed to free
+  // use only for backbuffer in vbe driver or to assign memory which will never
+  // be needed to free
   u32 addr = heap_start;
   heap_start += size;
   return (void *)addr;
@@ -16,9 +17,13 @@ void *kmalloc_primitive(u32 size) {
 // 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 void bitmap_init() {
   // TODO: fill bitmap till mem end
-  BitMap[0].column = 0x00000000; // all blocks are free
-  BitMap[0].baseAddress = (u32 *)heap_start;
-  BitMap[0].endAddress = (u32 *)(heap_start + sizeof(char) * 32);
+  u32 *start = (u32 *)heap_start;
+  for (int i = 0; i < BitMapSize; i++) {
+    BitMap[i].column = 0x00000000; // all blocks are free
+    BitMap[i].baseAddress = start;
+    BitMap[i].endAddress = (u32 *)(start + BLOCKSIZE * 32);
+    start = BitMap[i].endAddress;
+  }
   printf("INITAL COLUMN: ");
   printBinary(BitMap[0].column);
 }
@@ -39,6 +44,7 @@ void bitmap_init() {
 // in the memory pool if cant fit within a row, allocate 1s
 
 int getContigousBlocks(u32 block, int blocksRequired) {
+
   int count = 0;
   for (int i = 31; i >= 0; i--) {
     if ((block & (1 << i)) == 0) {
@@ -77,9 +83,11 @@ void *kmalloc(u32 size) {
 
   int blockPosition;
   int initialColumn = -1;
+  int sizeRequired = size + sizeof(int *);
+  int blocksRequired = (sizeRequired / BLOCKSIZE) + 1;
 
-  int blocksRequired = ((size + sizeof(int *)) / BLOCKSIZE) + 1;
-
+  printf("size: %d \n blocks: %d \n blocksize: %d\n", sizeRequired, blocksRequired,
+         BLOCKSIZE);
   for (int i = 0; i < BitMapSize &&
                   BitMap[i].column !=
                       0xffffffff /* only go through blocks which are not full*/;
@@ -124,8 +132,14 @@ void *kfree(void *pointer) {
     setNthBit(&BitMap[column].column, i, false);
   // memset as clear???
   memset(pointer, 0, BLOCKSIZE * blocks);
-}
 
+  // showing bitmap for debug
+}
+void printBitmap() {
+  printf("---Bitmap---\n");
+  for (int i = 0; i < BitMapSize; i++)
+    printBinary(BitMap[i].column);
+}
 void *kmalloc_page() {
   if (heap_start & 0xFFFFF000) { // not alligned
                                  // Align the placement address;

@@ -1,6 +1,6 @@
 #pragma once
 
-#define BLOCKSIZE 2048 * sizeof(u32) // bytes per block
+#define BLOCKSIZE (sizeof(char)*(1<<17)) // bytes per block, make SURE of including the () THE MULTIPLICATION WILL FUCK UP THE CALCULATIONS
 #include "../../../../../utils/kernel_utils.c"
 #include "../memory.c"
 void *kmalloc(u32 size);

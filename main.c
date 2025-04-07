@@ -6,8 +6,15 @@
 #include "drivers/vbe/vbe.c"
 #include "utils/kernel_utils.c"
 
-void main(void) {
+// void main(void) {
 
+//   terminal_color = vga_entry_color(WHITE, BLACK);
+//   VbeDriver.renderLoop();
+//   for (;;)
+//     asm("hlt");
+// }
+
+void main(void) {
   terminal_color = vga_entry_color(WHITE, BLACK);
   VbeDriver.renderLoop();
   for (;;)
