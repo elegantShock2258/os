@@ -1,15 +1,22 @@
 #pragma once
 #include "kheap.h"
 #define BitMapSize 20
-
-// kernel_end is defined in the linker script.
+// FIXME: for some rerason the allocator doesnt allocate the bitset from the
+// start of the column but in between some area?
+// col: 00000000000 assign: 1111
+// itll do 00011100000 instead of 111000000
+//  kernel_end is defined in the linker script.
 extern u32 kernel_end;
 u32 heap_start = (u32)&kernel_end;
 
 BitMapColumn BitMap[BitMapSize]; // 1 column * 32 bytes / column
+bool kmallocInit = false;
 void *kmalloc_primitive(u32 size) {
   // use only for backbuffer in vbe driver or to assign memory which will never
   // be needed to free
+  // USE ONLY BEFORE BITMAP_INIT
+  if (kmallocInit)
+    return NULL; // SAFETY, TODO: can make it so you relocate the bitmap
   u32 addr = heap_start;
   heap_start += size;
   return (void *)addr;
@@ -24,8 +31,11 @@ void bitmap_init() {
     BitMap[i].endAddress = (u32 *)(start + BLOCKSIZE * 32);
     start = BitMap[i].endAddress;
   }
+#ifndef debug
   printf("INITAL COLUMN: ");
   printBinary(BitMap[0].column);
+#endif
+  kmallocInit = true;
 }
 
 // 0 -> free
@@ -58,7 +68,11 @@ int getContigousBlocks(u32 block, int blocksRequired) {
   }
   return -1;
 }
-
+void printBitmap() {
+  printf("---Bitmap---\n");
+  for (int i = 0; i < BitMapSize; i++)
+    printBinary(BitMap[i].column);
+}
 void *kmalloc(u32 size) {
   // we can have two cases here
   // 1) size can fit in one block -> assign the block
@@ -85,9 +99,10 @@ void *kmalloc(u32 size) {
   int initialColumn = -1;
   int sizeRequired = size + sizeof(int *);
   int blocksRequired = (sizeRequired / BLOCKSIZE) + 1;
-
-  printf("size: %d \n blocks: %d \n blocksize: %d\n", sizeRequired, blocksRequired,
-         BLOCKSIZE);
+#ifndef debug
+  printf("size: %d \n blocks: %d \n blocksize: %d\n", sizeRequired,
+         blocksRequired, BLOCKSIZE);
+#endif
   for (int i = 0; i < BitMapSize &&
                   BitMap[i].column !=
                       0xffffffff /* only go through blocks which are not full*/;
@@ -113,8 +128,13 @@ void *kmalloc(u32 size) {
 
   // add a integer to denote how many consecutive blocks are present for the ptr
   *(int *)address = blocksRequired;
+
+// #ifndef debug
+//   printBitmap();
+// #endif
   return (address + sizeof(int));
 }
+
 void *kfree(void *pointer) {
   //  get the block position
   //  address = start_address + (BLOCKSIZE * blockPosition) +
@@ -133,13 +153,11 @@ void *kfree(void *pointer) {
   // memset as clear???
   memset(pointer, 0, BLOCKSIZE * blocks);
 
-  // showing bitmap for debug
+#ifndef debug
+  printBitmap();
+#endif
 }
-void printBitmap() {
-  printf("---Bitmap---\n");
-  for (int i = 0; i < BitMapSize; i++)
-    printBinary(BitMap[i].column);
-}
+
 void *kmalloc_page() {
   if (heap_start & 0xFFFFF000) { // not alligned
                                  // Align the placement address;

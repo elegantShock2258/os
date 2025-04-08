@@ -51,8 +51,8 @@ void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   Window *ws = kmalloc(sizeof(Window));
   ws->x = 0;
   ws->y = 0;
-  ws->width = 640;
-  ws->height = 640;
+  ws->width = 1920;
+  ws->height = 1080;
   ws->windowFb = kmalloc((ws->width) * (ws->height) * sizeof(u32));
   for (u32 i = 0; i < ws->width * ws->height; i++) {
     ws->windowFb[i] = COLOR(0, 255, 0); // Ensure all pixels are properly set
