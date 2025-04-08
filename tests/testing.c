@@ -2,13 +2,12 @@
 
 #include "../arch/i686/hal/io/serial.c"
 #include "../utils/kernel_utils.c"
+#define test
 
 void outputQemuSerial(u8 data) { outb(0x3F8, data); }
-void outputInt(u8 data){
-  outputQemuSerial(data);
-}
-void outputMessage(char* msg){
-  for(int i= 0 ; msg[i]; i++)
+void outputInt(u8 data) { outputQemuSerial(data); }
+void outputMessage(char *msg) {
+  for (int i = 0; msg[i]; i++)
     outputQemuSerial(msg[i]);
 }
 void assert(bool condition, char *message) {

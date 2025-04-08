@@ -11,7 +11,9 @@ VbeDriverState VbeDriver;
 
 char *vbeDriverStateToJson(VbeDriverState *state) {
   char json_str[1024];
-
+#ifndef test
+  return NULL;
+#endif
   // Constructing JSON string
   snprintf(
       json_str, 1024,
@@ -150,16 +152,16 @@ void _VBE_render() {
 void _VBE_renderLoop() {
   // DONT re-render every loop?
   // only update dirty pixels
-  
-    // _VBE_render();
-    // for (int i = 0; i < 1080; i++) {
-    //   for (int j = 0; j < 1920; j++)
-    //     VbeDriver.bf[i * 1920 + j] = COLOR(
-    //         image_data[i][j][0], image_data[i][j][1], image_data[i][j][2]);
-    // }
 
-    windowManagerInit(VbeDriver.fb, VbeDriver.bf, VbeDriver.vbe_w,
-                      VbeDriver.vbe_h);
+  // _VBE_render();
+  // for (int i = 0; i < 1080; i++) {
+  //   for (int j = 0; j < 1920; j++)
+  //     VbeDriver.bf[i * 1920 + j] = COLOR(
+  //         image_data[i][j][0], image_data[i][j][1], image_data[i][j][2]);
+  // }
+
+  windowManagerInit(VbeDriver.fb, VbeDriver.bf, VbeDriver.vbe_w,
+                    VbeDriver.vbe_h);
 }
 
 void VbeConstructor(int ebx) {
