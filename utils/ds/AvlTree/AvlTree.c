@@ -53,7 +53,7 @@ Node *leftRotate(Node *x) {
 Node *insert(Node *node, void *key, u32 *height) {
   if (node == NULL)
     return createNode(key, height);
-
+  printf("inserting %d\n", *height);
   if (_AVL_comparitor(key, node->key) < 0)
     node->left = insert(node->left, key, height);
   else if (_AVL_comparitor(key, node->key) > 0)
@@ -83,4 +83,3 @@ Node *insert(Node *node, void *key, u32 *height) {
 
   return node;
 }
-

@@ -3,6 +3,7 @@
 #include "arch/i686/hal/io/printf.h"
 #include "arch/i686/hal/io/stdio.c"
 #include "arch/i686/hal/memory/kheap/kheap.c"
+#include "drivers/vbe/graphics/window/window.h"
 #include "drivers/vbe/vbe.c"
 #include "utils/kernel_utils.c"
 
@@ -10,6 +11,7 @@ void main(void) {
   terminal_color = vga_entry_color(WHITE, BLACK);
   // int* arr = kmalloc(sizeof(u32)*1080*1920);
   // printBitmap();
+ 
   VbeDriver.renderLoop();
   for (;;)
     asm("hlt");

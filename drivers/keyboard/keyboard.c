@@ -35,9 +35,27 @@ void _Keyboard(Registers *regs) {
   if (scancode >= 0x80)
     return; // ignore above 0x80
   // TODO: update special keys whenever the keys are pressed.
-
+  if (code == 'e') {
+    Window *ws = kmalloc(sizeof(Window));
+    ws->zIndex = 2;
+    ws->x = 490;
+    ws->y = 30;
+    ws->width = 192;
+    ws->height = 100;
+    ws->windowFb = kmalloc((ws->width) * (ws->height) * sizeof(u32));
+    for (u32 i = 0; i < ws->width * ws->height; i++) {
+      ws->windowFb[i] = COLOR(0, 0, 0); // Ensure all pixels are properly set
+    }
+    Node winNode = *(Node *)kmalloc(sizeof(Node));
+    winNode.key = (void *)ws;
+    winNode.left = NULL;
+    winNode.right = NULL;
+    winNode.height = &(ws->zIndex);
+    insert(&WindowRoot, &winNode, (winNode.height));
+  }
   KeyboardDriver.keyboard_buffer.enqueue(&KeyboardDriver.keyboard_buffer, code);
   KeyboardDriver.keyboard_irq_handled = 1;
+
   // asm("mov $0x42, %edx");
   // if (code == '\n') {
   //   terminal_row++;
