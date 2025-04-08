@@ -10,6 +10,7 @@ int _VBE_renderGUI = 1;
 VbeDriverState VbeDriver;
 
 char *vbeDriverStateToJson(VbeDriverState *state) {
+  return NULL;
   char json_str[1024];
 #ifndef test
   return NULL;
