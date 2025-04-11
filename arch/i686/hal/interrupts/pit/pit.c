@@ -24,7 +24,7 @@ void timer() {
 }
 
 void sleep(uint32_t milliseconds) {
-    uint32_t end_ticks = ticks + (milliseconds * PIT_FREQUENCY / 1000);
+    uint32_t end_ticks = ticks + (milliseconds * PIT_FREQUENCY / 1000000);
     while (ticks < end_ticks) {
         asm volatile("hlt");
     }

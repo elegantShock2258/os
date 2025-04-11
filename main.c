@@ -1,4 +1,5 @@
-#include "arch/i686/hal/interrupts/irq/irq.c"
+#include "./tests/testing.c"
+#include "arch/i686/hal/interrupts/pit/pit.c"
 #include "arch/i686/hal/io/printf.c"
 #include "arch/i686/hal/io/printf.h"
 #include "arch/i686/hal/io/stdio.c"
@@ -20,10 +21,12 @@ void main(void) {
   printf("\n");
   kfree(arr);
   for (int i = 0; i < 10; i++) {
+    logf("hi %d", i);
     printf(" %d: %d ", i, arr[i]);
   }
-
-  // VbeDriver.renderLoop();
+  // outputQemuMessage("hfjkhjkjh");
+  // printFramebuffer(VbeDriver.fb, VbeDriver.vbe_h, VbeDriver.vbe_w, "VESA
+  // FB"); VbeDriver.renderLoop();
   for (;;)
     asm("hlt");
 }

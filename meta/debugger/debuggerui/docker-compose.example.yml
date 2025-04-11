@@ -1,0 +1,58 @@
+version: "3"
+services:
+  nodeapp:
+    container_name: node_pdf
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - "3000:3000"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    environment:
+      WAIT_HOSTS: mongodb:27017
+      GOOGLE_ID:
+      GOOGLE_SECRET:
+      NEXTAUTH_URL:
+    networks:
+      - node-webapp-network
+    volumes:
+      - ./:/
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:6.0
+    volumes:
+      - ./data/mongo_dev:/data/mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - node-webapp-network
+    restart: always
+
+  mysql-db:
+    image: mysql:latest
+    ports:
+      - ${DB_PORT}:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: rcdb
+    volumes:
+      - ./data/mysql_dev:/data/mongodb
+    networks:
+      - node-webapp-network
+
+volumes:
+  mongodb:
+    driver: local
+
+  mysqlVolume:
+    driver: local
+
+networks:
+  node-webapp-network:
+    driver: bridge

@@ -2,6 +2,7 @@
 #pragma once
 
 #include "./keyboard.h"
+#include "../../tests/testing.c"
 
 KeyboardDriverState  KeyboardDriver;
 CircularBuffer _Keyoard_CircularBuffer;
