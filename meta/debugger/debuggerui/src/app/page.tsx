@@ -18,8 +18,8 @@ export default function Page() {
 
     socket.onmessage = async (e) => {
       const parsedMessage = parseLogEntries(e.data);
-      if (parsedMessage[0].type === "message") {
-        const y = [...logs, parsedMessage[0].message];
+      if (parsedMessage?.type === "message") {
+        const y = [...logs, parsedMessage.message];
         console.log(e.data);
         setLogs(y);
       }

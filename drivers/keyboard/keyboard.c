@@ -1,10 +1,11 @@
 // TODO: write a full-fleged keyboard driver
+// include modifiers and everything.
 #pragma once
 
 #include "./keyboard.h"
 #include "../../tests/testing.c"
 
-KeyboardDriverState  KeyboardDriver;
+KeyboardDriverState KeyboardDriver;
 CircularBuffer _Keyoard_CircularBuffer;
 static SpecialKeys _Keyboard_specialKeys;
 
@@ -36,8 +37,14 @@ void _Keyboard(Registers *regs) {
     return; // ignore above 0x80
   // TODO: update special keys whenever the keys are pressed.
 
-  KeyboardDriver.keyboard_buffer.enqueue(&KeyboardDriver.keyboard_buffer,code);
+  KeyboardDriver.keyboard_buffer.enqueue(&KeyboardDriver.keyboard_buffer, code);
   KeyboardDriver.keyboard_irq_handled = 1;
+  // for (int i = 0; i < 10; i++) {
+  //   logf("hi %d", i);
+  // }
+
+  logfInterrupt("[KEYBOARD]: %d %d", scancode,code);
+  // logKeys(&KeyboardDriver, scancode,code);
   // asm("mov $0x42, %edx");
   // if (code == '\n') {
   //   terminal_row++;
@@ -58,7 +65,6 @@ void _Keyboard(Registers *regs) {
   // printf("%c", code); // TODO: send code to outb?.
 }
 
-
 void KeyboardConstructor() {
 
   KeyboardDriver.keyboard_irq_handled = 0;
@@ -66,13 +72,12 @@ void KeyboardConstructor() {
   KeyboardDriver.keyboard_buffer = _Keyoard_CircularBuffer;
   KeyboardDriver.specialKeys = &_Keyboard_specialKeys;
 
-
   KeyboardDriver.keyboard_read_scan_code = _Keyboard_read_scan_code;
   KeyboardDriver.keyboard_scan_code_to_ascii = _Keyboard_scan_code_to_ascii;
   KeyboardDriver.keyboard = _Keyboard;
 
   KeyboardDriver.Constructor = KeyboardConstructor;
 
-  _CB_Constructor(&KeyboardDriver.keyboard_buffer,BUFFER_MAX);
-  IRQ_RegisterHandler(1,KeyboardDriver.keyboard);
+  _CB_Constructor(&KeyboardDriver.keyboard_buffer, BUFFER_MAX);
+  IRQ_RegisterHandler(1, KeyboardDriver.keyboard);
 }
