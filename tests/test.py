@@ -2,7 +2,8 @@ import os
 from pathlib import Path
 import subprocess
 from termcolor import colored
-import sys  # Import to manage exit codes
+import sys
+import re  # For removing |...| wrapped strings
 
 # Paths and configuration
 GRUB_CFG = "grub.cfg"
@@ -42,13 +43,13 @@ def pretty_print_result(result_code, message):
 
 
 def read_test_result():
-    """Read test result from OUTPUT_FILE."""
+    """Read test result from OUTPUT_FILE, removing |...| wrapped segments."""
     if OUTPUT_FILE.exists():
         with open(OUTPUT_FILE, "r") as f:
             lines = f.readlines()
             if len(lines) >= 2:
-                result_code = lines[0].strip()
-                message = lines[1].strip()
+                result_code = re.sub(r'\|.*?\|', '', lines[0]).strip()
+                message = re.sub(r'\|.*?\|', '', lines[1]).strip()
                 return result_code, message
             else:
                 return None, "Incomplete test output."

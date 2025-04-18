@@ -99,10 +99,6 @@ void *kmalloc(u32 size) {
   int initialColumn = -1;
   int sizeRequired = size + sizeof(int *);
   int blocksRequired = (sizeRequired / BLOCKSIZE) + 1;
-#ifndef debug
-  printf("size: %d \n blocks: %d \n blocksize: %d\n", sizeRequired,
-         blocksRequired, BLOCKSIZE);
-#endif
   for (int i = 0; i < BitMapSize &&
                   BitMap[i].column !=
                       0xffffffff /* only go through blocks which are not full*/;
@@ -129,9 +125,7 @@ void *kmalloc(u32 size) {
   // add a integer to denote how many consecutive blocks are present for the ptr
   *(int *)address = blocksRequired;
 
-// #ifndef debug
-//   printBitmap();
-// #endif
+
   return (address + sizeof(int));
 }
 
@@ -152,10 +146,6 @@ void *kfree(void *pointer) {
     setNthBit(&BitMap[column].column, i, false);
   // memset as clear???
   memset(pointer, 0, BLOCKSIZE * blocks);
-
-#ifndef debug
-  printBitmap();
-#endif
 }
 
 void *kmalloc_page() {
