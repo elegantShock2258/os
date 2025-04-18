@@ -258,7 +258,7 @@ void _Keyboard(Registers *regs) {
   KeyboardDriver.keyboard_buffer.enqueue(&KeyboardDriver.keyboard_buffer, code);
   KeyboardDriver.keyboard_irq_handled = 1;
 
-  logfInterrupt("[KEYBOARD]: %d %d", scancode,code);
+  // logfInterrupt("[KEYBOARD]: %d %d", scancode,code);
   // logKeys(&KeyboardDriver, scancode,code);
   extended = false;
 

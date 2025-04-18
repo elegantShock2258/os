@@ -27,7 +27,7 @@ void main(void) {
   }
   assert(res, "kfree and kmalloc are working properly");
   // VbeDriver.renderLoop();
-  killQemu();
+  // killQemu();
   for (;;)
     asm("hlt");
 }
