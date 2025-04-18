@@ -16,18 +16,13 @@ void main(void) {
     arr[i] = i;
     res &= arr[i] == i;
   }
-  for (int i = 0; i < 10; i++) {
-    printf("Element at index %d: %d\n", i, arr[i]);
-  }
   kfree(arr);
-
   for (int i = 0; i < 10; i++) {
-    printf("Element at index %d: %d\n", i, arr[i]);
     res &= arr[i] == 0;
   }
   assert(res, "kfree and kmalloc are working properly");
   // VbeDriver.renderLoop();
-  // killQemu();
+  killQemu();
   for (;;)
     asm("hlt");
 }
