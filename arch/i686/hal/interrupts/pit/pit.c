@@ -19,9 +19,9 @@ void pit_init(uint32_t frequency) {
 }
 
 
-// void sleep(uint32_t milliseconds) {
-//     uint32_t end_ticks = ticks + (milliseconds * PIT_FREQUENCY / 1000);
-//     while (ticks < end_ticks) {
-//         asm volatile("hlt");
-//     }
-// }
+void sleep(uint32_t milliseconds) {
+    uint32_t end_ticks = ticks + (milliseconds * PIT_FREQUENCY / 1000000);
+    while (ticks < end_ticks) {
+        asm volatile("hlt");
+    }
+}

@@ -1,7 +1,10 @@
 // TODO: write a full-fleged keyboard driver
+// include modifiers and everything.
 #pragma once
 
 #include "./keyboard.h"
+
+#include "../../tests/testing.c"
 #include "../../drivers/vbe/vbe.c"
 
 KeyboardDriverState KeyboardDriver;
@@ -252,7 +255,13 @@ void _Keyboard(Registers *regs) {
   }
   _Keyboard_update_special_keys(scancode, released, extended);
 
+  KeyboardDriver.keyboard_buffer.enqueue(&KeyboardDriver.keyboard_buffer, code);
+  KeyboardDriver.keyboard_irq_handled = 1;
+
+  logfInterrupt("[KEYBOARD]: %d %d", scancode,code);
+  // logKeys(&KeyboardDriver, scancode,code);
   extended = false;
+
   // asm("mov $0x42, %edx");
   // if (code == '\n') {
   //   terminal_row++;
