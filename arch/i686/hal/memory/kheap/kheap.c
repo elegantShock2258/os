@@ -1,21 +1,41 @@
 #pragma once
 #include "kheap.h"
-#define BitMapSize 1
-
-// kernel_end is defined in the linker script.
+#define BitMapSize 20
+// FIXME: for some rerason the allocator doesnt allocate the bitset from the
+// start of the column but in between some area?
+// col: 00000000000 assign: 1111
+// itll do 00011100000 instead of 111000000
+//  kernel_end is defined in the linker script.
 extern u32 kernel_end;
 u32 heap_start = (u32)&kernel_end;
 
 BitMapColumn BitMap[BitMapSize]; // 1 column * 32 bytes / column
-
+bool kmallocInit = false;
+void *kmalloc_primitive(u32 size) {
+  // use only for backbuffer in vbe driver or to assign memory which will never
+  // be needed to free
+  // USE ONLY BEFORE BITMAP_INIT
+  if (kmallocInit)
+    return NULL; // SAFETY, TODO: can make it so you relocate the bitmap
+  u32 addr = heap_start;
+  heap_start += size;
+  return (void *)addr;
+}
 // 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 void bitmap_init() {
   // TODO: fill bitmap till mem end
-  BitMap[0].column = 0x00000000; // all blocks are free
-  BitMap[0].baseAddress = (u32 *)heap_start;
-  BitMap[0].endAddress = (u32 *)(heap_start + sizeof(char) * 32);
+  u32 *start = (u32 *)heap_start;
+  for (int i = 0; i < BitMapSize; i++) {
+    BitMap[i].column = 0x00000000; // all blocks are free
+    BitMap[i].baseAddress = start;
+    BitMap[i].endAddress = (u32 *)(start + BLOCKSIZE * 32);
+    start = BitMap[i].endAddress;
+  }
+#ifndef debug
   printf("INITAL COLUMN: ");
   printBinary(BitMap[0].column);
+#endif
+  kmallocInit = true;
 }
 
 // 0 -> free
@@ -34,6 +54,7 @@ void bitmap_init() {
 // in the memory pool if cant fit within a row, allocate 1s
 
 int getContigousBlocks(u32 block, int blocksRequired) {
+
   int count = 0;
   for (int i = 31; i >= 0; i--) {
     if ((block & (1 << i)) == 0) {
@@ -47,7 +68,11 @@ int getContigousBlocks(u32 block, int blocksRequired) {
   }
   return -1;
 }
-
+void printBitmap() {
+  printf("---Bitmap---\n");
+  for (int i = 0; i < BitMapSize; i++)
+    printBinary(BitMap[i].column);
+}
 void *kmalloc(u32 size) {
   // we can have two cases here
   // 1) size can fit in one block -> assign the block
@@ -63,7 +88,7 @@ void *kmalloc(u32 size) {
   // so in the code caluculate the address as follows
   // addr = BitMap[initialColumn].baseAddress + BLOCKSIZE * blockPosition
   // but, just set the value of the addr as the int for how many blocks are
-  // associated, 
+  // associated,
   // *addr = blocks
 
   // so add some metadata for the next block so kfree knows about it
@@ -72,9 +97,12 @@ void *kmalloc(u32 size) {
 
   int blockPosition;
   int initialColumn = -1;
-
-  int blocksRequired = ((size + sizeof(int *)) / BLOCKSIZE) + 1;
-
+  int sizeRequired = size + sizeof(int *);
+  int blocksRequired = (sizeRequired / BLOCKSIZE) + 1;
+#ifndef debug
+  printf("size: %d \n blocks: %d \n blocksize: %d\n", sizeRequired,
+         blocksRequired, BLOCKSIZE);
+#endif
   for (int i = 0; i < BitMapSize &&
                   BitMap[i].column !=
                       0xffffffff /* only go through blocks which are not full*/;
@@ -87,9 +115,9 @@ void *kmalloc(u32 size) {
       break;
     }
   }
-  if(initialColumn == -1)
+  if (initialColumn == -1)
     // kernel panic because memory cannot be allocated for the requested size
-   return NULL;
+    return NULL;
 
   // assign as busy in the bitmap
   for (int i = blockPosition; i < blockPosition + blocksRequired; i++)
@@ -100,8 +128,13 @@ void *kmalloc(u32 size) {
 
   // add a integer to denote how many consecutive blocks are present for the ptr
   *(int *)address = blocksRequired;
+
+// #ifndef debug
+//   printBitmap();
+// #endif
   return (address + sizeof(int));
 }
+
 void *kfree(void *pointer) {
   //  get the block position
   //  address = start_address + (BLOCKSIZE * blockPosition) +
@@ -119,6 +152,10 @@ void *kfree(void *pointer) {
     setNthBit(&BitMap[column].column, i, false);
   // memset as clear???
   memset(pointer, 0, BLOCKSIZE * blocks);
+
+#ifndef debug
+  printBitmap();
+#endif
 }
 
 void *kmalloc_page() {

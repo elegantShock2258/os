@@ -5,6 +5,7 @@
 #include "../arch/i686/hal/interrupts/pit/pit.c"
 #include "../drivers/keyboard/keyboard.c"
 #include "../utils/kernel_utils.c"
+#define test
 
 void outputQemuSerial(u8 data) { outb(0x3F8, data); }
 void outputQemuMessage(char *f) {
@@ -60,6 +61,11 @@ void printFramebuffer(u32* fb, int h,int w, char* title){
     outputQemuSerial(b);
     outputQemuSerial(a);
   }
+}
+void outputInt(u8 data) { outputQemuSerial(data); }
+void outputMessage(char *msg) {
+  for (int i = 0; msg[i]; i++)
+    outputQemuSerial(msg[i]);
 }
 
 void assert(bool condition, char *message) {

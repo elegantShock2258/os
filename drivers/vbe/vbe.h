@@ -12,8 +12,9 @@
 #include "../keyboard/keyboard.c"
 #include "../mouse/mouse.c"
 #include "../../multiboot.h"
+#include "./graphics/colors/colors.c"
+#include "./graphics/window/window.c"
 
-#define COLOR(r, g, b) ((b) | (g << 8) | (r << 16))
 
 #define CURSOR_WIDTH 30
 #define CURSOR_HEIGHT 30

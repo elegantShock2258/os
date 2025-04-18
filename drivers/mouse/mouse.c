@@ -102,6 +102,8 @@ void _Mouse(Registers *r) {
     }
     status = inb(MOUSE_STATUS);
   }
+
+  // EvalMouse();
 }
 
 void _Mouse_install() {
