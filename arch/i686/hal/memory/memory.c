@@ -13,12 +13,12 @@ void* memcpy(void* dst, const void* src, uint32_t num)
     return dst;
 }
 
-void * memset(void * ptr, int value, uint16_t num)
+void * memset(void * ptr, u32 value, u32 num)
 {
-    u32* u8Ptr = (u32 *)ptr;
+    u32* u32Ptr = (u32 *)ptr;
 
-    for (uint16_t i = 0; i < num; i++)
-        u8Ptr[i] = (uint8_t)value;
+    for (u32 i = 0; i < num; i++)
+        u32Ptr[i] = (u32)value;
 
     return ptr;
 }

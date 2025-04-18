@@ -17,15 +17,11 @@ void pit_init(uint32_t frequency) {
     outb(PIT_CHANNEL0, (uint8_t)(divisor & 0xFF));        // Low byte
     outb(PIT_CHANNEL0, (uint8_t)((divisor >> 8) & 0xFF)); // High byte
 }
-volatile uint32_t ticks = 0;
 
-void timer() {
-    ticks++;
-}
 
-void sleep(uint32_t milliseconds) {
-    uint32_t end_ticks = ticks + (milliseconds * PIT_FREQUENCY / 1000);
-    while (ticks < end_ticks) {
-        asm volatile("hlt");
-    }
-}
+// void sleep(uint32_t milliseconds) {
+//     uint32_t end_ticks = ticks + (milliseconds * PIT_FREQUENCY / 1000);
+//     while (ticks < end_ticks) {
+//         asm volatile("hlt");
+//     }
+// }

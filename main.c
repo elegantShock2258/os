@@ -3,27 +3,16 @@
 #include "arch/i686/hal/io/printf.h"
 #include "arch/i686/hal/io/stdio.c"
 #include "arch/i686/hal/memory/kheap/kheap.c"
+#include "drivers/vbe/graphics/window/window.h"
 #include "drivers/vbe/vbe.c"
 #include "utils/kernel_utils.c"
 
 void main(void) {
-
   terminal_color = vga_entry_color(WHITE, BLACK);
-
-  int *arr = kmalloc(sizeof(int) * 10);
-  for (int i = 0; i < 10; i++) {
-    arr[i] = i;
-  }
-  for (int i = 0; i < 10; i++) {
-    printf(" %d: %d ", i, arr[i]);
-  }
-  printf("\n");
-  kfree(arr);
-  for (int i = 0; i < 10; i++) {
-    printf(" %d: %d ", i, arr[i]);
-  }
-
-  // VbeDriver.renderLoop();
+  // int* arr = kmalloc(sizeof(u32)*1080*1920);
+  // printBitmap();
+ 
+  VbeDriver.renderLoop();
   for (;;)
     asm("hlt");
 }

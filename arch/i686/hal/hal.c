@@ -10,14 +10,12 @@
 #include "io/serial.c"
 #include "paging/paging.c"
 
-
 void hal_init() {
-  TermInit();             // for term init
+  TermInit(); // for term init
   gdt_init(); // for gdt init
-  idt_init();             // for idt init
-  isr_init();             // for isr init
+  idt_init(); // for idt init
+  isr_init(); // for isr init
   irq_init();
-  
 
   for (size_t i = 0; i < VGA_WIDTH; i++)
     printf("-");
