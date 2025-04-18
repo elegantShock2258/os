@@ -147,12 +147,3 @@ void *kfree(void *pointer) {
   // memset as clear???
   memset(pointer, 0, BLOCKSIZE * blocks);
 }
-
-void *kmalloc_page() {
-  if (heap_start & 0xFFFFF000) { // not alligned
-                                 // Align the placement address;
-    heap_start &= 0xFFFFF000;
-    heap_start += 0x1000;
-  }
-  return kmalloc(0x1000);
-}
