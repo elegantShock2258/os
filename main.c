@@ -11,16 +11,19 @@
 void main(void) {
   terminal_color = vga_entry_color(WHITE, BLACK);
   // VbeDriver.renderLoop();
-  int src[10], dst[10];
-  for (int i = 0; i < 10; i++) {
-    src[i] = i;
-  }
+  int *arr = kmalloc(sizeof(int) * 10);
   bool res = true;
-  memcpy(src, dst, 10);
-  for (int i = 0; i < 10; i++)
-    res = res && (src[i] == dst[i]);
-  assert(res, "memcpy working properly");
-  printf("%d", res);
+  for (int i = 0; i < 10; i++) {
+    arr[i] = i;
+    res &= arr[i] == i;
+  }
+  kfree(arr);
+  for (int i = 0; i < 10; i++) {
+    res &= arr[i] == 0;
+  }
+  assert(res, "kfree and kmalloc are working properly");
+  printf("done");
+  killQemu();
   for (;;)
     asm("hlt");
 }
