@@ -44,4 +44,5 @@ cp "$PROJECT_ROOT/grub.cfg" ./boot/grub/grub.cfg
 grub-mkrescue -o myos.iso .
 
 # Run the image in QEMU
-qemu-system-i386 -cdrom myos.iso -vga std -serial file:out -device isa-debug-exit 
+qemu-system-i386 -cdrom myos.iso -vga std -serial tcp:localhost:4444 -device isa-debug-exit 
+
