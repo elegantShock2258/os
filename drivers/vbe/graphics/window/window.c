@@ -66,13 +66,13 @@ void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   WindowRoot.right = NULL;
   WindowRoot.height = &(ws->zIndex);
   while (1) {
-  // traverse the window tree
+    // traverse the window tree
 
-  // _VBE_fillScreen(COLOR(255, 0, 255));
-  inOrderOperation(&WindowRoot, bf, &w, &h);
-  _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
+    // _VBE_fillScreen(COLOR(255, 0, 255));
+    inOrderOperation(&WindowRoot, bf, &w, &h);
+    _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
 
-  memcpy(fb, bf, h * w);
-  sleep(100); // somehow gui doesnt update without this
+    memcpy(fb, bf, h * w);
+    sleep(1); // somehow gui doesnt update without this
   }
 }

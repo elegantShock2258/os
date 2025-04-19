@@ -37,6 +37,7 @@ void irq_init() {
   }
 
   // enable interrupts
-  asm("sti");
   IRQ_RegisterHandler(0, timer);
+  pit_init(1000);
+  asm("sti");
 }
