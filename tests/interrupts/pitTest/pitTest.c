@@ -7,7 +7,6 @@
 #include "../../../drivers/vbe/vbe.c"
 #include "../../../utils/kernel_utils.c"
 #include "../../testing.c"
-#include <cassert>
 
 void main(void) {
 

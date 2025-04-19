@@ -68,10 +68,10 @@ void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   WindowRoot.right = NULL;
   WindowRoot.height = &(ws->zIndex);
 
-  Window s = {0, 0, 192, 108, 1, NULL};
+  // Window s = {0, 0, 192, 108, 1, NULL};
 
-  s.windowFb = kmalloc(s.width * s.height * sizeof(u32));
-  s.windowFb[0] = COLOR(255, 255, 0);
+  // s.windowFb = kmalloc(s.width * s.height * sizeof(u32));
+  // s.windowFb[0] = COLOR(255, 255, 0);
   // for (u32 i = 0; i < s.width * s.height; i++) {
   //   s.windowFb[i] = COLOR(255, 255, 0);
   // }

@@ -10,6 +10,7 @@
 
 void main(void) {
   VbeDriver.renderLoop();
+
   for (;;)
     asm("hlt");
 }
