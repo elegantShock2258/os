@@ -16,8 +16,11 @@ type LogEntry =
       char: number;
       scancode: number;
       modifiers?: SpecialKeys;
+    }
+  | {
+      type: "kmalloc";
+      bitmap: string;
     };
-
 // export function parseLogEntries(buffer: Uint8Array): LogEntry[] {
 //   const entries: LogEntry[] = [];
 
@@ -190,6 +193,14 @@ export function parseLogEntries(buffer: string): LogEntry | undefined {
       type: "keyboard",
       scancode: parseInt(scancodeStr, 10),
       char: parseInt(charStr, 10),
+    };
+  }
+
+  if (rest.startsWith("[KMALLOC]:")) {
+    const bitmap = rest.slice("[KMALLOC]:".length).trim();
+    return {
+      type: "kmalloc",
+      bitmap,
     };
   }
 
