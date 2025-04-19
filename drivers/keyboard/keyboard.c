@@ -4,8 +4,8 @@
 
 #include "./keyboard.h"
 
-#include "../../tests/testing.c"
 #include "../../drivers/vbe/vbe.c"
+#include "../../tests/testing.c"
 
 KeyboardDriverState KeyboardDriver;
 CircularBuffer _Keyoard_CircularBuffer;
@@ -231,7 +231,9 @@ void _Keyboard(Registers *regs) {
   unsigned char scancode = _Keyboard_read_scan_code();
   unsigned char code = _Keyboard_scan_code_to_ascii(scancode);
   printf("KEYBOARD: %c %d\n", code, scancode);
-
+  if (code == 'a') {
+  
+  }
   // TODO: update special keys whenever the keys are pressed.
   // TODO: do holding keys and all.
   if (scancode == 0xE0) {

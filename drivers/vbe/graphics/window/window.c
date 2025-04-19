@@ -1,6 +1,6 @@
 #include "./window.h"
 // #include "../../../../meta/framebuffer/images/a.c"
-
+#include "../../../../tests/testing.c"
 void renderWindow(Window *window, u32 *bf, u32 w, u32 h) {
   u32 *t = window->windowFb;
 
@@ -32,6 +32,8 @@ void renderWindow(Window *window, u32 *bf, u32 w, u32 h) {
 void inOrderOperation(Node *root, u32 *bf, u32 *w, u32 *h) {
   if (root != NULL) {
     inOrderOperation(root->left, bf, w, h);
+    Window *d = (Window *)root->key;
+    logf("rendering: %d, %d", *w, *h);
     renderWindow(root->key, bf, *w, *h);
     inOrderOperation(root->right, bf, w, h);
   }
@@ -65,6 +67,18 @@ void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   WindowRoot.left = NULL;
   WindowRoot.right = NULL;
   WindowRoot.height = &(ws->zIndex);
+
+  Window s = {0, 0, 192, 108, 1, NULL};
+
+  s.windowFb = kmalloc(s.width * s.height * sizeof(u32));
+  s.windowFb[0] = COLOR(255, 255, 0);
+  // for (u32 i = 0; i < s.width * s.height; i++) {
+  //   s.windowFb[i] = COLOR(255, 255, 0);
+  // }
+  
+  logf("COLOR ASSIGMNENT DONE");
+  // Node win = {&s,NULL,NULL,&(s.zIndex)};
+  // insert(&WindowRoot, &win, win.height);
   while (1) {
     // traverse the window tree
 

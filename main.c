@@ -9,7 +9,6 @@
 #include "utils/kernel_utils.c"
 
 void main(void) {
-
   VbeDriver.renderLoop();
   for (;;)
     asm("hlt");
