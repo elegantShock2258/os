@@ -73,6 +73,6 @@ void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
 
   memcpy(fb, bf, h * w);
-  sleep(100); // somehow gui doesnt update without this
+  sleep(1); // somehow gui doesnt update without this
   }
 }

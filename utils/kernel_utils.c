@@ -1,6 +1,8 @@
 #pragma once
 #include "./kernel_utils.h"
 #include "../arch/i686/hal/io/printf.c"
+#include "../tests/testing.c"
+
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -67,4 +69,18 @@ void printBinary(u32 n) {
     printf("%d", getNthBit(n, i));
   }
   printf("\n");
+}
+void logBinary(u32 n) {
+  bool one = 0;
+  for (int i = 30; i >= 0; i--) {
+    int bit = getNthBit(n, i);
+    if (bit && !one) {
+      outputQemuMessage(bit ? "1" : "0");
+      one = true;
+    } else if (!bit) {
+      one = false;
+    }
+    outputQemuMessage(getNthBit(n, i) ? "1" : "0");
+  }
+  outputQemuMessage("\n");
 }

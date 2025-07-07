@@ -3,6 +3,7 @@
 #include "../arch/i686/hal/io/printf.c"
 #include "../arch/i686/hal/io/serial.c"
 #include "../arch/i686/hal/interrupts/pit/pit.c"
+#include "../arch/i686/hal/memory/kheap/kheap.c"
 #include "../drivers/keyboard/keyboard.c"
 #include "../utils/kernel_utils.c"
 #define test
@@ -48,6 +49,13 @@ void logKeys(KeyboardDriverState* driver, int scancode, int code){
 
   outputQemuMessage("|");
 }
+
+void logfBitMap(){
+  outputQemuMessage("|[LOG]: [KMALLOC]: ");
+  logBitmap();
+  outputQemuMessage("|");
+}
+
 void printFramebuffer(u32* fb, int h,int w, char* title){
   logf("[FB]: %s: %dx%d\n",title,h,w);
   for(int i = 0;i<h*w;i++){
