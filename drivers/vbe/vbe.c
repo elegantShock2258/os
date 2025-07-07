@@ -154,7 +154,6 @@ void _VBE_renderLoop() {
   // DONT re-render every loop?
   // only update dirty pixels
 
-  // _VBE_render();
   // for (int i = 0; i < 1080; i++) {
   //   for (int j = 0; j < 1920; j++)
   //     VbeDriver.bf[i * 1920 + j] = COLOR(
