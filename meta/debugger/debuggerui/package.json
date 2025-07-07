@@ -6,13 +6,14 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "deno-server": "deno run --allow-net src/app/server/websocket.ts",
+    "deno-server": "deno run --allow-env --env-file=.env --allow-net src/app/server/websocket.ts",
     "lint": "next lint",
     "prepare": "husky"
   },
   "dependencies": {
     "@prisma/client": "^5.14.0",
     "@radix-ui/react-hover-card": "^1.1.10",
+    "@radix-ui/react-toast": "^1.2.13",
     "@tanstack/react-query": "^5.40.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
