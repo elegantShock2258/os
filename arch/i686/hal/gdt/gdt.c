@@ -1,6 +1,7 @@
 #pragma once
 #include "gdt.h"
 #include "../../../../utils/kernel_utils.c"
+#include "../interrupts/idt/idt.c"
 
 gdt_entry gdt_entries[7];
 
@@ -14,15 +15,16 @@ static void gdt_set_entry_info(u32 num, u32 base, u32 limit, u8 access,
 
   gdt_entries[num].access = access;
 
-  gdt_entries[num].granularity = gran;
+  gdt_entries[num].granularity = (gran & 0xF0) | ((limit >> 16) & 0x0F);
 }
 extern void reloadSegments();
 
 void gdt_init() {
-  asm("cli");
-  gdt_ptr gdtPtr;
-  gdtPtr.limit = (sizeof(gdt_entry) * 3) - 1;
-  gdtPtr.base = &gdt_entries[0];
+  disableInterrupts();
+
+  static gdtr gdtPtr;
+  gdtPtr.limit = (sizeof(gdt_entry) * 6) - 1;
+  gdtPtr.base = (u32)&gdt_entries[0];
 
   gdt_set_entry_info(0, 0, 0, 0, 0); // Null segment
   kernel_log("GDT: Create NULL Segment: (%o,%o,%o,%o,%o)\n", 0, 0, 0, 0, 0);

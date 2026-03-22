@@ -11,14 +11,14 @@ typedef struct {
   int size;
 } _CircularBuffer;
 
-typedef struct  CircularBuffer {
+typedef struct CircularBuffer {
   bool (*isEmpty)(const struct CircularBuffer *cb);
   bool (*isFull)(const struct CircularBuffer *cb);
-  void (*enqueue)(struct CircularBuffer *cb, uint8_t value);
-  bool (*dequeue)(struct CircularBuffer *cb, uint8_t *value);
+  void (*enqueue)(struct CircularBuffer *cb, _CB_TYPE *value);
+  _CB_TYPE (*dequeue)(struct CircularBuffer *cb, _CB_TYPE *value);
   void (*Constructor)();
 
-  _CB_TYPE (*top)(const struct CircularBuffer *cb);
+  _CB_TYPE (*top)(struct CircularBuffer *cb);
 
   _CircularBuffer *_cb; // for internal use only
 } CircularBuffer;
