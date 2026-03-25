@@ -23,8 +23,8 @@ void idt_set_descriptor(u8 interrupt, void (*base)(), u8 flags) {
 }
 
 void idt_init() {
-  idtr.base = &idt[0];
-  idtr.limit = (u16)sizeof(IDTEntry) * (256 - 1);
+  idtr.base = (u32)&idt[0];
+  idtr.limit = (u16)(sizeof(IDTEntry) * 256 - 1);
 
   __asm__ volatile("lidt %0" : : "m"(idtr)); // load the new IDT
   // kernel_log("IDT: done\n");

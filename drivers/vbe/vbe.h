@@ -3,7 +3,7 @@
 
 #include "../../arch/i686/hal/hal.h"
 #include "../../arch/i686/hal/interrupts/pit/pit.c"
-#include "../../arch/i686/hal/io/printf.c"
+// #include "../../arch/i686/hal/io/printf.c"
 #include "../../arch/i686/hal/memory/kheap/kheap.c"
 #include "../../arch/i686/hal/memory/memory.c"
 #include "../../arch/i686/hal/paging/paging.c"
@@ -11,15 +11,13 @@
 #include "../../utils/kernel_utils.c"
 #include "../keyboard/keyboard.c"
 #include "../mouse/mouse.c"
-#include "../../multiboot.h"
 #include "./graphics/colors/colors.c"
+void _VBE_putcursor(int x, int y); // forward declaration for window.c
 #include "./graphics/window/window.c"
-
 
 #define CURSOR_WIDTH 30
 #define CURSOR_HEIGHT 30
 #define CURSOR_COLOR COLOR(255, 255, 255)
-
 
 typedef struct {
   char VbeSignature[4];
@@ -67,33 +65,31 @@ typedef struct {
   uint8_t reserved1[206];
 } vbe_mode_info_structure __attribute__((packed));
 
-
-
 typedef struct svga_mode_info {
-	uint16_t attributes;
-	uint8_t windowA, windowB;
-	uint16_t granularity;
-	uint16_t windowSize;
-	uint16_t segmentA, segmentB;
-	uint32_t winFuncPtr; // ptr to INT 0x10 Function 0x4F05
-	uint16_t pitch; // bytes per scan line
+  uint16_t attributes;
+  uint8_t windowA, windowB;
+  uint16_t granularity;
+  uint16_t windowSize;
+  uint16_t segmentA, segmentB;
+  uint32_t winFuncPtr; // ptr to INT 0x10 Function 0x4F05
+  uint16_t pitch;      // bytes per scan line
 
-	uint16_t screen_width, screen_height; // resolution
-	uint8_t wChar, yChar, planes, bpp, banks; // number of banks
-	uint8_t memoryModel, bankSize, imagePages;
-	uint8_t reserved0;
+  uint16_t screen_width, screen_height;     // resolution
+  uint8_t wChar, yChar, planes, bpp, banks; // number of banks
+  uint8_t memoryModel, bankSize, imagePages;
+  uint8_t reserved0;
 
-	// color masks
-	uint8_t readMask, redPosition;
-	uint8_t greenMask, greenPosition; 
-	uint8_t blueMask, bluePosition;
-	uint8_t reservedMask, reservedPosition;
-	uint8_t directColorAttributes;
+  // color masks
+  uint8_t readMask, redPosition;
+  uint8_t greenMask, greenPosition;
+  uint8_t blueMask, bluePosition;
+  uint8_t reservedMask, reservedPosition;
+  uint8_t directColorAttributes;
 
-	uint32_t physbase; //pointer to LFB in LFB modes 
-	uint32_t offScreenMemOff;
-	uint16_t offScreenMemSize;
-	uint8_t reserved1[206];
+  uint32_t physbase; // pointer to LFB in LFB modes
+  uint32_t offScreenMemOff;
+  uint16_t offScreenMemSize;
+  uint8_t reserved1[206];
 } __attribute__((packed)) svga_mode_info_t;
 
 typedef struct {
@@ -118,4 +114,3 @@ typedef struct {
   void (*renderLoop)();
   void (*Constructor)(int ebx);
 } VbeDriverState;
-

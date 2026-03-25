@@ -21,14 +21,11 @@ struct gdt_entry {
   u8 access;
   u8 granularity; // this includes the flags and limits in the pic
   u8 base_high;
-} ;
+} __attribute__((packed));
 typedef struct gdt_entry gdt_entry;
 
-struct gdt_ptr {
-  u16 limit;       // start address
-  gdt_entry *base; // size
-} __attribute__((packed));
-typedef struct gdt_ptr gdt_ptr;
+// Use the gdtr struct above (u16 limit + u32 base) for lgdt.
+// The old gdt_ptr with a pointer-typed base was removed.
 
 
 

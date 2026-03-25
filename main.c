@@ -9,8 +9,21 @@
 #include "utils/kernel_utils.c"
 
 void main(void) {
+  // terminal_color = vga_entry_color(WHITE, BLACK);
   VbeDriver.renderLoop();
-
+  // int *arr = kmalloc(sizeof(int) * 10);
+  // bool res = true;
+  // for (int i = 0; i < 10; i++) {
+  //   arr[i] = i;
+  //   res &= arr[i] == i;
+  // }
+  // kfree(arr);
+  // for (int i = 0; i < 10; i++) {
+  //   res &= arr[i] == 0;
+  // }
+  // assert(res, "kfree and kmalloc are working properly");
+  // printf("done");
+  // killQemu();
   for (;;)
     asm("hlt");
 }

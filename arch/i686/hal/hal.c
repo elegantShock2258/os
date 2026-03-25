@@ -17,6 +17,7 @@ void hal_init() {
   isr_init(); // for isr init
   irq_init(); // ------------------------------------------ ENABLE INTERRUPTS
 
+  asm("sti");
   for (size_t i = 0; i < VGA_WIDTH; i++)
     printf("-");
   printf("\n\n");

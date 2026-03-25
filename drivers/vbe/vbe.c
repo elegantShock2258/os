@@ -1,11 +1,10 @@
 #pragma once
 #include "vbe.h"
-#include "../../arch/i686/hal/io/stdio.c"
-#include "../../tests/testing.c"
 #include "graphics/colors/colors.h"
 #include "graphics/window/window.h"
 
 int _VBE_renderGUI = 1;
+#include "../../tests/testing.c"
 
 VbeDriverState VbeDriver;
 
