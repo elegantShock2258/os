@@ -1,5 +1,6 @@
 CompileFlags:
   Add:
+    - "-xc"
     - "-target"
     - "i686-pc-none-elf"
     - "-m32"
