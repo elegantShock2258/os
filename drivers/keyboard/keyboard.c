@@ -4,6 +4,8 @@
 
 #include "./keyboard.h"
 
+#include "./keyboard.h"
+
 #include "../../drivers/vbe/vbe.c"
 #include "../../tests/testing.c"
 

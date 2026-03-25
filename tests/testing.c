@@ -1,9 +1,8 @@
 #pragma once
 
+#include "../arch/i686/hal/interrupts/pit/pit.c"
 #include "../arch/i686/hal/io/printf.c"
 #include "../arch/i686/hal/io/serial.c"
-#include "../arch/i686/hal/interrupts/pit/pit.c"
-#include "../drivers/keyboard/keyboard.c"
 #include "../utils/kernel_utils.c"
 #define test
 
@@ -24,7 +23,7 @@ void logf(char *str, ...) {
   sleep(80);
   va_end(va);
 }
-// only use this during irq handlers or drivers like keyboard mouse or vesa 
+// only use this during irq handlers or drivers like keyboard mouse or vesa
 void logfInterrupt(char *str, ...) {
   va_list va;
   va_start(va, str);
@@ -42,15 +41,15 @@ void cleanLogf(char *str, ...) {
   outputQemuMessage(buffer);
   va_end(va);
 }
-void logKeys(KeyboardDriverState* driver, int scancode, int code){
+void logKeys(KeyboardDriverState *driver, int scancode, int code) {
   outputQemuMessage("|[LOG]: [KEYBOARD]: ");
-  cleanLogf("%d %d", scancode,code);
+  cleanLogf("%d %d", scancode, code);
 
   outputQemuMessage("|");
 }
-void printFramebuffer(u32* fb, int h,int w, char* title){
-  logf("[FB]: %s: %dx%d\n",title,h,w);
-  for(int i = 0;i<h*w;i++){
+void printFramebuffer(u32 *fb, int h, int w, char *title) {
+  logf("[FB]: %s: %dx%d\n", title, h, w);
+  for (int i = 0; i < h * w; i++) {
     u8 a = fb[i] & (0x000000ff);
     u8 b = fb[i] & (0x0000ff00);
     u8 c = fb[i] & (0x00ff0000);
