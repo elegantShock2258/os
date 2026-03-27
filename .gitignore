@@ -34,3 +34,6 @@ docker-compose.yml
 
 .husky
 .next
+
+.idea
+.fleet

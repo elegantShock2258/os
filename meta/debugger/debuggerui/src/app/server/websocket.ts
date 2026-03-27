@@ -1,28 +1,41 @@
 // deno run --allow-net serialProxy.ts
 
-const TCP_PORT = 4444;
-const WS_PORT = 8080;
+import {
+  CheckEnv,
+  DENO_WEB_SERVER_HOST,
+  DENO_WEB_SERVER_PORT,
+  QEMU_HOST,
+  QEMU_PORT,
+} from "./consts.ts";
 
+CheckEnv();
 const clients = new Set<WebSocket>();
 
-// Start WebSocket server
-Deno.serve({ port: WS_PORT }, async (req) => {
-  const { socket, response } = Deno.upgradeWebSocket(req);
-  socket.onopen = () => {
-    console.log("[WS] Client connected");
-    clients.add(socket);
-  };
-  socket.onclose = () => {
-    console.log("[WS] Client disconnected");
-    clients.delete(socket);
-  };
-  return response;
-});
+// Start WebSocket server to connect to frontend
+Deno.serve(
+  { port: DENO_WEB_SERVER_PORT, host: DENO_WEB_SERVER_HOST },
+  async (req) => {
+    const { socket, response } = Deno.upgradeWebSocket(req);
+    socket.onopen = () => {
+      console.log("[WS] Client connected");
+      clients.add(socket);
+    };
+    socket.onclose = () => {
+      console.log("[WS] Client disconnected");
+      clients.delete(socket);
+    };
+    return response;
+  },
+);
 
-// Start TCP server
-const listener = Deno.listen({ port: TCP_PORT });
-console.log(`✅ TCP server listening on port ${TCP_PORT}`);
-console.log(`✅ WebSocket server listening on ws://localhost:${WS_PORT}`);
+// Start TCP server to isten to qemu
+const listener = Deno.listen({ port: QEMU_PORT, host: QEMU_HOST });
+console.log(
+  `✅ TCP server listening on port https://${QEMU_HOST}:${QEMU_PORT}`,
+);
+console.log(
+  `✅ WebSocket server listening on ws://${DENO_WEB_SERVER_HOST}:${DENO_WEB_SERVER_PORT}`,
+);
 
 for await (const conn of listener) {
   console.log("[TCP] QEMU connected");

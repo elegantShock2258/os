@@ -236,6 +236,7 @@ void _Keyboard(Registers *regs) {
 
   // TODO: update special keys whenever the keys are pressed.
   // TODO: do holding keys and all.
+
   if (scancode == 0xE0) {
     extended = true;
     return;

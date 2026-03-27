@@ -65,3 +65,18 @@ void printBinary(u32 n) {
   }
   printf("\n");
 }
+extern void outputQemuMessage(char *f);
+void logBinary(u32 n) {
+  bool one = 0;
+  for (int i = 30; i >= 0; i--) {
+    int bit = getNthBit(n, i);
+    if (bit && !one) {
+      outputQemuMessage(bit ? "1" : "0");
+      one = true;
+    } else if (!bit) {
+      one = false;
+    }
+    outputQemuMessage(getNthBit(n, i) ? "1" : "0");
+  }
+  outputQemuMessage("\n");
+}
