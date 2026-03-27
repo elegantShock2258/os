@@ -1,12 +1,7 @@
 #pragma once
 #include "./kernel_utils.h"
 #include "../arch/i686/hal/io/printf.c"
-#include "../tests/testing.c"
-
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
-
+#include "types.h"
 int abs(int y) {
   if (y >= 0)
     return y;
@@ -70,6 +65,7 @@ void printBinary(u32 n) {
   }
   printf("\n");
 }
+extern void outputQemuMessage(char *f);
 void logBinary(u32 n) {
   bool one = 0;
   for (int i = 30; i >= 0; i--) {

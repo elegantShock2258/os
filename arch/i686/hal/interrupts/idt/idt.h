@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 #include "../../../../../utils/kernel_utils.h"
 #include "../../io/printf.h"
 
@@ -8,14 +8,12 @@ typedef struct {
   u8 Reserved;
   u8 Flags;
   u16 BaseHigh;
-}  IDTEntry;
+} IDTEntry;
 
 typedef struct {
   u16 limit;
-  IDTEntry *base;
+  u32 base;
 } __attribute__((packed)) idtr_t;
-
-
 
 #define IDT_FLAG_GATE_TASK 0x5
 #define IDT_FLAG_GATE_16BIT_INT 0x6
@@ -30,8 +28,7 @@ typedef struct {
 
 #define IDT_FLAG_PRESENT 0x80
 
-
-void IDT_EnableGate(int interrupt) ;
+void IDT_EnableGate(int interrupt);
 
 void IDT_DisableGate(int interrupt);
 

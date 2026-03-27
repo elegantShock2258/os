@@ -2,9 +2,11 @@
 #include "irq.h"
 
 #include "../../io/printf.c"
+#include "../idt/idt.c"
 #include "../isr/isr.c"
 #include "../pic/pic.c"
 #include "../pit/pit.c"
+
 #define PIC_REMAP_OFFSET 0x20
 
 IRQHandler g_IRQHandlers[16];
@@ -37,6 +39,6 @@ void irq_init() {
   }
 
   // enable interrupts
-  asm("sti");
   IRQ_RegisterHandler(0, timer);
+  pit_init(1000); // 1000 Hz = 1 tick per millisecond
 }

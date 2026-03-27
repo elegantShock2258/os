@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../arch/i686/hal/interrupts/isr/isr.c"
+#include "../../arch/i686/hal/interrupts/irq/irq.c"
 #include "../../arch/i686/hal/io/serial.c"
 #include "../../utils/kernel_utils.c"
 

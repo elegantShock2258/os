@@ -1,0 +1,12 @@
+CompileFlags:
+  Add:
+    - "-xc"
+    - "-target"
+    - "i686-pc-none-elf"
+    - "-m32"
+    - "-ffreestanding"
+    - "-nostdlib"
+    - "-fno-builtin"
+    - "-std=gnu99"
+    - "-Wall"
+    - "-Wextra"

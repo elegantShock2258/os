@@ -43,7 +43,6 @@ int _AVL_comparitor(void *a, void *b) {
 
   return wa->height - wb->height;
 }
-
 Node WindowRoot; // idk why but using a Node* doesnt sit well with it
 void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   // create first window, ill put one window will w-full h-full and bg-red
@@ -66,13 +65,11 @@ void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   WindowRoot.right = NULL;
   WindowRoot.height = &(ws->zIndex);
   while (1) {
-  // traverse the window tree
+    // traverse the window tree
+    inOrderOperation(&WindowRoot, bf, &w, &h);
+    _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
 
-  // _VBE_fillScreen(COLOR(255, 0, 255));
-  inOrderOperation(&WindowRoot, bf, &w, &h);
-  _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
-
-  memcpy(fb, bf, h * w);
-  sleep(1); // somehow gui doesnt update without this
+    memcpy(fb, bf, h * w);
+    sleep(10); // somehow gui doesnt update without this
   }
 }

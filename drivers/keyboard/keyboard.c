@@ -4,8 +4,10 @@
 
 #include "./keyboard.h"
 
-#include "../../tests/testing.c"
+#include "./keyboard.h"
+
 #include "../../drivers/vbe/vbe.c"
+#include "../../tests/testing.c"
 
 KeyboardDriverState KeyboardDriver;
 CircularBuffer _Keyoard_CircularBuffer;
@@ -222,7 +224,7 @@ unsigned char _Keyboard_get_char() {
   } else {
     unsigned char t = _top;
     KeyboardDriver.keyboard_buffer.dequeue(&KeyboardDriver.keyboard_buffer,
-                                           &_top);
+                                           (_CB_TYPE *)&_top);
     return t;
   }
 }
@@ -234,11 +236,7 @@ void _Keyboard(Registers *regs) {
 
   // TODO: update special keys whenever the keys are pressed.
   // TODO: do holding keys and all.
-  
-  if(code == 'a'){
-    logfBitMap();
-  }
-  
+
   if (scancode == 0xE0) {
     extended = true;
     return;
@@ -254,17 +252,18 @@ void _Keyboard(Registers *regs) {
       // key is pressed
       _Keyboard_Release_map[scancode] = true;
       KeyboardDriver.keyboard_buffer.enqueue(&KeyboardDriver.keyboard_buffer,
-                                             scancode);
+                                             (_CB_TYPE *)&scancode);
       KeyboardDriver.keyboard_irq_handled = 1;
     }
   }
   _Keyboard_update_special_keys(scancode, released, extended);
 
-  KeyboardDriver.keyboard_buffer.enqueue(&KeyboardDriver.keyboard_buffer, code);
+  KeyboardDriver.keyboard_buffer.enqueue(&KeyboardDriver.keyboard_buffer,
+                                         (_CB_TYPE *)&code);
   KeyboardDriver.keyboard_irq_handled = 1;
 
-  // logfInterrupt("[KEYBOARD]: %d %d", scancode,code);
-  // logKeys(&KeyboardDriver, scancode,code);
+  logfInterrupt("[KEYBOARD]: %d %d", scancode, code);
+  logKeys(&KeyboardDriver, scancode, code);
   extended = false;
 
   // asm("mov $0x42, %edx");
