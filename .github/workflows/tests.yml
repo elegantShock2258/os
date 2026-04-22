@@ -2,7 +2,7 @@ name: OS Tests
 
 on:
   push:
-    branches: [master, main, debug, newTests]
+    branches: [master, main, debug, newTests, NewTests]
   pull_request:
     branches: [master, main]
 
@@ -14,12 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install cross-compiler and tools
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            gcc-i686-linux-gnu \
-            binutils-i686-linux-gnu \
             nasm \
             grub-pc-bin \
             grub-common \
@@ -27,23 +25,61 @@ jobs:
             mtools \
             qemu-system-x86 \
             python3 \
-            python3-pip
+            python3-pip \
+            build-essential \
+            bison \
+            flex \
+            libgmp3-dev \
+            libmpc-dev \
+            libmpfr-dev \
+            texinfo
           pip3 install termcolor
 
-      - name: Install i686-elf cross-compiler
+      - name: Cache i686-elf toolchain
+        id: cache-toolchain
+        uses: actions/cache@v4
+        with:
+          path: /opt/cross
+          key: i686-elf-toolchain-13.2.0
+
+      - name: Build i686-elf cross-compiler
+        if: steps.cache-toolchain.outputs.cache-hit != 'true'
         run: |
-          # Download pre-built i686-elf toolchain
-          wget -q https://github.com/lordmilko/i686-elf-tools/releases/latest/download/i686-elf-tools-linux.zip
-          unzip -q i686-elf-tools-linux.zip -d /tmp/i686-elf
-          sudo cp /tmp/i686-elf/bin/* /usr/local/bin/
-          # Verify
+          export PREFIX="/opt/cross"
+          export TARGET=i686-elf
+          export PATH="$PREFIX/bin:$PATH"
+          mkdir -p /tmp/src && cd /tmp/src
+
+          # Build binutils
+          wget -q https://ftp.gnu.org/gnu/binutils/binutils-2.41.tar.xz
+          tar xf binutils-2.41.tar.xz
+          mkdir build-binutils && cd build-binutils
+          ../binutils-2.41/configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror
+          make -j$(nproc)
+          make install
+          cd ..
+
+          # Build GCC
+          wget -q https://ftp.gnu.org/gnu/gcc/gcc-13.2.0/gcc-13.2.0.tar.xz
+          tar xf gcc-13.2.0.tar.xz
+          mkdir build-gcc && cd build-gcc
+          ../gcc-13.2.0/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c --without-headers
+          make -j$(nproc) all-gcc
+          make -j$(nproc) all-target-libgcc
+          make install-gcc
+          make install-target-libgcc
+
+      - name: Add toolchain to PATH
+        run: echo "/opt/cross/bin" >> $GITHUB_PATH
+
+      - name: Verify toolchain
+        run: |
           i686-elf-gcc --version
           i686-elf-as --version
 
       - name: Run tests
-        run: |
-          python3 tests/test.py
-        timeout-minutes: 15
+        run: python3 tests/test.py
+        timeout-minutes: 20
 
       - name: Upload serial output
         if: always()

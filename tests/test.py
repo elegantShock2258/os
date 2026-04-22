@@ -9,7 +9,13 @@ import re  # For removing |...| wrapped strings
 GRUB_CFG = "grub.cfg"
 BOOT_DIR = Path("build/output/boot")
 PROJECT_ROOT = Path("../..")
-COMPILATION_SCRIPT = Path("./scripts/qemu/runOs_qemu.sh")
+
+if os.environ.get("CI") or os.environ.get("HEADLESS"):
+    print(colored("Running in headless mode", "cyan"))
+    COMPILATION_SCRIPT = Path("./scripts/qemu/runOs_qemu_headless.sh")
+else:
+    COMPILATION_SCRIPT = Path("./scripts/qemu/runOs_qemu.sh")
+
 OUTPUT_FILE = Path("build/output/out")
 
 
