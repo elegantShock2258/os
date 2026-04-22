@@ -1,10 +1,6 @@
 #pragma once
 #include "kheap.h"
 #define BitMapSize 20
-// FIXME: for some rerason the allocator doesnt allocate the bitset from the
-// start of the column but in between some area?
-// col: 00000000000 assign: 1111
-// itll do 00011100000 instead of 111000000
 //  kernel_end is defined in the linker script.
 extern u32 kernel_end;
 u32 heap_start = (u32)&kernel_end;
@@ -56,14 +52,14 @@ void bitmap_init() {
 int getContigousBlocks(u32 block, int blocksRequired) {
 
   int count = 0;
-  for (int i = 31; i >= 0; i--) {
+  for (int i = 0; i < 32; i++) {
     if ((block & (1 << i)) == 0) {
       count++;
     } else {
       count = 0;
     }
     if (count == blocksRequired) {
-      return (31 - i);
+      return (i - blocksRequired + 1);
     }
   }
   return -1;
@@ -125,7 +121,6 @@ void *kmalloc(u32 size) {
   // add a integer to denote how many consecutive blocks are present for the ptr
   *(int *)address = blocksRequired;
 
-
   return (address + sizeof(int));
 }
 
@@ -146,4 +141,5 @@ void *kfree(void *pointer) {
     setNthBit(&BitMap[column].column, i, false);
   // memset as clear???
   memset(pointer, 0, BLOCKSIZE * blocks);
+  return NULL;
 }
