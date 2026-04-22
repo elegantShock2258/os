@@ -1,0 +1,22 @@
+PROJECT_NAME           = "OS"
+PROJECT_BRIEF          = "A custom freestanding monolithic 32-bit graphical OS kernel"
+OUTPUT_DIRECTORY       = docs_output
+INPUT                  = arch drivers kernel utils
+EXTENSION_MAPPING      = c=C++
+FILE_PATTERNS          = *.c *.h
+RECURSIVE              = YES
+OPTIMIZE_OUTPUT_FOR_C  = YES
+EXTRACT_ALL           = YES
+EXTRACT_PRIVATE       = YES
+EXTRACT_STATIC        = YES
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
+GENERATE_XML           = NO
+
+HAVE_DOT               = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+DOT_GRAPH_MAX_NODES    = 50
+MAX_DOT_GRAPH_DEPTH    = 3

@@ -31,12 +31,13 @@ mkdir -p "./boot/$OUTPUT_DIR"
 
 # Compile the boot code, kernel.c, and link them using the linker
 i686-elf-as $(find $PROJECT_ROOT -type f -name "*.S") -o boot.o
-i686-elf-gcc -c "$KERNEL_C" -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
-i686-elf-gcc -S "$KERNEL_C" -o kernel_asm.S -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+i686-elf-gcc -c "$KERNEL_C" -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra -Werror $EXTRA_CFLAGS
+i686-elf-gcc -S "$KERNEL_C" -o kernel_asm.S -std=gnu99 -ffreestanding -O2 -Wall -Wextra -Werror $EXTRA_CFLAGS
 i686-elf-gcc -T "$PROJECT_ROOT/linker.ld" -o temp.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc
 
 # Copy the binary to the appropriate location in /boot
 mv temp.bin "./boot/$OUTPUT_BIN"
+i686-elf-size "./boot/$OUTPUT_BIN"
 
 # Create GRUB image
 mkdir -p ./boot/grub
