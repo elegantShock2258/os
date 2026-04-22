@@ -2,7 +2,7 @@ name: OS Tests
 
 on:
   push:
-    branches: [master, main, debug, newTests, NewTests]
+    branches: [master, main, debug, NewTests]
   pull_request:
     branches: [master, main]
 
