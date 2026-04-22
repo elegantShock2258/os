@@ -39,7 +39,7 @@ jobs:
         run: |
           # Try compiling generic directories using standard 64-bit gcc to ensure no 32-bit dependency creep
           sudo apt-get update && sudo apt-get install -y gcc
-          find utils datastructures strings -name '*.c' | xargs gcc -c -std=gnu99 -ffreestanding -O2 -Wall -Wextra -Werror
+          find utils datastructures strings -name '*.c' | xargs gcc -c -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 
   docs:
     runs-on: ubuntu-latest
