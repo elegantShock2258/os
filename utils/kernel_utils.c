@@ -8,7 +8,9 @@ int abs(int y) {
   else
     return -y;
 }
-int max(int a, int b) { return a > b ? a : b; }
+int max(int a, int b) {
+  return a > b ? a : b;
+}
 int kernel_log(const char *fmt, ...) {
   int res = -1;
   va_list va;
@@ -19,7 +21,9 @@ int kernel_log(const char *fmt, ...) {
   return res;
 }
 
-bool getNthBit(u32 data, int n) { return (data & (1 << n)); }
+bool getNthBit(u32 data, int n) {
+  return (data & (1 << n));
+}
 
 void setNthBit(u32 *data, int n, bool value) {
   if (value) {

@@ -30,5 +30,9 @@ void idt_init() {
   // kernel_log("IDT: done\n");
 }
 
-void enableInterrupts() { asm("sti"); }
-void disableInterrupts() { asm("cli"); }
+void enableInterrupts() {
+  asm("sti");
+}
+void disableInterrupts() {
+  asm("cli");
+}
