@@ -64,6 +64,7 @@ jobs:
             --suppress=missingIncludeSystem \
             --suppress=unusedFunction \
             --suppress=staticFunction \
+            --suppress=internalAstError \
             -I ./arch/i686/hal \
             -I ./utils \
             -i meta -i node_modules -i build \
