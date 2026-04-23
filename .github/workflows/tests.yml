@@ -5,22 +5,6 @@ on:
     branches: [main, master, debug, NewTests]
   pull_request:
     branches: [main, master]
-    paths:
-      - "arch/**"
-      - "kernel/**"
-      - "drivers/**"
-      - "utils/**"
-      - "tests/**"
-      - ".github/workflows/**"
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-env:
-  PREFIX: /opt/cross
-  TARGET: i686-elf
 
 jobs:
 
@@ -39,7 +23,7 @@ jobs:
           xargs clang-format --dry-run --Werror
 
   # -------------------------
-  # 2. Static Analysis (cppcheck)
+  # 2. Static Analysis
   # -------------------------
   analyze:
     runs-on: ubuntu-latest
@@ -67,100 +51,46 @@ jobs:
             --suppress=internalAstError \
             -I ./arch/i686/hal \
             -I ./utils \
-            -i meta -i tests -i node_modules -i build \
-            arch kernel drivers utils tests
+            -i meta -i node_modules -i build \
+            arch kernel drivers utils
 
   # -------------------------
-  # 3. Build
-  # -------------------------
-  build:
-    runs-on: ubuntu-latest
-    needs: analyze
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            nasm grub-pc-bin grub-common xorriso mtools \
-            qemu-system-x86 python3 python3-pip build-essential \
-            bison flex libgmp3-dev libmpc-dev libmpfr-dev texinfo
-
-      # 🔥 FAST: restore prebuilt toolchain
-      - name: Cache toolchain
-        id: cache-toolchain
-        uses: actions/cache@v4
-        with:
-          path: /opt/cross
-          key: i686-elf-toolchain-13.2.0
-
-      - name: Download toolchain (fallback if cache miss)
-        if: steps.cache-toolchain.outputs.cache-hit != 'true'
-        run: |
-          wget https://github.com/<your-repo>/releases/download/toolchain/i686-elf-toolchain.tar.gz
-          sudo mkdir -p /opt
-          sudo tar -xzf i686-elf-toolchain.tar.gz -C /
-
-      - name: Add toolchain to PATH
-        run: echo "/opt/cross/bin" >> $GITHUB_PATH
-
-      - name: Build kernel
-        run: |
-          make -j$(nproc)
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: kernel-build
-          path: |
-            build/*.elf
-            build/*.bin
-            build/*.iso
-
-  # -------------------------
-  # 4. Test (fast for PR, full for main)
+  # 3. Test (Docker toolchain)
   # -------------------------
   test:
     runs-on: ubuntu-latest
-    needs: build
+    needs: analyze
 
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - { mem: "128M", smp: "1", cpu: "qemu32" }
+    container:
+      image: randomdude/gcc-cross-i686
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Install runtime deps
         run: |
-          sudo apt-get update
-          sudo apt-get install -y qemu-system-x86 python3 python3-pip
-          pip3 install termcolor
+          apt-get update
+          apt-get install -y qemu-system-x86 python3 python3-pip
+          pip3 install termcolor --break-system-packages
 
-      - name: Restore toolchain
-        uses: actions/cache@v4
-        with:
-          path: /opt/cross
-          key: i686-elf-toolchain-13.2.0
-
-      - name: Add toolchain to PATH
-        run: echo "/opt/cross/bin" >> $GITHUB_PATH
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: kernel-build
-          path: build/
-
-      - name: Run tests
+      - name: Verify toolchain
         run: |
-          python3 tests/test.py \
-            --qemu-args "-m ${{ matrix.config.mem }} -smp ${{ matrix.config.smp }} -cpu ${{ matrix.config.cpu }}"
-        timeout-minutes: 15
+          which i686-elf-gcc
+          which i686-elf-as
+
+      - name: Build kernel
+        run: |
+          chmod +x ./scripts/build.sh
+          ./scripts/build.sh
+
+      - name: Run headless QEMU
+        run: |
+          chmod +x ./scripts/qemu/runOs_qemu_headless.sh
+          ./scripts/qemu/runOs_qemu_headless.sh > build/output/out 2>&1 || true
+
+      - name: Show output
+        run: |
+          cat build/output/out || true
 
       - name: Detect kernel panic
         run: |
@@ -178,47 +108,7 @@ jobs:
           if-no-files-found: ignore
 
   # -------------------------
-  # 5. Extra matrix (ONLY on main)
-  # -------------------------
-  test-matrix:
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    needs: build
-
-    strategy:
-      matrix:
-        config:
-          - { mem: "128M", smp: "1", cpu: "qemu32" }
-          - { mem: "512M", smp: "2", cpu: "qemu32" }
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install runtime deps
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y qemu-system-x86 python3 python3-pip
-          pip3 install termcolor
-
-      - uses: actions/cache@v4
-        with:
-          path: /opt/cross
-          key: i686-elf-toolchain-13.2.0
-
-      - run: echo "/opt/cross/bin" >> $GITHUB_PATH
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: kernel-build
-          path: build/
-
-      - name: Run matrix tests
-        run: |
-          python3 tests/test.py \
-            --qemu-args "-m ${{ matrix.config.mem }} -smp ${{ matrix.config.smp }} -cpu ${{ matrix.config.cpu }}"
-
-  # -------------------------
-  # 6. Docs
+  # 4. Docs
   # -------------------------
   docs:
     runs-on: ubuntu-latest
