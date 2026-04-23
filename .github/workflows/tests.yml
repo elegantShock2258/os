@@ -146,15 +146,10 @@ jobs:
       # -------------------------
       # Run QEMU headless
       # -------------------------
-      - name: Run headless QEMU
+      - name: Run tests
         run: |
-          mkdir -p build/output
-          chmod +x ./scripts/qemu/runOs_qemu_headless.sh
-          ./scripts/qemu/runOs_qemu_headless.sh > build/output/out 2>&1 || true
-
-      - name: Show output
-        run: cat build/output/out || true
-
+          python3 tests/test.py
+      
       - name: Detect kernel panic
         run: |
           if grep -i "panic" build/output/out; then
