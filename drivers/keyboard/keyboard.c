@@ -4,6 +4,8 @@
 
 #include "./keyboard.h"
 
+#include "./keyboard.h"
+
 #include "../../drivers/vbe/vbe.c"
 #include "../../tests/testing.c"
 
@@ -208,7 +210,9 @@ static void _Keyboard_update_special_keys(uint8_t scancode, bool released,
   }
 }
 
-unsigned char _Keyboard_read_scan_code(void) { return inb(KEYBOARD_DATA_PORT); }
+unsigned char _Keyboard_read_scan_code(void) {
+  return inb(KEYBOARD_DATA_PORT);
+}
 
 unsigned char _Keyboard_scan_code_to_ascii(unsigned char scan_code) {
   return ascii[scan_code];

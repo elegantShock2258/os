@@ -27,8 +27,6 @@ typedef struct gdt_entry gdt_entry;
 // Use the gdtr struct above (u16 limit + u32 base) for lgdt.
 // The old gdt_ptr with a pointer-typed base was removed.
 
-
-
 /**
  * @brief Sets the information for a GDT entry.
  *
@@ -39,7 +37,7 @@ typedef struct gdt_entry gdt_entry;
  * @param gran The granularity of the segment.
  */
 static void gdt_set_entry_info(u32 num, u32 base, u32 limit, u8 access,
-                               u8 gran) ;
+                               u8 gran);
 
 // ill add these entries to the GDT
 // some null entry first too

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../arch/i686/hal/interrupts/isr/isr.c"
 #include "../../arch/i686/hal/interrupts/irq/irq.c"
+#include "../../arch/i686/hal/interrupts/isr/isr.c"
 #include "../../arch/i686/hal/io/serial.c"
 #include "../../utils/kernel_utils.c"
 
@@ -44,19 +44,17 @@ typedef struct {
 #define MOUSE_V_BIT 0x08
 
 typedef struct {
-    u8 mouse_cycle;
-    mouse_device_packet_t packet;
-    int mouse_x;
-    int mouse_y;
-    int8_t *mouse_byte;
-    mouse_byte_state_data mb;
-    
-    void (*mouse_wait)(u8 a_type);
-    void (*mouse_write)(u8 write);
-    u8 (*mouse_read)();
-    void (*mouse)(Registers *r);
-    void (*mouse_install)();
-    void (*Constructor)();
+  u8 mouse_cycle;
+  mouse_device_packet_t packet;
+  int mouse_x;
+  int mouse_y;
+  int8_t *mouse_byte;
+  mouse_byte_state_data mb;
+
+  void (*mouse_wait)(u8 a_type);
+  void (*mouse_write)(u8 write);
+  u8 (*mouse_read)();
+  void (*mouse)(Registers *r);
+  void (*mouse_install)();
+  void (*Constructor)();
 } MouseDriverState;
-
-

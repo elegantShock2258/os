@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "serial.c"
 #include "printf.h"
+#include "serial.c"
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -110,13 +110,13 @@ static inline uint8_t vga_entry_color(enum color fg, enum color bg) {
 static inline uint16_t vga_entry(unsigned char uc, uint8_t color) {
   return (uint16_t)uc | (uint16_t)color << 8;
 }
-int strcmp(const char *s1, const char *s2){
-  // compare two strings 
+int strcmp(const char *s1, const char *s2) {
+  // compare two strings
   while (*s1 && (*s1 == *s2)) {
     s1++;
     s2++;
   }
-  return *(const unsigned char*)s1 - *(const unsigned char*)s2;
+  return *(const unsigned char *)s1 - *(const unsigned char *)s2;
 }
 size_t strlen(const char *str) {
   size_t len = 0;
@@ -139,13 +139,17 @@ void TermInit(void) {
   }
   _printinit = 1;
 }
-char getchr(int x, int y) { return terminal_buffer[(y * VGA_WIDTH + x)]; }
+char getchr(int x, int y) {
+  return terminal_buffer[(y * VGA_WIDTH + x)];
+}
 void putchr(int x, int y, char c, uint8_t color) {
   terminal_buffer_colors[x][y] = color;
   terminal_buffer[(y * VGA_WIDTH + x)] = vga_entry(c, color);
 }
 // TODO: fix
-uint8_t getcolor(int x, int y) { return terminal_buffer_colors[x][y]; }
+uint8_t getcolor(int x, int y) {
+  return terminal_buffer_colors[x][y];
+}
 
 void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) {
 
@@ -158,7 +162,7 @@ void scrollback(int lines) {
     for (size_t x = 0; x < VGA_WIDTH; x++) {
       char c = getchr(x, y);
       u8 color = getcolor(x, y);
-      terminal_putentryat(c, color, x, y-lines);
+      terminal_putentryat(c, color, x, y - lines);
     }
 
   for (int y = VGA_HEIGHT - lines; y < VGA_HEIGHT; y++)
@@ -168,7 +172,9 @@ void scrollback(int lines) {
 
   terminal_row -= lines;
 }
-void terminal_setcolor(uint8_t color) { terminal_color = color; }
+void terminal_setcolor(uint8_t color) {
+  terminal_color = color;
+}
 
 void setcursor(int x, int y) {
   int pos = y * VGA_WIDTH + x;
@@ -207,9 +213,13 @@ void terminal_write(const char *data, size_t size) {
     _putchar(data[i]);
 }
 
-void print(const char *data) { terminal_write(data, strlen(data)); }
+void print(const char *data) {
+  terminal_write(data, strlen(data));
+}
 
-void printChar(const char data) { _putchar(data); }
+void printChar(const char data) {
+  _putchar(data);
+}
 
 // output function type
 typedef void (*out_fct_type)(char character, void *buffer, size_t idx,
@@ -273,7 +283,9 @@ static inline unsigned int _strnlen_s(const char *str, size_t maxsize) {
 
 // internal test if char is a digit (0-9)
 // \return true if char is a digit
-static inline bool _is_digit(char ch) { return (ch >= '0') && (ch <= '9'); }
+static inline bool _is_digit(char ch) {
+  return (ch >= '0') && (ch <= '9');
+}
 
 // internal ASCII string to unsigned int conversion
 static unsigned int _atoi(const char **str) {

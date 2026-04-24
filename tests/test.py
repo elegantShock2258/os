@@ -9,7 +9,15 @@ import re  # For removing |...| wrapped strings
 GRUB_CFG = "grub.cfg"
 BOOT_DIR = Path("build/output/boot")
 PROJECT_ROOT = Path("../..")
-COMPILATION_SCRIPT = Path("./scripts/qemu/runOs_qemu.sh")
+
+# Check if headless mode should be used
+HEADLESS = bool(os.environ.get("CI") or os.environ.get("HEADLESS"))
+if HEADLESS:
+    print(colored("Running in headless mode", "cyan"))
+    COMPILATION_SCRIPT = Path("./scripts/qemu/runOs_qemu_headless.sh")
+else:
+    COMPILATION_SCRIPT = Path("./scripts/qemu/runOs_qemu.sh")
+
 OUTPUT_FILE = Path("build/output/out")
 
 
@@ -87,6 +95,7 @@ def add_test_and_compile(category, testname, entry_index):
         return result_code == "1"
     else:
         print(colored("⚠️ WARNING: No result found.", "yellow") + f" Message: {message}")
+        print(result.stderr)
         return False
 
 
