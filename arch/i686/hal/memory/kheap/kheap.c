@@ -27,10 +27,10 @@ void bitmap_init() {
     BitMap[i].endAddress = (u32 *)(start + BLOCKSIZE * 32);
     start = BitMap[i].endAddress;
   }
-#ifndef debug
-  printf("INITAL COLUMN: ");
-  printBinary(BitMap[0].column);
-#endif
+  // #ifndef debug
+  //   printf("INITAL COLUMN: ");
+  //   printBinary(BitMap[0].column);
+  // #endif
   kmallocInit = true;
 }
 
@@ -68,6 +68,10 @@ void printBitmap() {
   printf("---Bitmap---\n");
   for (int i = 0; i < BitMapSize; i++)
     printBinary(BitMap[i].column);
+}
+void logBitmap() {
+  for (int i = 0; i < BitMapSize; i++)
+    logBinary(BitMap[i].column);
 }
 void *kmalloc(u32 size) {
   // we can have two cases here
