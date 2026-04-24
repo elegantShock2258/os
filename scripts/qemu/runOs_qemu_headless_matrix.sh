@@ -17,12 +17,6 @@ SMP="1"
 if [ "$#" -ge 5 ]; then
   SMP="$5"
 fi
-if [ "$#" -ge 1 ]; then
-  KERNEL_C="$1"
-fi
-if [ "$#" -ge 2 ]; then
-  MAIN_C="$2"
-fi
 if [ "$#" -ge 3 ]; then
   OUTPUT_BIN="$3"
 fi
