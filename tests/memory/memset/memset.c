@@ -13,7 +13,7 @@ void main(void) {
   int src[10];
   bool res = true;
   memset(src, 10, 10);
-  for (int i = 0; i < 10; i++){
+  for (int i = 0; i < 10; i++) {
     res = res && (src[i] == 10);
     printf("Element at index %d: %d\n", i, src[i]);
   }

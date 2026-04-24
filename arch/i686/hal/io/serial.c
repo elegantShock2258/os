@@ -35,7 +35,9 @@ static inline u8 inb(u16 port) {
   __asm__ volatile("inb %w1, %b0" : "=a"(ret) : "Nd"(port) : "memory");
   return ret;
 }
-static inline void io_wait(void) { outb(0x80, 0); }
+static inline void io_wait(void) {
+  outb(0x80, 0);
+}
 
 void serial_configure_baud_rate(unsigned short com, unsigned short divisor) {
   /* Tell the serial port to first expect the highest 8 bits, then the lowest

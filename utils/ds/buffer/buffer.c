@@ -65,4 +65,3 @@ void _CB_Constructor(CircularBuffer *state, int size) {
 
   _cb_init(state, size);
 }
-

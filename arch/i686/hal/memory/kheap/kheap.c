@@ -53,7 +53,7 @@ int getContigousBlocks(u32 block, int blocksRequired) {
 
   int count = 0;
   for (int i = 0; i < 32; i++) {
-    if ((block & (1 << i)) == 0) {
+    if ((block & (1U << i)) == 0) {
       count++;
     } else {
       count = 0;
@@ -121,14 +121,14 @@ void *kmalloc(u32 size) {
   // add a integer to denote how many consecutive blocks are present for the ptr
   *(int *)address = blocksRequired;
 
-  return (address + sizeof(int));
+  return ((char *)address + sizeof(int));
 }
 
 void *kfree(void *pointer) {
   //  get the block position
   //  address = start_address + (BLOCKSIZE * blockPosition) +
   //  32*BLOCKSIZE*(column-1);
-  int blocks = *(int *)(pointer - sizeof(int));
+  int blocks = *(int *)((char *)pointer - sizeof(int));
   u32 pointerAddressOffset = (u32)pointer - heap_start;
   // pointerAddressOffset =  (BLOCKSIZE * blockPosition) +
   // 32*BLOCKSIZE*(column-1);

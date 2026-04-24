@@ -5,9 +5,7 @@
 
 void drivers_init(int ebx) {
 
-
   KeyboardConstructor();
   MouseConstructor();
   VbeConstructor(ebx);
-
 }

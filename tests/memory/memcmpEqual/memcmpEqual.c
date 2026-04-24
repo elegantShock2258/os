@@ -12,8 +12,8 @@ void main(void) {
   terminal_color = vga_entry_color(WHITE, BLACK);
   int src[10] = {0}, dst[10] = {0};
   bool eq = memcmp(src, dst, 10);
-  for(int i = 0;i<10;i++){
-    printf(" %d %d ",src[i],dst[i]);
+  for (int i = 0; i < 10; i++) {
+    printf(" %d %d ", src[i], dst[i]);
   }
   assert(!eq, "memcmp working properly");
   // VbeDriver.renderLoop();
@@ -21,4 +21,3 @@ void main(void) {
   for (;;)
     asm("hlt");
 }
-
