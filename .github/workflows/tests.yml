@@ -211,6 +211,7 @@ jobs:
       - run: |
           sudo apt-get update
           sudo apt-get install -y clang lld
+          sudo apt-get install -y qemu-system-x86 python3 python3-pip grub-pc-bin xorriso mtools
           export CC=clang
           chmod +x ./scripts/build.sh
           ./scripts/build.sh
@@ -262,10 +263,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - ""
-          - "-m 128M"
-          - "-m 256M -smp 2"
+        memory: [64M, 128M, 256M, 512M]
+        smp: [1,2,4,16,32,64] 
     steps:
       - uses: actions/checkout@v4
 
@@ -280,9 +279,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qemu-system-x86 python3 python3-pip grub-pc-bin xorriso mtools
           pip3 install termcolor --break-system-packages
-
-          chmod +x ./scripts/qemu/runOs_qemu_headless.sh
-          ./scripts/qemu/runOs_qemu_headless.sh ${{ matrix.config }}
+          chmod +x ./scripts/qemu/runOs_qemu_headless_matrix.sh
+          ./scripts/qemu/runOs_qemu_headless_matrix.sh "" "" "" ${{ matrix.memory }} ${{ matrix.smp }}
 
   parallel-build:
     runs-on: ubuntu-latest
