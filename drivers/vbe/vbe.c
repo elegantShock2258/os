@@ -119,7 +119,9 @@ void _VBE_fillScreen(int color) {
 
   _VBE_drawRect(0, 0, VbeDriver.vbe_w, VbeDriver.vbe_h, color);
 }
-void exportVBE() { vbeDriverStateToJson(&VbeDriver); }
+void exportVBE() {
+  vbeDriverStateToJson(&VbeDriver);
+}
 
 Window *w;
 void _VBE_init(int ebx) {

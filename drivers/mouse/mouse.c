@@ -8,7 +8,7 @@ int8_t _Mouse_byte[3];
 int _Mouse_x = 0, _Mouse_y = 0;
 mouse_byte_state_data _Mouse_mb;
 
-MouseDriverState  MouseDriver;
+MouseDriverState MouseDriver;
 
 void _Mouse_wait(u8 a_type) {
   uint32_t timeout = 100000;
@@ -61,7 +61,8 @@ void _Mouse(Registers *r) {
       case 2:
         MouseDriver.mouse_byte[2] = mouse_in;
         /* We now have a full mouse packet ready to use */
-        if (MouseDriver.mouse_byte[0] & 0x80 || MouseDriver.mouse_byte[0] & 0x40) {
+        if (MouseDriver.mouse_byte[0] & 0x80 ||
+            MouseDriver.mouse_byte[0] & 0x40) {
           /* x/y overflow? bad packet! */
           break;
         }
@@ -71,8 +72,10 @@ void _Mouse(Registers *r) {
         MouseDriver.packet.buttons = 0;
         MouseDriver.mb = *(mouse_byte_state_data *)&MouseDriver.mouse_byte[0];
 
-        MouseDriver.mouse_x += (MouseDriver.mb.xSign ? 1 : -1) * MouseDriver.mouse_byte[1];
-        MouseDriver.mouse_y += (MouseDriver.mb.ySign ? 1 : -1) * MouseDriver.mouse_byte[2];
+        MouseDriver.mouse_x +=
+            (MouseDriver.mb.xSign ? 1 : -1) * MouseDriver.mouse_byte[1];
+        MouseDriver.mouse_y +=
+            (MouseDriver.mb.ySign ? 1 : -1) * MouseDriver.mouse_byte[2];
         // checking coords
         // Clamp mouse_x to screen width
         if (MouseDriver.mouse_x < 0) {

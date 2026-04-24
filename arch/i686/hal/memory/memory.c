@@ -2,35 +2,32 @@
 #include "memory.h"
 
 #include "../../../../utils/kernel_utils.c"
-void* memcpy(void* dst, const void* src, uint32_t num)
-{
-    uint32_t* u32Dst = (uint32_t *)dst;
-    const uint32_t* u32Src = (const uint32_t *)src;
+void *memcpy(void *dst, const void *src, uint32_t num) {
+  uint32_t *u32Dst = (uint32_t *)dst;
+  const uint32_t *u32Src = (const uint32_t *)src;
 
-    for (uint32_t i = 0; i < num; i++)
-        u32Dst[i] = u32Src[i];
+  for (uint32_t i = 0; i < num; i++)
+    u32Dst[i] = u32Src[i];
 
-    return dst;
+  return dst;
 }
 
-void * memset(void * ptr, u32 value, u32 num)
-{
-    u32* u32Ptr = (u32 *)ptr;
+void *memset(void *ptr, u32 value, u32 num) {
+  u32 *u32Ptr = (u32 *)ptr;
 
-    for (u32 i = 0; i < num; i++)
-        u32Ptr[i] = (u32)value;
+  for (u32 i = 0; i < num; i++)
+    u32Ptr[i] = (u32)value;
 
-    return ptr;
+  return ptr;
 }
 
-int memcmp(const void* ptr1, const void* ptr2, uint16_t num)
-{
-    const u32* u8Ptr1 = (const u32 *)ptr1;
-    const u32* u8Ptr2 = (const u32 *)ptr2;
+int memcmp(const void *ptr1, const void *ptr2, uint16_t num) {
+  const u32 *u8Ptr1 = (const u32 *)ptr1;
+  const u32 *u8Ptr2 = (const u32 *)ptr2;
 
-    for (uint16_t i = 0; i < num; i++)
-        if (u8Ptr1[i] != u8Ptr2[i])
-            return 1;
+  for (uint16_t i = 0; i < num; i++)
+    if (u8Ptr1[i] != u8Ptr2[i])
+      return 1;
 
-    return 0;
+  return 0;
 }

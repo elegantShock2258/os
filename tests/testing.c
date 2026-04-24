@@ -7,7 +7,9 @@
 #include "../utils/kernel_utils.c"
 #define test
 
-void outputQemuSerial(u8 data) { outb(0x3F8, data); }
+void outputQemuSerial(u8 data) {
+  outb(0x3F8, data);
+}
 void outputQemuMessage(char *f) {
   for (int i = 0; f[i]; i++) {
     outputQemuSerial(f[i]);
@@ -62,7 +64,9 @@ void printFramebuffer(u32 *fb, int h, int w, char *title) {
     outputQemuSerial(a);
   }
 }
-void outputInt(u8 data) { outputQemuSerial(data); }
+void outputInt(u8 data) {
+  outputQemuSerial(data);
+}
 void outputMessage(char *msg) {
   for (int i = 0; msg[i]; i++)
     outputQemuSerial(msg[i]);

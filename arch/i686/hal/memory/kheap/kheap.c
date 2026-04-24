@@ -1,10 +1,6 @@
 #pragma once
 #include "kheap.h"
 #define BitMapSize 20
-// FIXME: for some rerason the allocator doesnt allocate the bitset from the
-// start of the column but in between some area?
-// col: 00000000000 assign: 1111
-// itll do 00011100000 instead of 111000000
 //  kernel_end is defined in the linker script.
 extern u32 kernel_end;
 u32 heap_start = (u32)&kernel_end;
@@ -31,10 +27,10 @@ void bitmap_init() {
     BitMap[i].endAddress = (u32 *)(start + BLOCKSIZE * 32);
     start = BitMap[i].endAddress;
   }
-// #ifndef debug
-//   printf("INITAL COLUMN: ");
-//   printBinary(BitMap[0].column);
-// #endif
+  // #ifndef debug
+  //   printf("INITAL COLUMN: ");
+  //   printBinary(BitMap[0].column);
+  // #endif
   kmallocInit = true;
 }
 
@@ -56,14 +52,14 @@ void bitmap_init() {
 int getContigousBlocks(u32 block, int blocksRequired) {
 
   int count = 0;
-  for (int i = 31; i >= 0; i--) {
-    if ((block & (1 << i)) == 0) {
+  for (int i = 0; i < 32; i++) {
+    if ((block & (1U << i)) == 0) {
       count++;
     } else {
       count = 0;
     }
     if (count == blocksRequired) {
-      return (31 - i);
+      return (i - blocksRequired + 1);
     }
   }
   return -1;
@@ -75,7 +71,7 @@ void printBitmap() {
 }
 void logBitmap() {
   for (int i = 0; i < BitMapSize; i++)
-   logBinary(BitMap[i].column);
+    logBinary(BitMap[i].column);
 }
 void *kmalloc(u32 size) {
   // we can have two cases here
@@ -129,15 +125,14 @@ void *kmalloc(u32 size) {
   // add a integer to denote how many consecutive blocks are present for the ptr
   *(int *)address = blocksRequired;
 
-
-  return (address + sizeof(int));
+  return ((char *)address + sizeof(int));
 }
 
 void *kfree(void *pointer) {
   //  get the block position
   //  address = start_address + (BLOCKSIZE * blockPosition) +
   //  32*BLOCKSIZE*(column-1);
-  int blocks = *(int *)(pointer - sizeof(int));
+  int blocks = *(int *)((char *)pointer - sizeof(int));
   u32 pointerAddressOffset = (u32)pointer - heap_start;
   // pointerAddressOffset =  (BLOCKSIZE * blockPosition) +
   // 32*BLOCKSIZE*(column-1);
@@ -150,4 +145,5 @@ void *kfree(void *pointer) {
     setNthBit(&BitMap[column].column, i, false);
   // memset as clear???
   memset(pointer, 0, BLOCKSIZE * blocks);
+  return NULL;
 }
