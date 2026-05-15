@@ -9,7 +9,6 @@
 #error use i686-elf-as command
 #endif
 
-multiboot_info_t *multiboot_grub_info;
 void init(unsigned long ebx) {
   hal_init();
   drivers_init(ebx); // initialize drivers

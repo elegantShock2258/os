@@ -1,7 +1,9 @@
 #pragma once
+
 #include "./kernel_utils.h"
 #include "../arch/i686/hal/io/printf.c"
 #include "types.h"
+
 int abs(int y) {
   if (y >= 0)
     return y;

@@ -4,7 +4,6 @@
 #include "./vbe/vbe.c"
 
 void drivers_init(int ebx) {
-
   KeyboardConstructor();
   MouseConstructor();
   VbeConstructor(ebx);
