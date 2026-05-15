@@ -1,4 +1,6 @@
+#pragma once
 #include "./AvlTree.h"
+#include "../../../tests/testing.c"
 
 int getHeight(Node *n) {
   if (n == NULL)
@@ -53,7 +55,9 @@ Node *leftRotate(Node *x) {
 Node *insert(Node *node, void *key, u32 *height) {
   if (node == NULL)
     return createNode(key, height);
-  printf("inserting %d\n", *height);
+
+  logf("inserting %d\n", *height);
+
   if (_AVL_comparitor(key, node->key) < 0)
     node->left = insert(node->left, key, height);
   else if (_AVL_comparitor(key, node->key) > 0)

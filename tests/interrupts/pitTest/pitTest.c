@@ -16,7 +16,7 @@ void main(void) {
   u32 new = ticks;
   printf("bye\n");
   bool eq = (new - old) == 5000;
-  assert(eq,"sleep() working");
+  assert(eq, "sleep() working");
   // VbeDriver.renderLoop();
   killQemu();
   for (;;)

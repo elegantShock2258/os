@@ -12,7 +12,7 @@
 
 void hal_init() {
   TermInit(); // for term init
-  gdt_init(); // for gdt init   --------------------------- DISABLE INTERRUPTS 
+  gdt_init(); // for gdt init   --------------------------- DISABLE INTERRUPTS
   idt_init(); // for idt init
   isr_init(); // for isr init
   irq_init(); // ------------------------------------------ ENABLE INTERRUPTS

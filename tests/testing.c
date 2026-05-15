@@ -22,7 +22,7 @@ void logf(char *str, ...) {
   vsnprintf_(buffer, sizeof(buffer), str, va);
   outputQemuMessage(buffer);
   outputQemuMessage("|");
-  sleep(80);
+  sleep(100);
   va_end(va);
 }
 // only use this during irq handlers or drivers like keyboard mouse or vesa

@@ -1,6 +1,9 @@
+#pragma once
 #include "./window.h"
 // #include "../../../../meta/framebuffer/images/a.c"
 #include "../../../../tests/testing.c"
+#include "../frontscreen/frontscreen.c"
+
 void renderWindow(Window *window, u32 *bf, u32 w, u32 h) {
   u32 *t = window->windowFb;
 
@@ -31,10 +34,9 @@ void renderWindow(Window *window, u32 *bf, u32 w, u32 h) {
 
 void inOrderOperation(Node *root, u32 *bf, u32 *w, u32 *h) {
   if (root != NULL) {
-    inOrderOperation(root->left, bf, w, h);
-    Window *d = (Window *)root->key;
     logf("rendering: %d, %d", *w, *h);
     renderWindow(root->key, bf, *w, *h);
+    inOrderOperation(root->left, bf, w, h);
     inOrderOperation(root->right, bf, w, h);
   }
 }
@@ -45,7 +47,7 @@ int _AVL_comparitor(void *a, void *b) {
 
   return wa->height - wb->height;
 }
-Node WindowRoot; // idk why but using a Node* doesnt sit well with it
+Node WindowRoot; // idk why but using a Node* doesn't sit well with it
 void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   // create first window, ill put one window will w-full h-full and bg-red
 
@@ -67,17 +69,11 @@ void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
   WindowRoot.right = NULL;
   WindowRoot.height = &(ws->zIndex);
 
-  // Window s = {0, 0, 192, 108, 1, NULL};
-
-  // s.windowFb = kmalloc(s.width * s.height * sizeof(u32));
-  // s.windowFb[0] = COLOR(255, 255, 0);
-  // for (u32 i = 0; i < s.width * s.height; i++) {
-  //   s.windowFb[i] = COLOR(255, 255, 0);
-  // }
-  
   logf("COLOR ASSIGMNENT DONE");
-  // Node win = {&s,NULL,NULL,&(s.zIndex)};
-  // insert(&WindowRoot, &win, win.height);
+
+  // initialize the ui
+  uiInit();
+
   while (1) {
     // traverse the window tree
     inOrderOperation(&WindowRoot, bf, &w, &h);
