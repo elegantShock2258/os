@@ -3,7 +3,9 @@
 #include "../arch/i686/hal/interrupts/pit/pit.c"
 #include "../arch/i686/hal/io/printf.c"
 #include "../arch/i686/hal/io/serial.c"
+#include "../drivers/keyboard/keyboard.h"
 #include "../utils/kernel_utils.c"
+
 #define test
 
 void outputQemuSerial(u8 data) {

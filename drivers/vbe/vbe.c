@@ -1,12 +1,14 @@
 #pragma once
 #include "vbe.h"
 #include "graphics/colors/colors.h"
-#include "graphics/window/window.h"
+#include "graphics/window/window.c"
 
 int _VBE_renderGUI = 1;
 #include "../../tests/testing.c"
+#include "graphics/frontscreen/frontscreen.c"
 
 VbeDriverState VbeDriver;
+SceneGraph *sg;
 
 char *vbeDriverStateToJson(VbeDriverState *state) {
   return NULL;
@@ -113,7 +115,7 @@ void _VBE_drawRect(int x, int y, int width, int height, int color) {
 }
 
 void _VBE_putcursor(int x, int y) {
-  _VBE_drawRect(x, y, CURSOR_WIDTH, CURSOR_HEIGHT, COLOR(255, 255, 255));
+  _VBE_drawRect(x, y, CURSOR_WIDTH, CURSOR_HEIGHT, COLOR(0, 255, 255));
 }
 void _VBE_fillScreen(int color) {
 
@@ -151,18 +153,21 @@ void _VBE_render() {
   _VBE_fillScreen(COLOR(255, 0, 0));
   _VBE_drawRect(10, 10, 100, 100, COLOR(255, 255, 255));
 }
+
 void _VBE_renderLoop() {
   // DONT re-render every loop?
   // only update dirty pixels
+  // initialize the ui
+  uiInit(sg);
 
-  // for (int i = 0; i < 1080; i++) {
-  //   for (int j = 0; j < 1920; j++)
-  //     VbeDriver.bf[i * 1920 + j] = COLOR(
-  //         image_data[i][j][0], image_data[i][j][1], image_data[i][j][2]);
-  // }
+  while (1) {
+    // traverse the window tree
+    traverseSceneGraph(sg, &VbeDriver);
+    _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
 
-  windowManagerInit(VbeDriver.fb, VbeDriver.bf, VbeDriver.vbe_w,
-                    VbeDriver.vbe_h);
+    memcpy(VbeDriver.fb, VbeDriver.bf, VbeDriver.vbe_h * VbeDriver.vbe_w);
+    sleep(10); // somehow gui doesnt update without this
+  }
 }
 
 void VbeConstructor(int ebx) {

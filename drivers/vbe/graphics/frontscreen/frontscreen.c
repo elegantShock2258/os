@@ -1,13 +1,24 @@
 #pragma once
-#include "../../../../utils/ds/AvlTree/AvlTree.c"
-#include "../window/window.c"
+#include "../window/window.h"
 
-extern Node WindowRoot;
-void uiInit() {
+void uiInit(SceneGraph *sg) {
   // this is the front screen ui
+  Window *bg = kmalloc(sizeof(Window));
+  bg->x = 0;
+  bg->y = 0;
+  // FIXME: should be VBEDriver.vbe_w,vbe_h
+  bg->width = 1920;
+  bg->height = 1080;
+  bg->windowFb = kmalloc((bg->width) * (bg->height) * sizeof(u32));
+  for (u32 i = 0; i < bg->width * bg->height; i++) {
+    bg->windowFb[i] = COLOR(255, 255, 255);
+  }
+
+  bg->zIndex = 1;
+  bg->next = NULL;
+  sg->Background = bg;
 
   // add a tool bar at the top
-
   Window *toolBar = kmalloc(sizeof(Window));
   toolBar->x = 0;
   toolBar->y = 0;
@@ -19,9 +30,7 @@ void uiInit() {
     toolBar->windowFb[i] =
         COLOR(255, 0, 0); // Ensure all pixels are properly set
   }
-
   toolBar->zIndex = 3;
-  Node *res = insert(&WindowRoot, toolBar, &(toolBar->zIndex));
 
   Window *toolBar2 = kmalloc(sizeof(Window));
   toolBar2->x = 0;
@@ -35,7 +44,8 @@ void uiInit() {
         COLOR(255, 233, 0); // Ensure all pixels are properly set
   }
 
-  toolBar2->zIndex = 4;
+  toolBar->next = toolBar2;
+  toolBar2->next = NULL;
 
-  insert(&WindowRoot, toolBar2, &(toolBar2->zIndex));
+  sg->SystemPanel = toolBar;
 }

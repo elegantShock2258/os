@@ -1,27 +1,35 @@
 #pragma once
 #include "./window.h"
-// #include "../../../../meta/framebuffer/images/a.c"
 #include "../../../../tests/testing.c"
-#include "../frontscreen/frontscreen.c"
 
-void renderWindow(Window *window, u32 *bf, u32 w, u32 h) {
+SceneGraph *SceneGraphInit() {
+  SceneGraph *sg = (SceneGraph *)kmalloc(sizeof(SceneGraph));
+  sg->Background = NULL;
+  sg->SystemPanel = NULL;
+  sg->Applications = NULL;
+  sg->Tooltips = NULL;
+
+  return sg;
+}
+
+void renderWindow(Window *window, VbeDriverState *VbeDriver) {
   u32 *t = window->windowFb;
 
   for (u32 i = 0; i < window->height; i++) {
     u32 fb_y = i + window->y;
-    if (fb_y >= h)
+    if (fb_y >= VbeDriver->vbe_h)
       break;
 
-    u32 *start = bf + fb_y * w + window->x;
+    u32 *start = VbeDriver->bf + fb_y * VbeDriver->vbe_w + window->x;
     u32 copy_width = window->width;
 
-    if ((window->x + copy_width) > w)
-      copy_width = w - window->x;
+    if ((window->x + copy_width) > VbeDriver->vbe_w)
+      copy_width = VbeDriver->vbe_w - window->x;
 
     if (window->x < 0) {
       t -= window->x;
       copy_width += window->x;
-      start = bf + fb_y * w;
+      start = VbeDriver->bf + fb_y * VbeDriver->vbe_w;
     }
 
     if (copy_width > 0) {
@@ -32,54 +40,27 @@ void renderWindow(Window *window, u32 *bf, u32 w, u32 h) {
   }
 }
 
-void inOrderOperation(Node *root, u32 *bf, u32 *w, u32 *h) {
-  if (root != NULL) {
-    logf("rendering: %d, %d", *w, *h);
-    renderWindow(root->key, bf, *w, *h);
-    inOrderOperation(root->left, bf, w, h);
-    inOrderOperation(root->right, bf, w, h);
+void renderLayer(Window *layer, VbeDriverState *vbe) {
+  // go through each node
+  // go to child nodes
+  // render childs
+  Window *ptr = layer;
+  while (ptr != NULL) {
+    // logf("printing window %d\n",ptr->zIndex);
+    renderWindow(ptr, vbe);
+    ptr = ptr->next;
   }
 }
 
-int _AVL_comparitor(void *a, void *b) {
-  Window *wa = (Window *)a;
-  Window *wb = (Window *)b;
-
-  return wa->height - wb->height;
-}
-Node WindowRoot; // idk why but using a Node* doesn't sit well with it
-void windowManagerInit(u32 *fb, u32 *bf, u32 w, u32 h) {
-  // create first window, ill put one window will w-full h-full and bg-red
-
-  Window *ws = kmalloc(sizeof(Window));
-  ws->x = 0;
-  ws->y = 0;
-  ws->width = 1920;
-  ws->height = 1080;
-  ws->windowFb = kmalloc((ws->width) * (ws->height) * sizeof(u32));
-  for (u32 i = 0; i < ws->width * ws->height; i++) {
-    ws->windowFb[i] = COLOR(0, 255, 0); // Ensure all pixels are properly set
-  }
-
-  ws->zIndex = 1;
-
-  WindowRoot = *(Node *)kmalloc(sizeof(Node));
-  WindowRoot.key = (void *)ws;
-  WindowRoot.left = NULL;
-  WindowRoot.right = NULL;
-  WindowRoot.height = &(ws->zIndex);
-
-  logf("COLOR ASSIGMNENT DONE");
-
-  // initialize the ui
-  uiInit();
-
-  while (1) {
-    // traverse the window tree
-    inOrderOperation(&WindowRoot, bf, &w, &h);
-    _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
-
-    memcpy(fb, bf, h * w);
-    sleep(10); // somehow gui doesnt update without this
-  }
+void traverseSceneGraph(SceneGraph *sg, VbeDriverState *vbe) {
+  // TODO: switch to opaque front and back pass
+  // render bg
+  // logf("rendering bg layer\n");
+  renderLayer(sg->Background, vbe);
+  //  // render system panel
+  renderLayer(sg->SystemPanel, vbe);
+  //  // render applications
+  renderLayer(sg->Applications, vbe);
+  //  // render tooltips
+  renderLayer(sg->Tooltips, vbe);
 }

@@ -6,7 +6,7 @@
 
 #include "./keyboard.h"
 
-#include "../../drivers/vbe/vbe.c"
+#include "../../drivers/vbe/vbe.h"
 #include "../../tests/testing.c"
 
 KeyboardDriverState KeyboardDriver;
