@@ -17,10 +17,10 @@ void renderChar(int x, int y, int scale, int color, char c) {
 void renderText(int x, int y, int width, int height, char *text, int color,
                 int scale, enum TextOverFlow overFlow) {
   u32 textWidth = strlen(text) * 8 * scale;
-  if ((x + textWidth) >=)
-    for (int i = 0; text[i] != '\0'; i++) {
-      renderChar(x, y, scale, color, text[i]);
-      // TODO: text wrap and text ellipses and text overflow
-      x += 8 * scale;
-    }
+  //   if ((x + textWidth) >=)
+  for (int i = 0; text[i] != '\0'; i++) {
+    renderChar(x, y, scale, color, text[i]);
+    // TODO: text wrap and text ellipses and text overflow
+    x += 8 * scale;
+  }
 }
