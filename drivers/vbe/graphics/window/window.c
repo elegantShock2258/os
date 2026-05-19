@@ -2,6 +2,9 @@
 #include "./window.h"
 #include "../../../../tests/testing.c"
 
+// TODO: implement dnd, and BOX model too, i need padding, margin on each window
+// and window toolbar to close/minimise it
+
 SceneGraph *SceneGraphInit() {
   SceneGraph *sg = (SceneGraph *)kmalloc(sizeof(SceneGraph));
   sg->Background = NULL;

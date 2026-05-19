@@ -1,6 +1,7 @@
 #pragma once
 #include "vbe.h"
 #include "graphics/colors/colors.h"
+#include "graphics/text/text.c"
 #include "graphics/window/window.c"
 
 int _VBE_renderGUI = 1;
@@ -166,9 +167,9 @@ void _VBE_renderLoop() {
     traverseSceneGraph(sg, &VbeDriver);
     _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
 
-    renderText(0, 0, "Hello World!", COLOR(0, 0, 0), 2);
+    renderText(0, 0, 400, 400, "Hello World!", COLOR(0, 0, 0), 2, ELLIPSIS);
     memcpy(VbeDriver.fb, VbeDriver.bf, VbeDriver.vbe_h * VbeDriver.vbe_w);
-    sleep(10); // somehow gui doesnt update without this
+    sleep(10); // somehow gui doesn't update without this
   }
 }
 
