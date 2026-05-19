@@ -1,5 +1,6 @@
 #pragma once
 #include "mouse.h"
+#include "../vbe/graphics/colors/colors.h"
 
 u8 _Mouse_cycle = 0;
 
@@ -9,6 +10,7 @@ int _Mouse_x = 0, _Mouse_y = 0;
 mouse_byte_state_data _Mouse_mb;
 
 MouseDriverState MouseDriver;
+int MOUSE_COLOR = COLOR(255, 0, 0);
 
 void _Mouse_wait(u8 a_type) {
   uint32_t timeout = 100000;

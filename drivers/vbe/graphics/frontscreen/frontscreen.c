@@ -48,4 +48,21 @@ void uiInit(SceneGraph *sg) {
   toolBar2->next = NULL;
 
   sg->SystemPanel = toolBar;
+
+  Window *ActualApplication = kmalloc(sizeof(Window));
+  ActualApplication->x = 200;
+  ActualApplication->y = 200;
+  ActualApplication->width = 400;
+  ActualApplication->height = 400;
+  ActualApplication->windowFb = kmalloc(
+      (ActualApplication->width) * (ActualApplication->height) * sizeof(u32));
+
+  for (u32 i = 0; i < ActualApplication->width * ActualApplication->height;
+       i++) {
+    ActualApplication->windowFb[i] =
+        COLOR((255 + i) % 255, 233, 0); // Ensure all pixels are properly set
+  }
+
+  ActualApplication->next = NULL;
+  sg->Applications = ActualApplication;
 }

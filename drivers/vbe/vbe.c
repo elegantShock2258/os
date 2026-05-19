@@ -115,7 +115,8 @@ void _VBE_drawRect(int x, int y, int width, int height, int color) {
 }
 
 void _VBE_putcursor(int x, int y) {
-  _VBE_drawRect(x, y, CURSOR_WIDTH, CURSOR_HEIGHT, COLOR(0, 255, 255));
+  extern int MOUSE_COLOR;
+  _VBE_drawRect(x, y, CURSOR_WIDTH, CURSOR_HEIGHT, MOUSE_COLOR);
 }
 void _VBE_fillScreen(int color) {
 
