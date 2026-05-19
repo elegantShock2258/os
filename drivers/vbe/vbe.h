@@ -107,6 +107,7 @@ typedef struct {
   uint32_t *bf;
 
   void (*putpixel)(int x, int y, int color);
+  void (*drawRect)(int x, int y, int width, int height, int color);
   void (*putcursor)(int x, int y);
   void (*fillScreen)(int color);
   void (*wait)(int milliseconds);

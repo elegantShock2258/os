@@ -166,6 +166,7 @@ void _VBE_renderLoop() {
     traverseSceneGraph(sg, &VbeDriver);
     _VBE_putcursor(MouseDriver.mouse_x, MouseDriver.mouse_y);
 
+    renderText(0, 0, "Hello World!", COLOR(0, 0, 0), 2);
     memcpy(VbeDriver.fb, VbeDriver.bf, VbeDriver.vbe_h * VbeDriver.vbe_w);
     sleep(10); // somehow gui doesnt update without this
   }
@@ -176,6 +177,7 @@ void VbeConstructor(int ebx) {
   VbeDriver.colorDepth = 4;
 
   VbeDriver.putpixel = _VBE_putpixel;
+  VbeDriver.drawRect = _VBE_drawRect;
   VbeDriver.putcursor = _VBE_putcursor;
   VbeDriver.fillScreen = _VBE_fillScreen;
   VbeDriver.render = _VBE_render;

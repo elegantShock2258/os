@@ -1,4 +1,5 @@
 #pragma once
+#include "../text/text.c"
 #include "../window/window.h"
 
 void uiInit(SceneGraph *sg) {
