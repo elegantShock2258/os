@@ -5,3 +5,5 @@ so i could have a react frontend
 
 BASIC ACHIEVABLE GOAL FOR NOW:
 => have a GUI ready which will help you CRUD a file
+=> Ring 3
+=> Demand Paging
