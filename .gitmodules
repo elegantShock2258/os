@@ -1,3 +1,6 @@
 [submodule "drivers/vbe/graphics/fonts"]
 	path = drivers/vbe/graphics/fonts
 	url = https://github.com/dhepper/font8x8/
+[submodule "meta/debugger/debuggerui"]
+	path = meta/debugger/debuggerui
+	url = git@github.com:elegantShock2258/osdev-debugger.git

@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "32fef2da468da260",
+    "type": "split",
+    "children": [
+      {
+        "id": "b5c91e228596927b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0fb2645c3752e54a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0e4da3d554d356c4",
+    "type": "split",
+    "children": [
+      {
+        "id": "e25874e63ef46064",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f1c0bfa216d73c0a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "db7de00850b62975",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "6e85b67c36f77b9b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "a606ff18009d3ea7",
+    "type": "split",
+    "children": [
+      {
+        "id": "71ba7f904db1bb61",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "acaa3577921dd90c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for README"
+            }
+          },
+          {
+            "id": "f2052d49b47dd71f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from README"
+            }
+          },
+          {
+            "id": "f81b4038efd37bb7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "04b2c8b7952e59d3",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "57cb997a64e3daa7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "README.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "0fb2645c3752e54a",
+  "lastOpenFiles": [
+    "utils/utils.md",
+    "src/walk.ts.md",
+    "src",
+    "kernel.md",
+    "drivers/drivers.md",
+    "arch/i686/hal/memory/memory.md",
+    "arch/i686/hal/io/io.md",
+    "arch/i686/hal/interrupts/interrupts.md",
+    "arch/i686/hal/hal.md",
+    "todo.md",
+    "tests/interrupts/pitTest/pitTestKernel.c",
+    "tests/interrupts/pitTest/pitTest.c",
+    "tests/interrupts/pitTest",
+    "tests/interrupts",
+    "drivers/vbe/graphics/text/text.h",
+    "drivers/vbe/graphics/text/text.c",
+    "drivers/vbe/graphics/text",
+    "drivers/vbe/graphics/frontscreen/frontscreen.c",
+    "drivers/vbe/graphics/frontscreen",
+    "meta/debugger/debuggerui/public/vercel.svg",
+    "meta/debugger/debuggerui/public/next.svg",
+    "meta/framebuffer/images/a.png",
+    "drivers/vbe/graphics/window/window.c.md",
+    "drivers/vbe/vbe.c.md",
+    "drivers/mouse/mouse.h.md",
+    "drivers/vbe/vbe.h.md",
+    "drivers.c.md",
+    "kernel.c.md",
+    "boot.S.md"
+  ]
+}

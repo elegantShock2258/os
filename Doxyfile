@@ -1,9 +1,9 @@
 PROJECT_NAME           = "OS"
 PROJECT_BRIEF          = "A custom freestanding monolithic 32-bit graphical OS kernel"
 OUTPUT_DIRECTORY       = docs_output
-INPUT                  = arch drivers kernel utils
+INPUT                  = arch drivers kernel utils main.c.md kernel.c.md boot.S.md multiboot.h.md README.md
 EXTENSION_MAPPING      = c=C++
-FILE_PATTERNS          = *.c *.h
+FILE_PATTERNS          = *.c *.h *.md
 RECURSIVE              = YES
 OPTIMIZE_OUTPUT_FOR_C  = YES
 EXTRACT_ALL           = YES

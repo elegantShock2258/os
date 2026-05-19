@@ -120,7 +120,6 @@ void _VBE_putcursor(int x, int y) {
   _VBE_drawRect(x, y, CURSOR_WIDTH, CURSOR_HEIGHT, MOUSE_COLOR);
 }
 void _VBE_fillScreen(int color) {
-
   _VBE_drawRect(0, 0, VbeDriver.vbe_w, VbeDriver.vbe_h, color);
 }
 void exportVBE() {
@@ -146,6 +145,7 @@ void _VBE_init(int ebx) {
       sizeof(uint32_t) * VbeDriver.vbe_h * VbeDriver.vbe_w);
   if (!VbeDriver.bf) {
     printf("Failed to allocate backbuffer.\n");
+    logf("Failed to allocate backbuffer!!\n");
   }
 
   exportVBE();
