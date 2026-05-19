@@ -1,0 +1,3 @@
+[submodule "meta/debugger/debuggerui"]
+	path = meta/debugger/debuggerui
+	url = git@github.com:elegantShock2258/osdev-debugger.git
