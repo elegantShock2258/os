@@ -58,3 +58,5 @@ typedef struct {
   void (*mouse_install)();
   void (*Constructor)();
 } MouseDriverState;
+
+extern MouseDriverState MouseDriver;

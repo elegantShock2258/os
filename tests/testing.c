@@ -3,7 +3,9 @@
 #include "../arch/i686/hal/interrupts/pit/pit.c"
 #include "../arch/i686/hal/io/printf.c"
 #include "../arch/i686/hal/io/serial.c"
+#include "../drivers/keyboard/keyboard.h"
 #include "../utils/kernel_utils.c"
+
 #define test
 
 void outputQemuSerial(u8 data) {
@@ -22,7 +24,7 @@ void logf(char *str, ...) {
   vsnprintf_(buffer, sizeof(buffer), str, va);
   outputQemuMessage(buffer);
   outputQemuMessage("|");
-  sleep(80);
+  sleep(100);
   va_end(va);
 }
 // only use this during irq handlers or drivers like keyboard mouse or vesa

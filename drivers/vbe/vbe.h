@@ -9,11 +9,12 @@
 #include "../../arch/i686/hal/paging/paging.c"
 #include "../../multiboot.h"
 #include "../../utils/kernel_utils.c"
-#include "../keyboard/keyboard.c"
-#include "../mouse/mouse.c"
 #include "./graphics/colors/colors.c"
+
+#include "../mouse/mouse.h"
+
 void _VBE_putcursor(int x, int y); // forward declaration for window.c
-#include "./graphics/window/window.c"
+void _VBE_renderLoop();
 
 #define CURSOR_WIDTH 30
 #define CURSOR_HEIGHT 30
@@ -96,16 +97,17 @@ typedef struct {
   int renderGUI;
   vbe_mode_info_structure *vbe_info_block;
   VbeInfoBlock *vbe_control_block;
-  int vbe_h;
-  int vbe_w;
-  int bpp;
-  int pitch;
-  int colorDepth;
+  u32 vbe_h;
+  u32 vbe_w;
+  u32 bpp;
+  u32 pitch;
+  u32 colorDepth;
   multiboot_info_t *multiboot_grub_info;
   uint32_t *fb;
   uint32_t *bf;
 
   void (*putpixel)(int x, int y, int color);
+  void (*drawRect)(int x, int y, int width, int height, int color);
   void (*putcursor)(int x, int y);
   void (*fillScreen)(int color);
   void (*wait)(int milliseconds);
@@ -114,3 +116,5 @@ typedef struct {
   void (*renderLoop)();
   void (*Constructor)(int ebx);
 } VbeDriverState;
+
+extern VbeDriverState VbeDriver;
