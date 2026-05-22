@@ -30,7 +30,7 @@
 
 char *to_string(int value, char *buffer, int base) {
   if (base < 2 || base > 36) {
-    *buffer = '\0'; // Invalid base
+    *buffer = '\0';
     return buffer;
   }
 
@@ -42,7 +42,6 @@ char *to_string(int value, char *buffer, int base) {
 
   int i = 0;
 
-  // Process the number and convert to the given base
   do {
     int digit = value % base;
     buffer[i++] = (digit < 10) ? '0' + digit : 'a' + digit - 10;
@@ -53,10 +52,8 @@ char *to_string(int value, char *buffer, int base) {
     buffer[i++] = '-';
   }
 
-  // Null-terminate the string
   buffer[i] = '\0';
 
-  // Reverse the string to get the correct order
   for (int j = 0, k = i - 1; j < k; ++j, --k) {
     char temp = buffer[j];
     buffer[j] = buffer[k];
